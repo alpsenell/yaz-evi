@@ -13,7 +13,6 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 function getImageUrl() {
-  console.log(props.image)
   return new URL(`../../assets/media/${props.image}`, import.meta.url)
 }
 </script>
