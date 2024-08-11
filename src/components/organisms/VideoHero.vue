@@ -5,7 +5,10 @@
 <template>
   <div class="video-hero">
     <video class="video-hero__video" autoplay muted loop>
-      <source src="../../assets/media/drone.mp4" type="video/mp4">
+      <source
+        src="https://yazevi.s3.eu-central-1.amazonaws.com/bozcaada.mp4"
+        type="video/mp4"
+      >
     </video>
     <div class="video-hero__content">
       <h1 class="video-hero__title">Welcome to Yaz Evi</h1>

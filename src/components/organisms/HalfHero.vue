@@ -19,11 +19,14 @@ function getImageUrl() {
 
 <template>
   <section
-    class="half-hero w-screen h-screen flex flex-row min-h-[600px]"
-    :class="props.imagePosition === 'left' ? 'flex-row' : 'flex-row-reverse'"
+    class="half-hero w-screen grid grid-cols-1 lg:grid-cols-2 lg:min-h-[600px]"
   >
-    <img :src="getImageUrl()" alt="" class="flex-1 object-cover" />
-    <div class="flex flex-1 flex-col gap-10 justify-end p-6">
+    <img
+      :src="getImageUrl()"
+      class="flex-1 object-cover w-full h-full"
+      :class="props.imagePosition === 'left' ? '' : 'order-1'"
+    />
+    <div class="flex flex-1 flex-col gap-10 justify-center p-6">
       <h3 class="text-6xl font-raleway font-light">
         {{ props.title }}
       </h3>
