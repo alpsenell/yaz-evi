@@ -24,7 +24,7 @@ function getImageUrl() {
     <img
       :src="getImageUrl()"
       class="flex-1 object-cover w-full h-full"
-      :class="props.imagePosition === 'left' ? '' : 'order-1'"
+      :class="props.imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
     />
     <div class="flex flex-1 flex-col gap-10 justify-center p-6">
       <h3 class="text-6xl font-raleway font-light">
