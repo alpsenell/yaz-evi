@@ -8,6 +8,10 @@
       <source
         src="https://yazevi.s3.eu-central-1.amazonaws.com/bozcaada.mp4"
         type="video/mp4"
+        autoplay
+        loop
+        muted
+        playsinline
       >
     </video>
     <div class="video-hero__content">
