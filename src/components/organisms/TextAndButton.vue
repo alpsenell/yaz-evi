@@ -4,7 +4,7 @@ import YazButton from "../atoms/YazButton.vue";
 </script>
 
 <template>
-  <section class="text-and-button max-w-screen-lg mx-auto text-center py-8">
+  <section class="text-and-button max-w-screen-lg mx-auto text-center py-10">
     <slot />
 
     <yaz-button
