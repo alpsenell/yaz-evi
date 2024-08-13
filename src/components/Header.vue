@@ -18,7 +18,7 @@
               <router-link class="header__link sub-link" to="/">Home</router-link>
             </li>
             <li>
-              <router-link class="header__link sub-link" to="/rooms">Rooms</router-link>
+              <router-link class="header__link sub-link" to="/gallery">Rooms</router-link>
             </li>
             <li>
               <router-link class="header__link sub-link" to="/dining">Dining</router-link>

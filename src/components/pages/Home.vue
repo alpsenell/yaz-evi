@@ -42,7 +42,7 @@ import MixedGallery from "../organisms/MixedGallery.vue";
 
     <MixedGallery>
       <template #left>
-        <h3 class="font-raleway text-4xl">Gallery</h3>
+        <h3 class="font-raleway text-3xl">Gallery</h3>
         <img
           class="w-9/12"
           src="../../assets/media/home-gallery/gallery_left_1.jpg"
