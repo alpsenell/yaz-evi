@@ -18,7 +18,6 @@ interface Image {
   ]);
 
   function animate(entries: IntersectionObserverEntry[], observer: IntersectionObserver): void {
-    console.log('yarrak2')
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const imageIndex = images.value.findIndex(img => img.src === (entry.target as HTMLImageElement).src);
@@ -37,7 +36,6 @@ function getImageUrl(name) {
 <template>
   <div class="container mx-auto p-4">
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-      yarrak
       <div
         v-for="(image, index) in images"
         :key="index"
