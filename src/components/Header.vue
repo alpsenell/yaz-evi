@@ -16,6 +16,10 @@ const openMobileMenu = () => {
 };
 
 const handleScroll = () => {
+  if (mobileMenu.value) {
+    return;
+  }
+
   const currentScrollY = window.scrollY;
 
   if (currentScrollY > lastScrollY.value) {
@@ -23,7 +27,9 @@ const handleScroll = () => {
   } else if (currentScrollY < lastScrollY.value) {
     scrollDirection.value = "Scrolling up";
   }
-
+  if (currentScrollY === 0) {
+    scrollDirection.value = "No scrolling yet";
+  }
   lastScrollY.value = currentScrollY;
 };
 onMounted(() => {
@@ -78,7 +84,7 @@ onBeforeUnmount(() => {
       </div>
 
       <div
-        class="block md:hidden relative w-14 flex-column cursor-pointer top-3"
+        class="block md:hidden relative w-10 flex-column cursor-pointer top-3"
         :class="{ 'header__mobile-menu-open': mobileMenu }"
         @click="openMobileMenu"
       >
@@ -95,8 +101,8 @@ onBeforeUnmount(() => {
   &__mobile-menu-open {
     span:nth-child(1) {
       transform: rotate(45deg);
-      top: -3px;
-      left: 8px;
+      top: 0;
+      left: 0;
     }
 
     span:nth-child(2) {
@@ -106,8 +112,8 @@ onBeforeUnmount(() => {
 
     span:nth-child(3) {
       transform: rotate(-45deg);
-      top: 37px;
-      left: 8px;
+      top: 29px;
+      left: 0;
     }
   }
 

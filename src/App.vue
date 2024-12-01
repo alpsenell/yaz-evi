@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import { ref, watch } from "vue";
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import { HEADER_MENU_ITEMS } from "./enums/global.ts";
@@ -13,6 +13,14 @@ const openMobileMenu = () => {
 
   mobileMenu.value = !mobileMenu.value
 }
+
+watch(mobileMenu, (value) => {
+  if (value) {
+    document.body.style.position = 'fixed'
+  } else {
+    document.body.style.position = 'unset'
+  }
+})
 
 </script>
 
@@ -28,7 +36,7 @@ const openMobileMenu = () => {
     :style="{ height: `calc(100dvh - ${headerHeight}px)`, top: `${headerHeight}px` }"
   >
     <nav class="h-full">
-      <ul class="header__list h-full flex flex-col items-center gap-16 justify-center">
+      <ul class="header__list h-full flex flex-col items-center gap-8 justify-center overflow-auto">
         <li v-for="item in HEADER_MENU_ITEMS">
           <router-link
             class="header__link sub-link text-3xl"
