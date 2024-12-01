@@ -1,5 +1,5 @@
 <template>
-  <section class="mixed-gallery max-w-screen-lg flex items-center mx-auto gap-6 my-10">
+  <section class="mixed-gallery max-w-screen-lg flex items-center mx-auto gap-6 my-10 px-4 md:px-0">
     <div class="flex flex-col items-end gap-4">
       <slot name="left"/>
     </div>

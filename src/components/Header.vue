@@ -1,33 +1,65 @@
 <script setup lang="ts">
+import { onMounted, onBeforeUnmount, ref, computed } from "vue";
+import { HEADER_MENU_ITEMS } from "../enums/global.ts";
+import LanguageSelector from "./organisms/LanguageSelector.vue";
 
+const emit = defineEmits(['openMobileMenu']);
+
+const header = ref<Element>();
+const lastScrollY = ref<number>(0);
+const scrollDirection = ref("No scrolling yet");
+const mobileMenu = ref(false);
+
+const openMobileMenu = () => {
+  mobileMenu.value = !mobileMenu.value;
+  emit("openMobileMenu");
+};
+
+const handleScroll = () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > lastScrollY.value) {
+    scrollDirection.value = "Scrolling down";
+  } else if (currentScrollY < lastScrollY.value) {
+    scrollDirection.value = "Scrolling up";
+  }
+
+  lastScrollY.value = currentScrollY;
+};
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
-  <header class="header bg-white sticky top-0 items-center flex z-10">
+  <header
+    ref="header"
+    class="header h-24 md:h-32 bg-white sticky top-0 items-center flex z-10 transition-transform duration-500 w-full"
+    :class="{ '-translate-y-full': scrollDirection === 'Scrolling down' }"
+  >
     <div class="header__inner flex justify-between mx-auto w-[90%]">
-      <img
-        src="../assets/media/yaz-evi.svg"
-        alt="Logo"
-        class="w-[160px] h-auto"
-      >
+      <router-link to="/">
+        <img
+          src="../assets/media/yaz-evi.svg"
+          alt="Logo"
+          class="w-24 md:w-[160px] h-auto"
+        >
+      </router-link>
 
-      <div class="header__right">
+      <div class="header__right hidden items-center md:flex">
         <nav>
           <ul class="header__list flex flex-row items-center gap-4 justify-center">
-            <li>
-              <router-link class="header__link sub-link" to="/">Home</router-link>
-            </li>
-            <li>
-              <router-link class="header__link sub-link" to="/gallery">Rooms</router-link>
-            </li>
-            <li>
-              <router-link class="header__link sub-link" to="/dining">Dining</router-link>
-            </li>
-            <li>
-              <router-link class="header__link sub-link" to="/about">About</router-link>
-            </li>
-            <li>
-              <router-link class="header__link sub-link" to="/contact">Contact</router-link>
+            <li v-for="item in HEADER_MENU_ITEMS">
+              <router-link
+                class="header__link sub-link"
+                :to=item.url
+              >
+                {{ $t(`${item.title}`) }}
+              </router-link>
             </li>
           </ul>
         </nav>
@@ -42,6 +74,17 @@
           </svg>
           <a href="tel:+905303062021">0530 306 20 21</a>
         </div>
+        <LanguageSelector/>
+      </div>
+
+      <div
+        class="block md:hidden relative w-14 flex-column cursor-pointer top-3"
+        :class="{ 'header__mobile-menu-open': mobileMenu }"
+        @click="openMobileMenu"
+      >
+        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-0 origin-left"></span>
+        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-4 origin-left"></span>
+        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-8 origin-left"></span>
       </div>
     </div>
   </header>
@@ -49,8 +92,24 @@
 
 <style scoped lang="scss">
 .header {
-  width: 100vw;
-  height: 130px;
+  &__mobile-menu-open {
+    span:nth-child(1) {
+      transform: rotate(45deg);
+      top: -3px;
+      left: 8px;
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+      width: 0;
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 37px;
+      left: 8px;
+    }
+  }
 
   &__phone-icon {
     width: 24px;
@@ -59,8 +118,6 @@
   }
 
   &__right {
-    align-items: center;
-    display: flex;
     flex-direction: row;
     gap: 24px;
   }
@@ -70,12 +127,6 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    &__right {
-      display: none;
-    }
   }
 }
 </style>

@@ -11,7 +11,7 @@ import MixedGallery from "../organisms/MixedGallery.vue";
     <VideoHero/>
     <TextAndButton>
       <div class="flex flex-col gap-4">
-        <h2 class="text-4xl capitalize font-raleway font-light">Bozcaada's most exclusive home</h2>
+        <h2 class="text-4xl capitalize font-raleway font-light">{{ $t('exclusiveHome') }}</h2>
         <p class="text-base font-raleway font-light">With just four beautifully appointed pavilions, Pretty Beach House is the most exclusive
           luxury lodge in Australia. A 90-minute drive north of Sydney, the lodge sits high above the village of Pretty
           Beach, nestled into the rugged bushland of Bouddi National Park on the spectacular Bouddi Peninsula.
@@ -42,7 +42,7 @@ import MixedGallery from "../organisms/MixedGallery.vue";
 
     <MixedGallery>
       <template #left>
-        <h3 class="font-raleway text-3xl">Gallery</h3>
+        <h3 class="font-raleway text-3xl my-4">Gallery</h3>
         <img
           class="w-9/12"
           src="../../assets/media/home-gallery/gallery_left_1.jpg"

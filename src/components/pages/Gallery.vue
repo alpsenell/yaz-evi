@@ -8,17 +8,17 @@ interface Image {
 }
 
   const images = ref<Image[]>([
-    { name: 'oda_1/IMG_1766', alt: 'Image 1', isVisible: false },
-    { name: 'oda_1/IMG_1772', alt: 'Image 2', isVisible: false },
-    { name: 'oda_1/IMG_1789', alt: 'Image 2', isVisible: false },
-    { name: 'oda_1/IMG_1812', alt: 'Image 2', isVisible: false },
-    { name: 'oda_1/IMG_1843', alt: 'Image 2', isVisible: false },
-    { name: 'oda_1/IMG_1772', alt: 'Image 2', isVisible: false },
-    // Add more images here
+    { name: 'oda_1/IMG_1766.jpg', alt: 'Image 1', isVisible: false },
+    { name: 'oda_1/IMG_1772.jpg', alt: 'Image 2', isVisible: false },
+    { name: 'oda_1/IMG_1789.jpg', alt: 'Image 2', isVisible: false },
+    { name: 'oda_1/IMG_1812.jpg', alt: 'Image 2', isVisible: false },
+    { name: 'oda_1/IMG_1843.jpg', alt: 'Image 2', isVisible: false },
+    { name: 'oda_1/IMG_1772.jpg', alt: 'Image 2', isVisible: false },
   ]);
 
   function animate(entries: IntersectionObserverEntry[], observer: IntersectionObserver): void {
     entries.forEach(entry => {
+      console.log(entry)
       if (entry.isIntersecting) {
         const imageIndex = images.value.findIndex(img => img.src === (entry.target as HTMLImageElement).src);
         if (imageIndex !== -1) {
@@ -29,7 +29,7 @@ interface Image {
   }
 
 function getImageUrl(name) {
-  return new URL(`../../assets/media/${name}`, import.meta.url)
+  return new URL(`/src/assets/media/${name}`, import.meta.url).href
 }
 </script>
 
@@ -42,9 +42,8 @@ function getImageUrl(name) {
         class="relative overflow-hidden"
         v-intersect="{ callback: animate, options: { threshold: 0.5 } }"
       >
-        img
         <img
-          :src="getImageUrl(images.name)"
+          :src="getImageUrl(image.name)"
           :alt="image.alt"
           class="w-full h-auto transform transition-transform duration-700 ease-out"
           :class="{ 'translate-x-full': !image.isVisible, 'translate-x-0': image.isVisible }"

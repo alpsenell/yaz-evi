@@ -13,7 +13,7 @@
       >
     </video>
     <div class="video-hero__content">
-      <h1 class="font-gravity text-9xl text-white">Welcome to Yaz Evi</h1>
+      <h1 class="font-gravity text-9xl text-white">{{ $t('welcomeToYazEvi') }}</h1>
       <p class="video-hero__text"></p>
     </div>
   </div>
