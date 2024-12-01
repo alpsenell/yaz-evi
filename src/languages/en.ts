@@ -7,4 +7,6 @@ export default {
   experiences: "Experiences",
   contact: "Contact",
   selectOption: "Select an option",
+  english: "English",
+  turkish: "Turkish"
 }

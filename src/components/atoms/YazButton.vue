@@ -19,6 +19,8 @@ const classes = computed(() => {
       return 'bg-secondary text-white'
     case 'outlined':
       return 'border border-primary text-primary'
+    case 'outlined-simple':
+      return 'border border-primary text-primary'
     default:
       return ''
   }
@@ -27,16 +29,18 @@ const classes = computed(() => {
 
 <template>
   <button
-    class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden"
+    class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
     :class="`yaz-button__${props.type} ${classes}`"
   >
     {{ props.label }}
+
+    <slot />
   </button>
 </template>
 
 <style scoped lang="scss">
 .yaz-button {
-  &__outlined  {
+  &__outlined {
     &:after {
       transition: all .2s ease-in-out;
       position: absolute;
@@ -57,6 +61,12 @@ const classes = computed(() => {
 
     &:hover {
       color: #fff;
+    }
+  }
+
+  &__outlined-secondary {
+    &:hover {
+      outline: #a97057 1px solid;
     }
   }
 }

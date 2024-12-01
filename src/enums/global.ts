@@ -24,12 +24,12 @@ export const HEADER_MENU_ITEMS = [
 export const LANGUAGES = [
   {
     title: 'en',
-    icon: 'uk',
     value: 'en',
+    label: 'english'
   },
   {
     title: 'tr',
-    icon: 'tr',
     value: 'tr',
+    label: 'turkish'
   }
 ];

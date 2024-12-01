@@ -8,7 +8,7 @@ import YazButton from "../atoms/YazButton.vue";
     <slot />
 
     <yaz-button
-      class="mt-4"
+      class="mt-4 mx-auto"
       label="reserve now"
       type="outlined"
     />

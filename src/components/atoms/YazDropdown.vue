@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { computed, defineProps, withDefaults, ref } from "vue";
 import YazIcon from "./YazIcon.vue";
+import YazButton from "./YazButton.vue";
 
 interface Props {
   options: string[];
   selectedValue?: string;
+  openPosition?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   options: [],
-  selectedValue: ''
+  selectedValue: '',
+  openPosition: 'down',
 });
 const emit = defineEmits(['selectValue']);
 
@@ -37,28 +40,39 @@ const dropdownStatus = ref(false);
     <div
       v-else
       class="flex cursor-pointer"
-      @click="dropdownStatus = !dropdownStatus"
     >
-      <YazIcon
-        v-if="selectedOption.icon"
-        :name="selectedOption.icon"
-        class="rounded-full"
-      />
+      <YazButton
+        v-if="selectedOption.label"
+        type="outlined-secondary"
+        :label="$t(selectedOption.label)"
+        small
+        @click="dropdownStatus = !dropdownStatus"
+      >
+        <YazIcon
+          v-if="dropdownStatus"
+          name="up"
+          :size="16"
+          color="#a97057"
+        />
 
-      <p v-if="selectedOption.label">
-        {{ selectedOption.label }}
-      </p>
+        <YazIcon
+          v-else
+          name="down"
+          :size="16"
+          color="#a97057"
+        />
+      </YazButton>
     </div>
 
     <div
-      class="flex absolute bg-white z-10 p-4 shadow"
-      :class="{ 'hidden': !dropdownStatus }"
+      class="flex absolute bg-white z-10 shadow-2xl w-full"
+      :class="{ 'hidden': !dropdownStatus, 'bottom-full mb-2': openPosition === 'up', 'mt-2': openPosition === 'down' }"
     >
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col w-full">
         <div
           v-for="(option, index) in props.options"
           :key="index"
-          class="yaz-dropdown__option flex gap-1 cursor-pointer"
+          class="yaz-dropdown__option flex gap-1 cursor-pointer px-4 py-4 hover:bg-tertiary"
           @click="emit('selectValue', option.value)"
         >
           <YazIcon
@@ -67,8 +81,11 @@ const dropdownStatus = ref(false);
             class="rounded-full"
           />
 
-          <p v-if="option.label">
-            {{ option.label }}
+          <p
+            v-if="option.label"
+            class="text-secondaryDark"
+          >
+            {{ $t(option.label) }}
           </p>
         </div>
       </div>

@@ -7,4 +7,6 @@ export default {
   experiences: "Deneyimler",
   contact: "İletişim",
   selectOption: "Bir seçenek seçin",
+  english: "İngilizce",
+  turkish: "Türkçe"
 }

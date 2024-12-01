@@ -19,7 +19,7 @@ function getImageUrl() {
 
 <template>
   <section
-    class="half-hero w-screen h-screen grid grid-cols-1 lg:grid-cols-2"
+    class="half-hero w-screen md:h-screen grid grid-cols-1 lg:grid-cols-2"
   >
     <img
       :src="getImageUrl()"

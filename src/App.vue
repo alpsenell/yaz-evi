@@ -37,16 +37,16 @@ watch(mobileMenu, (value) => {
     :style="{ height: `calc(100dvh - ${headerHeight}px)`, top: `${headerHeight}px` }"
   >
     <nav class="h-full">
-      <ul class="header__list h-full flex flex-col items-center gap-8 justify-center overflow-auto">
+      <ul class="header__list h-full flex flex-col items-center gap-4 justify-center overflow-auto">
         <li v-for="item in HEADER_MENU_ITEMS">
           <router-link
-            class="header__link sub-link text-3xl"
+            class="header__link sub-link text-xl"
             :to=item.url
           >
             {{ $t(`${item.title}`) }}
           </router-link>
         </li>
-        <LanguageSelector />
+        <LanguageSelector open-position="up" />
       </ul>
     </nav>
   </div>
