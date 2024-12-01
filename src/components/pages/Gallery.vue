@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineComponent, ref } from 'vue';
+import TransitionImage from "../atoms/TransitionImage.vue";
 
 interface Image {
   src: string;
@@ -42,12 +43,8 @@ function getImageUrl(name) {
         :key="index"
         class="relative overflow-hidden"
       >
-        <img
-          :src="getImageUrl(image.name)"
-          :alt="image.alt"
-          class="w-full h-auto transform transition-transform duration-300 ease-out"
-          :class="{ 'translate-x-full': !image.isVisible, 'translate-x-0': image.isVisible }"
-          v-intersect="{ callback: animate, options: { threshold: 0.5 } }"
+        <TransitionImage
+          :image="image.name"
         />
       </div>
     </div>
