@@ -49,30 +49,12 @@ import YazIcon from "./atoms/YazIcon.vue";
       <div class="flex justify-center md:justify-end flex-1">
         <div class="flex gap-4">
           <a
-            href="https://www.instagram.com/yazevi/"
+            href="https://www.instagram.com/yazevibozcaada_/"
           >
             <img
               src="../assets/media/instagram.svg"
               alt="Instagram"
-              class="w-[24px] h-auto"
-            >
-          </a>
-          <a
-            href="https://www.pinterest.com/yazevi/"
-          >
-            <img
-              src="../assets/media/pinterest.svg"
-              alt="Pinterest"
-              class="w-[24px] h-auto"
-            >
-          </a>
-          <a
-            href="https://www.tripadvisor.com/yazevi/"
-          >
-            <img
-              src="../assets/media/trip-advisor.svg"
-              alt="trip advisor"
-              class="w-[24px] h-auto"
+              class="w-[30px] h-auto"
             >
           </a>
         </div>

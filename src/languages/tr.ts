@@ -8,5 +8,9 @@ export default {
   contact: "İletişim",
   selectOption: "Bir seçenek seçin",
   english: "İngilizce",
-  turkish: "Türkçe"
+  turkish: "Türkçe",
+  room1: "Oda Zeus",
+  room2: "Oda Hera",
+  room3: "Oda Achilles",
+  room1Description: "Oda açıklaması",
 }

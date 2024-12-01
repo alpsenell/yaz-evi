@@ -8,5 +8,9 @@ export default {
   contact: "Contact",
   selectOption: "Select an option",
   english: "English",
-  turkish: "Turkish"
+  turkish: "Turkish",
+  room1: "Room Zeus",
+  room1: "Room Hera",
+  room1: "Room Achilles",
+  room1Description: "Room description",
 }

@@ -33,3 +33,21 @@ export const LANGUAGES = [
     label: 'turkish'
   }
 ];
+
+export const ROOMS = [
+  {
+    title: 'room1',
+    image: 'oda_1/IMG_1772.jpg',
+    description: 'room1Description'
+  },
+  {
+    title: 'room2',
+    image: 'oda_1/IMG_1766.jpg',
+    description: 'room1Description'
+  },
+  {
+    title: 'room3',
+    image: 'oda_1/IMG_1789.jpg',
+    description: 'room1Description'
+  }
+];

@@ -2,7 +2,6 @@ import { DirectiveBinding } from 'vue';
 
 const intersect = {
   mounted(el, binding) {
-    console.log('mounted')
     const options = {
       threshold: binding.value.options?.threshold || 0.1,
     };
