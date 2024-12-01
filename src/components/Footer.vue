@@ -5,7 +5,7 @@ import YazIcon from "./atoms/YazIcon.vue";
 
 <template>
   <footer class="bg-tertiary w-full px-10 py-12">
-    <div class="max-w-screen-2xl flex gap-20 mx-auto">
+    <div class="max-w-screen-2xl flex flex-col md:flex-row gap-10 md:gap-20 mx-auto">
       <img
         src="../assets/media/yaz-evi.svg"
         alt="Logo"
@@ -46,7 +46,7 @@ import YazIcon from "./atoms/YazIcon.vue";
         </div>
       </div>
 
-      <div class="flex justify-end flex-1">
+      <div class="flex justify-center md:justify-end flex-1">
         <div class="flex gap-4">
           <a
             href="https://www.instagram.com/yazevi/"
@@ -79,14 +79,9 @@ import YazIcon from "./atoms/YazIcon.vue";
       </div>
     </div>
 
-    <ul class="max-w-screen-2xl flex flex-row justify-end ga-6 font-raleway text-sm gap-8 mt-6 mx-auto">
+    <ul class="max-w-screen-2xl flex flex-row justify-center md:justify-end ga-6 font-raleway text-sm gap-8 mt-6 mx-auto">
       <li>
-        <a
-          class="text-link"
-          href="/"
-        >
-          &copy; 2024 Yaz Evi
-        </a>
+        &copy; 2024 Yaz Evi
       </li>
       <li>
         <a

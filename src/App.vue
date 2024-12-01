@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { useTemplateRef, ref, watch } from "vue";
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import { HEADER_MENU_ITEMS } from "./enums/global.ts";
@@ -15,6 +15,7 @@ const openMobileMenu = () => {
 }
 
 watch(mobileMenu, (value) => {
+  console.log(value)
   if (value) {
     document.body.style.position = 'fixed'
   } else {
