@@ -44,7 +44,7 @@ onBeforeUnmount(() => {
 <template>
   <header
     ref="header"
-    class="header h-24 md:h-32 bg-white sticky top-0 items-center flex z-10 transition-transform duration-500 w-full"
+    class="header fixed h-24 md:h-32 bg-transparent top-0 items-center flex z-10 transition-transform duration-500 w-full"
     :class="{ '-translate-y-full': scrollDirection === 'Scrolling down' }"
   >
     <div class="header__inner flex justify-between mx-auto w-[90%]">

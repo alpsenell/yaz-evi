@@ -23,7 +23,7 @@ function getImageUrl() {
   >
     <img
       :src="getImageUrl()"
-      class="flex-1 object-cover w-full h-full"
+      class="flex-1 object-cover w-full h-full max-h-screen"
       :class="props.imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
     />
     <div class="flex flex-1 flex-col gap-10 justify-center px-4 py-6 md:p-6">

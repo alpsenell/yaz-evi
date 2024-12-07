@@ -27,7 +27,7 @@ import MixedGallery from "../organisms/MixedGallery.vue";
       description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
       natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
       that reflects the beauty of the bushland outside."
-      image="home_1.jpg"
+      image="home_3.jpg"
       imagePosition="left"
     />
 
@@ -36,7 +36,7 @@ import MixedGallery from "../organisms/MixedGallery.vue";
       description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
       natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
       that reflects the beauty of the bushland outside."
-      image="home_2.jpg"
+      image="homepage-1.png"
       imagePosition="right"
     />
 
