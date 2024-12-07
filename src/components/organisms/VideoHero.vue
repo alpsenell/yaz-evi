@@ -1,5 +1,5 @@
 <template>
-  <div class="video-hero relative">
+  <div class="full-height-section video-hero relative">
     <video
       class="video-hero__video"
       autoplay

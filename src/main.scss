@@ -46,12 +46,16 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: transparent;
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  background-size: cover !important;
-  background-position: top !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed;
+}
+
+@media screen and (min-width: 768px) {
+  html, body {
+    scroll-snap-type: y mandatory;
+  }
+
+  .full-height-section {
+    scroll-snap-align: start;
+  }
 }
 
 .sub-link {

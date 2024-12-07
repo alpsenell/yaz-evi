@@ -4,16 +4,15 @@ import { collection, query, where, getDocs, setDoc, doc } from "firebase/firesto
 import db from "./firebase";
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-import { HEADER_MENU_ITEMS } from "./enums/global.ts";
-import LanguageSelector from "./components/organisms/LanguageSelector.vue";
+import SlidingHeader from "./components/organisms/SlidingHeader.vue";
 
-const mobileMenu = ref(false);
+const menuVisibility = ref(false);
 const headerHeight = ref(0);
 
-const openMobileMenu = () => {
+const openMenu = () => {
   headerHeight.value = document.querySelector('.header')?.clientHeight
 
-  mobileMenu.value = !mobileMenu.value
+  menuVisibility.value = !menuVisibility.value
 }
 
 async function getRooms() {
@@ -34,42 +33,25 @@ async function createRoom() {
   });
 }
 
-watch(mobileMenu, (value) => {
+watch(menuVisibility, (value) => {
   if (value) {
     document.body.style.position = 'fixed'
   } else {
     document.body.style.position = 'unset'
   }
 })
-
 </script>
 
 <template>
   <div>
-    <Header @openMobileMenu="openMobileMenu" />
+    <Header @openMenu="openMenu" />
     <router-view />
     <Footer />
   </div>
+  <SlidingHeader
+    class="fixed w-dvw bg-white top-0 transition-transform z-10"
+  />
+
 <!--  <button @click="getRooms">Get Rooms</button>-->
 <!--  <button @click="createRoom">Create room</button>-->
-  <div
-    class="fixed w-dvw bg-white top-0 transition-transform z-10"
-    :class="{ 'translate-x-0': mobileMenu, 'translate-x-full': !mobileMenu }"
-    :style="{ height: `calc(100dvh - ${headerHeight}px)`, top: `${headerHeight}px` }"
-  >
-    <nav class="h-full">
-      <ul class="header__list h-full flex flex-col items-center gap-4 justify-center overflow-auto">
-        <li v-for="item in HEADER_MENU_ITEMS">
-          <router-link
-            class="header__link sub-link text-xl"
-            :to=item.url
-            @click="mobileMenu = false"
-          >
-            {{ $t(`${item.title}`) }}
-          </router-link>
-        </li>
-        <LanguageSelector open-position="up" />
-      </ul>
-    </nav>
-  </div>
 </template>

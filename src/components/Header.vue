@@ -6,48 +6,31 @@ import LanguageSelector from "./organisms/LanguageSelector.vue";
 const emit = defineEmits(['openMobileMenu']);
 
 const header = ref<Element>();
-const lastScrollY = ref<number>(0);
-const scrollDirection = ref("No scrolling yet");
-const mobileMenu = ref(false);
+const menuVisibility = ref(false);
 
-const openMobileMenu = () => {
-  mobileMenu.value = !mobileMenu.value;
-  emit("openMobileMenu");
+const openMenu = () => {
+  menuVisibility.value = !menuVisibility.value;
+  emit("openMenu");
 };
 
-const handleScroll = () => {
-  if (mobileMenu.value) {
-    return;
-  }
-
-  const currentScrollY = window.scrollY;
-
-  if (currentScrollY > lastScrollY.value) {
-    scrollDirection.value = "Scrolling down";
-  } else if (currentScrollY < lastScrollY.value) {
-    scrollDirection.value = "Scrolling up";
-  }
-  if (currentScrollY === 0) {
-    scrollDirection.value = "No scrolling yet";
-  }
-  lastScrollY.value = currentScrollY;
-};
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
 </script>
 
 <template>
   <header
     ref="header"
     class="header fixed h-24 md:h-32 bg-transparent top-0 items-center flex z-10 transition-transform duration-500 w-full"
-    :class="{ '-translate-y-full': scrollDirection === 'Scrolling down' }"
   >
-    <div class="header__inner flex justify-between mx-auto w-[90%]">
+    <div class="header__inner flex mx-auto w-[90%]">
+      <div
+        class="block relative w-10 flex-column cursor-pointer top-3"
+        :class="{ 'header__mobile-menu-open': false }"
+        @click="openMenu"
+      >
+        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-0 origin-left"></span>
+        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-2 origin-left"></span>
+        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-4 origin-left"></span>
+      </div>
+
       <router-link to="/">
         <img
           src="../assets/media/yaz-evi.svg"
@@ -75,8 +58,8 @@ onBeforeUnmount(() => {
 
       <div
         class="block md:hidden relative w-10 flex-column cursor-pointer top-3"
-        :class="{ 'header__mobile-menu-open': mobileMenu }"
-        @click="openMobileMenu"
+        :class="{ 'header__mobile-menu-open': false }"
+        @click="openMenu"
       >
         <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-0 origin-left"></span>
         <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-4 origin-left"></span>

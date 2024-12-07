@@ -10,3 +10,11 @@ export function debounce<T extends (...args: any[]) => void>(func: T, delay: num
     }, delay);
   };
 }
+
+export function isElementVisible (element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top < window.innerHeight &&
+    rect.bottom > 0
+  );
+}

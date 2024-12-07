@@ -4,30 +4,19 @@ import VideoHero from "../organisms/VideoHero.vue";
 import TextAndButton from "../organisms/TextAndButton.vue";
 import HalfHero from "../organisms/HalfHero.vue";
 import MixedGallery from "../organisms/MixedGallery.vue";
+import FullHero from "../organisms/FullHero.vue";
 </script>
 
 <template>
   <div class="home">
     <VideoHero/>
-    <TextAndButton>
-      <div class="flex flex-col gap-4">
-        <h2 class="text-4xl capitalize font-raleway font-light">{{ $t('exclusiveHome') }}</h2>
-        <p class="text-base font-raleway font-light">With just four beautifully appointed pavilions, Pretty Beach House is the most exclusive
-          luxury lodge in Australia. A 90-minute drive north of Sydney, the lodge sits high above the village of Pretty
-          Beach, nestled into the rugged bushland of Bouddi National Park on the spectacular Bouddi Peninsula.
-          <br>
-          Come to Pretty Beach House to unwind in seclusion among the trees and be pampered in luxury. Indulge in
-          delicious seasonal dishes expertly paired with fine wines, immerse in nature and return home rejuvenated and
-          re-energised.</p>
-      </div>
-    </TextAndButton>
 
     <HalfHero
       title="The Pavilions"
       description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
       natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
       that reflects the beauty of the bushland outside."
-      image="home_3.jpg"
+      image="homepage-1-min.jpg"
       imagePosition="left"
     />
 
@@ -36,8 +25,38 @@ import MixedGallery from "../organisms/MixedGallery.vue";
       description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
       natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
       that reflects the beauty of the bushland outside."
-      image="homepage-1.png"
+      image="homepage-2-min.jpg"
       imagePosition="right"
+    />
+
+    <FullHero
+      :title="$t('homepage.untouchedNature').toUpperCase()"
+      image="homepage-3-min.jpg"
+      color="#ffffff"
+    />
+
+    <HalfHero
+      title="The Pavilions"
+      description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
+      natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
+      that reflects the beauty of the bushland outside."
+      image="homepage-4-min.jpg"
+      imagePosition="left"
+    />
+
+    <HalfHero
+      title="The Pavilions"
+      description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
+      natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
+      that reflects the beauty of the bushland outside."
+      image="homepage-5-min.jpg"
+      imagePosition="right"
+    />
+
+    <FullHero
+      :title="$t('homepage.untouchedNature').toUpperCase()"
+      image="homepage-6-min.jpg"
+      color="#ffffff"
     />
 
     <MixedGallery>

@@ -13,4 +13,7 @@ export default {
   room2: "Oda Hera",
   room3: "Oda Achilles",
   room1Description: "Oda açıklaması",
+  homepage: {
+    untouchedNature: "El değmemiş doğa",
+  }
 }

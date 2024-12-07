@@ -13,4 +13,7 @@ export default {
   room1: "Room Hera",
   room1: "Room Achilles",
   room1Description: "Room description",
+  homepage: {
+    untouchedNature: "Untouched nature",
+  }
 }
