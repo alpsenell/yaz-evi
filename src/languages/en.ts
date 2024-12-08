@@ -10,8 +10,8 @@ export default {
   english: "English",
   turkish: "Turkish",
   room1: "Room Zeus",
-  room1: "Room Hera",
-  room1: "Room Achilles",
+  room2: "Room Hera",
+  room3: "Room Achilles",
   room1Description: "Room description",
   homepage: {
     untouchedNature: "Untouched nature",

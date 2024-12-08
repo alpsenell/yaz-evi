@@ -5,7 +5,6 @@ const props = defineProps({
   image: String,
 })
 
-
 const loaded = ref(false)
 const getImageUrl = () => {
   return new URL(`../../assets/media/${props.image}`, import.meta.url)
@@ -25,7 +24,7 @@ const onLoaded = () => {
         :src="getImageUrl()"
         v-show="loaded"
         v-on:load="onLoaded"
-        alt=""
+        :alt="`Image of ${props.image}`"
       />
     </transition>
   </div>

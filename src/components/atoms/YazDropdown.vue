@@ -43,7 +43,7 @@ const dropdownStatus = ref(false);
     >
       <YazButton
         v-if="selectedOption.label"
-        type="outlined-secondary"
+        type="outlined-simple"
         :label="$t(selectedOption.label)"
         small
         @click="dropdownStatus = !dropdownStatus"
@@ -92,7 +92,3 @@ const dropdownStatus = ref(false);
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

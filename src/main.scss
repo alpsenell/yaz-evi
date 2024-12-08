@@ -53,7 +53,7 @@ body {
     scroll-snap-type: y mandatory;
   }
 
-  .full-height-section {
+  .full-height-section, section {
     scroll-snap-align: start;
   }
 }

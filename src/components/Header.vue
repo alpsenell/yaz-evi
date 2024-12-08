@@ -1,76 +1,40 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref, computed } from "vue";
-import { HEADER_MENU_ITEMS } from "../enums/global.ts";
-import LanguageSelector from "./organisms/LanguageSelector.vue";
+  import YazIcon from "./atoms/YazIcon.vue";
 
-const emit = defineEmits(['openMobileMenu']);
-
-const header = ref<Element>();
-const menuVisibility = ref(false);
-
-const openMenu = () => {
-  menuVisibility.value = !menuVisibility.value;
-  emit("openMenu");
-};
-
+  const emit = defineEmits(['toggleMobileMenu']);
 </script>
 
 <template>
-  <header
-    ref="header"
-    class="header fixed h-24 md:h-32 bg-transparent top-0 items-center flex z-10 transition-transform duration-500 w-full"
-  >
-    <div class="header__inner flex mx-auto w-[90%]">
+  <header class="header fixed bg-transparent top-0 items-center flex z-10 transition-transform duration-500 w-full">
+    <div class="header__inner mt-8 flex justify-between md:justify-start gap-10 mx-auto w-[90%]">
       <div
-        class="block relative w-10 flex-column cursor-pointer top-3"
+        class="block relative w-10 flex-column cursor-pointer top-4"
         :class="{ 'header__mobile-menu-open': false }"
-        @click="openMenu"
+        @click="emit('toggleMobileMenu')"
       >
-        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-0 origin-left"></span>
-        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-2 origin-left"></span>
-        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-4 origin-left"></span>
+        <span
+          class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-0 origin-left"></span>
+        <span
+          class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-2 origin-left"></span>
+        <span
+          class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-4 origin-left"></span>
       </div>
 
       <router-link to="/">
-        <img
-          src="../assets/media/yaz-evi.svg"
-          alt="Logo"
-          class="w-24 md:w-[160px] h-auto"
-        >
+        <YazIcon
+          name="yaz-evi"
+          color="white"
+          class=" max-[400px]:w-[150px] w-[200px] h-auto"
+        />
       </router-link>
-
-      <div class="header__right hidden items-center md:flex">
-        <nav>
-          <ul class="header__list flex flex-row items-center gap-4 justify-center">
-            <li v-for="item in HEADER_MENU_ITEMS">
-              <router-link
-                class="header__link sub-link"
-                :to=item.url
-              >
-                {{ $t(`${item.title}`) }}
-              </router-link>
-            </li>
-          </ul>
-        </nav>
-
-        <LanguageSelector/>
-      </div>
-
-      <div
-        class="block md:hidden relative w-10 flex-column cursor-pointer top-3"
-        :class="{ 'header__mobile-menu-open': false }"
-        @click="openMenu"
-      >
-        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-0 origin-left"></span>
-        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-4 origin-left"></span>
-        <span class="absolute block h-0.5 bg-secondaryDark w-full rounded l-0 transition-transform top-8 origin-left"></span>
-      </div>
     </div>
   </header>
 </template>
 
 <style scoped lang="scss">
 .header {
+  background-image: linear-gradient(180deg, #bfbdba 0%, rgba(255, 255, 255, 0) 100%);
+
   &__mobile-menu-open {
     span:nth-child(1) {
       transform: rotate(45deg);

@@ -4,13 +4,19 @@ import YazIcon from "./atoms/YazIcon.vue";
 </script>
 
 <template>
-  <footer class="bg-tertiary w-full px-10 py-12">
-    <div class="max-w-screen-2xl flex flex-col md:flex-row gap-10 md:gap-20 mx-auto">
-      <img
-        src="../assets/media/yaz-evi.svg"
-        alt="Logo"
-        class="w-[160px] h-auto"
-      >
+  <footer class="full-height-section bg-tertiary w-full pb-12">
+    <div class="w-full h-[500px]">
+      <gmp-map center="39.833438873291016,26.07203483581543" zoom="14" map-id="DEMO_MAP_ID">
+        <gmp-advanced-marker position="39.833438873291016,26.07203483581543" title="My location"></gmp-advanced-marker>
+      </gmp-map>
+    </div>
+
+    <div class="max-w-screen-2xl flex flex-col md:flex-row gap-10 md:gap-20 mx-auto px-10 mt-10">
+      <YazIcon
+        name="yaz-evi"
+        color="black"
+        class="w-24 w-[160px] h-auto"
+      />
 
       <div class="flex flex-col gap-4">
         <div class="flex gap-4">

@@ -1,19 +1,17 @@
 <script setup lang="ts">
-
-import HalfHero from "../organisms/HalfHero.vue";
 import { ROOMS } from "../../enums/global.ts";
+import SliderHero from "../organisms/SliderHero.vue";
 </script>
 
 <template>
   <div>
-    <h1 class="my-8 md:my-12 text-6xl font-raleway md:text[72px] text-center mx-auto max-w-screen-lg">{{ $t('rooms')}} </h1>
-
-    <HalfHero
+    <SliderHero
       v-for="(room, index) in ROOMS"
       :title="$t(room.title)"
       :image-position="index % 2 === 0 ? 'left' : 'right'"
       :description="$t(room.description)"
-      :image="room.image"
+      :images="room.images"
+      size="half"
     />
   </div>
 </template>

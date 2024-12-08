@@ -1,9 +1,5 @@
 export const HEADER_MENU_ITEMS = [
   {
-    title: 'home',
-    url: '/'
-  },
-  {
     title: 'rooms',
     url: '/rooms'
   },
@@ -37,17 +33,60 @@ export const LANGUAGES = [
 export const ROOMS = [
   {
     title: 'room1',
-    image: 'oda_1/IMG_1772.jpg',
-    description: 'room1Description'
+    image: 'oda_1/oda1-min.jpg',
+    description: 'room1Description',
+    images: [
+      'oda_1/oda1-1-min.jpg',
+      'oda_1/oda1-2-min.jpg',
+      'oda_1/oda1-3-min.jpg',
+      'oda_1/oda1-4-min.jpg',
+      'oda_1/oda1-5-min.jpg',
+      'oda_1/oda1-6-min.jpg',
+      'oda_1/oda1-min.jpg',
+      'oda_1/wc-1-min.jpg',
+      'oda_1/wca-2-min.jpg',
+      'oda_1/wca-3-min.jpg',
+      'oda_1/wca-4-min.jpg',
+      'oda_1/wca-5-min.jpg',
+    ]
   },
   {
     title: 'room2',
-    image: 'oda_1/IMG_1766.jpg',
-    description: 'room1Description'
+    image: 'oda_2/oda2-1-min.jpg',
+    description: 'room1Description',
+    images: [
+      'oda_2/oda2-1-min.jpg',
+      'oda_2/oda2-2-min.jpg',
+      'oda_2/oda2-3-min.jpg',
+      'oda_2/oda2-4-min.jpg',
+      'oda_2/oda2-5-min.jpg',
+      'oda_2/oda2-6-min.jpg',
+      'oda_2/wcb-1-min.jpg',
+      'oda_2/wcb-2-min.jpg',
+      'oda_2/wcb-3-min.jpg',
+    ]
   },
   {
     title: 'room3',
     image: 'oda_1/IMG_1789.jpg',
-    description: 'room1Description'
+    description: 'room1Description',
+    images: [
+      'oda_3/oda3-1-min.jpg',
+      'oda_3/oda3-2-min.jpg',
+      'oda_3/oda3-3-min.jpg',
+      'oda_3/oda3-4-min.jpg',
+      'oda_3/oda3-5-min.jpg',
+      'oda_3/oda3-6-min.jpg',
+      'oda_3/oda3-7-min.jpg',
+      'oda_3/oda3-8-min.jpg',
+      'oda_3/oda3-9-min.jpg',
+      'oda_3/wcc-1-min.jpg',
+      'oda_3/wcc-2-min.jpg',
+      'oda_3/wcc-3-min.jpg',
+    ]
   }
+];
+
+export const ROOMS_IMAGES = [
+
 ];

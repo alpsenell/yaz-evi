@@ -1,7 +1,5 @@
 <script setup lang="ts">
-
 import VideoHero from "../organisms/VideoHero.vue";
-import TextAndButton from "../organisms/TextAndButton.vue";
 import HalfHero from "../organisms/HalfHero.vue";
 import MixedGallery from "../organisms/MixedGallery.vue";
 import FullHero from "../organisms/FullHero.vue";
