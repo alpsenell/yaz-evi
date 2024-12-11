@@ -24,7 +24,7 @@
         <YazIcon
           name="yaz-evi"
           color="white"
-          class=" max-[400px]:w-[150px] w-[200px] h-auto"
+          class="w-[140px] md:w-[200px] h-auto"
         />
       </router-link>
     </div>
