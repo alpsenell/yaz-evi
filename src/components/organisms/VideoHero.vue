@@ -1,7 +1,7 @@
 <template>
-  <div class="full-height-section video-hero relative">
+  <div class="full-height-section h-screen video-hero relative">
     <video
-      class="video-hero__video"
+      class="video-hero__video h-full"
       autoplay
       muted
       loop

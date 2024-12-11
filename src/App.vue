@@ -17,7 +17,7 @@ const route = useRoute()
 watch(
   () => route.path,
   () => {
-    toggleMobileMenu()
+    menuVisibility.value = false
   }
 )
 

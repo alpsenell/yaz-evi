@@ -18,16 +18,19 @@ function getImageUrl(image) {
 
 <template>
   <section
-    class="w-screen grid grid-cols-1"
+    class="full-height-section w-screen grid grid-cols-1"
     :class="size === 'half' ? 'lg:grid-cols-2' : ''"
   >
     <div
-      class="relative"
+      class="relative max-h-screen"
       :class="imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
     >
       <Splide :has-track="false" :options="{ perPage: 1, type: 'loop', pagination: false }">
         <SplideTrack>
-          <SplideSlide v-for="(image, index) in images">
+          <SplideSlide
+            v-for="(image, index) in images"
+            class="max-h-screen"
+          >
             <img
               class="w-full h-full object-cover"
               :src="getImageUrl(image)"
