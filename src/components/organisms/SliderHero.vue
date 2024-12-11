@@ -2,6 +2,7 @@
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/vue-splide';
 import { defineProps } from "vue";
 import YazIcon from "../atoms/YazIcon.vue";
+import YazButton from "../atoms/YazButton.vue";
 
 defineProps({
   images: Array,
@@ -18,15 +19,18 @@ function getImageUrl(image) {
 
 <template>
   <section
-    class="full-height-section w-screen grid grid-cols-1"
-    :class="size === 'half' ? 'lg:grid-cols-2' : ''"
+    class="full-height-section w-screen flex flex-col lg:flex-row"
   >
     <div
-      class="relative max-h-screen"
+      class="relative max-h-screen lg:max-h-[700px] flex-[1.2]"
       :class="imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
     >
-      <Splide :has-track="false" :options="{ perPage: 1, type: 'loop', pagination: false }">
-        <SplideTrack>
+      <Splide
+        class="h-full"
+        :has-track="false"
+        :options="{ perPage: 1, type: 'loop', pagination: false }"
+      >
+        <SplideTrack class="h-full">
           <SplideSlide
             v-for="(image, index) in images"
             class="max-h-screen"
@@ -50,13 +54,20 @@ function getImageUrl(image) {
       </Splide>
     </div>
 
-    <div class="flex flex-1 flex-col gap-10 justify-center px-4 py-6 md:p-6">
-      <h3 class="text-4xl font-raleway font-light">
+    <div
+      class="flex flex-1 flex-col gap-10 justify-center px-4 py-6 md:p-20 items-center"
+      :class="imagePosition === 'right' ? 'md:items-end' : 'md:items-start'"
+    >
+      <h3 class="text-3xl font-raleway font-light">
         {{ title }}
       </h3>
-      <p class="font-raleway text-xl font-light">
+      <p class="font-raleway text-base font-light">
         {{ description }}
       </p>
+      <div class="flex gap-4">
+        <YazButton label="Learn More" type="outlined" />
+        <YazButton label="Book Now" type="primary" />
+      </div>
     </div>
   </section>
 </template>
@@ -65,14 +76,13 @@ function getImageUrl(image) {
 .splide {
   &__arrows {
     display: flex;
-    gap: 10px;
   }
 
   .splide__arrow {
     border: 1px solid white;
-    border-radius: 50%;
     width: 48px;
     height: 48px;
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;

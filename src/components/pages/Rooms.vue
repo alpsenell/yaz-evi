@@ -4,7 +4,7 @@ import SliderHero from "../organisms/SliderHero.vue";
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-20">
     <SliderHero
       v-for="(room, index) in ROOMS"
       :title="$t(room.title)"
