@@ -3,11 +3,18 @@ import VideoHero from "../organisms/VideoHero.vue";
 import HalfHero from "../organisms/HalfHero.vue";
 import MixedGallery from "../organisms/MixedGallery.vue";
 import FullHero from "../organisms/FullHero.vue";
+import TextAndButton from "../organisms/TextAndButton.vue";
 </script>
 
 <template>
   <div class="home">
     <VideoHero/>
+
+    <TextAndButton :button-label="$t('homepage.textAndButton.button')">
+      <h3 class="font-raleway text-3xl my-4">{{ $t('homepage.textAndButton.title') }}</h3>
+      <p class="font-raleway text-lg my-6">{{ $t('homepage.textAndButton.descriptionFirst') }}</p>
+      <p class="font-raleway text-lg my-6">{{ $t('homepage.textAndButton.descriptionSecond') }}</p>
+    </TextAndButton>
 
     <HalfHero
       title="The Pavilions"

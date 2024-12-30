@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, defineProps, withDefaults } from 'vue'
+import { computed } from 'vue'
 
 interface Props {
   type?: string
   label: string
   small?: boolean
+  href?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,6 +30,7 @@ const classes = computed(() => {
 
 <template>
   <button
+    v-if="!href"
     class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
     :class="`yaz-button__${props.type} ${classes}`"
   >
@@ -36,6 +38,16 @@ const classes = computed(() => {
 
     <slot />
   </button>
+  <router-link
+    v-else
+    :to="props.href"
+    class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
+    :class="`yaz-button__${props.type} ${classes}`"
+  >
+    {{ props.label }}
+
+    <slot />
+  </router-link>
 </template>
 
 <style scoped lang="scss">

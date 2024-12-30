@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, defineEmits, watch, computed } from "vue";
+import { ref, watch, computed } from "vue";
 import { HEADER_MENU_ITEMS } from "../../enums/global.ts";
 import LanguageSelector from "./LanguageSelector.vue";
 import YazIcon from "../atoms/YazIcon.vue";
@@ -52,7 +52,10 @@ const openPosition = computed(() => {
       </router-link>
 
       <ul class="header__list overflow-y-visible h-auto flex flex-col items-baseline gap-4 justify-items-start mt-12">
-        <li v-for="item in HEADER_MENU_ITEMS">
+        <li
+          v-for="item in HEADER_MENU_ITEMS"
+          class="cursor-pointer"
+        >
           <router-link
             class="header__link sub-link text-base"
             :to=item.url

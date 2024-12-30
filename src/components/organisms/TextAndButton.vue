@@ -1,6 +1,7 @@
 <script setup lang="ts">
-
+import { defineProps } from "vue";
 import YazButton from "../atoms/YazButton.vue";
+defineProps({ buttonLabel: String });
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import YazButton from "../atoms/YazButton.vue";
 
     <yaz-button
       class="mt-4 mx-auto"
-      label="reserve now"
+      :label="buttonLabel"
       type="outlined"
     />
   </section>

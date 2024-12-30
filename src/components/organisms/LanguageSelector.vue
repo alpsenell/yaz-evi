@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps, withDefaults } from "vue";
+import { ref } from "vue";
 import i18next, { changeLanguage } from "i18next";
 import YazDropdown from "../atoms/YazDropdown.vue";
 import { LANGUAGES } from "../../enums/global.ts";

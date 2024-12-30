@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue'
+import { defineProps } from 'vue'
 
 interface Props {
   title?: string
@@ -17,7 +17,7 @@ function getImageUrl() {
 
 <template>
   <section
-    class="full-height-section full-hero w-screen md:h-screen relative"
+    class="full-height-section full-hero w-screen h-screen relative"
   >
     <img
       :src="getImageUrl()"
@@ -25,7 +25,7 @@ function getImageUrl() {
     />
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <h3
-        class="text-6xl font-montserrat font-normal"
+        class="text-4xl text-center font-montserrat font-normal lg:text-6xl"
         :style="{ color: props.color }"
       >
         {{ props.title }}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps, withDefaults, ref } from "vue";
+import { computed, ref } from "vue";
 import YazIcon from "./YazIcon.vue";
 import YazButton from "./YazButton.vue";
 

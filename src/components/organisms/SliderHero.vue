@@ -22,7 +22,7 @@ function getImageUrl(image) {
     class="full-height-section w-screen flex flex-col lg:flex-row"
   >
     <div
-      class="relative max-h-screen lg:max-h-[700px] flex-[1.2]"
+      class="relative max-h-screen lg:max-h-[700px] flex-[1.4]"
       :class="imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
     >
       <Splide
@@ -66,7 +66,7 @@ function getImageUrl(image) {
       </p>
       <div class="flex gap-4">
         <YazButton label="Learn More" type="outlined" />
-        <YazButton label="Book Now" type="primary" />
+        <YazButton label="Book Now" type="primary" href="booking" />
       </div>
     </div>
   </section>
