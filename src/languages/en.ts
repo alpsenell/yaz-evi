@@ -3,6 +3,10 @@ export default {
   exclusiveHome: "Bozcaada's most exclusive home",
   home: "Home",
   rooms: "Rooms",
+  room: "Room",
+  guests: "Guests",
+  nights: "Nights",
+  selectRoom: "Select Room",
   gallery: "Gallery",
   experiences: "Experiences",
   contact: "Contact",
@@ -13,6 +17,8 @@ export default {
   room2: "Room Hera",
   room3: "Room Achilles",
   room1Description: "Room description",
+  bookNow: "Book Now",
+  allInclusive: "All Inclusive Rates",
   homepage: {
     untouchedNature: "Untouched nature",
     textAndButton: {
@@ -33,5 +39,26 @@ export default {
       five: 'Discover our four exclusive villas – Vineyard View, Seaside Serenity, Olive Grove Hideaway, and Sunset Haven.'
     },
     button: 'View Rates & Inclusions'
+  },
+  roomInformation: {
+    kingBed: 'King Bed',
+    sofa: 'Sofa',
+    sleeps: 'Sleeps',
+    bathroom: 'Bathroom',
+    wifi: 'Wifi',
+    nonSmoking: 'Non-Smoking',
+    airConditioning: 'Air Conditioning',
+    heating: 'Heating',
+    tv: 'TV',
+    minibar: 'Minibar',
+    safeBox: 'Safe Box',
+    hairDryer: 'Hair Dryer',
+    roomService: 'Room Service',
+    dailyCleaning: 'Daily Cleaning',
+    towel: 'Towel',
+    bathrobe: 'Bathrobe',
+    slippers: 'Slippers',
+    toiletries: 'Toiletries',
+    balcony: 'Balcony',
   }
 }

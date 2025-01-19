@@ -1,56 +1,51 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { DatePicker } from "v-calendar";
-import YazButton from "../atoms/YazButton.vue";
 
-interface Props {
-  label?: string;
-  columns?: number;
-  disabledRanges?: any;
-}
-
-const date = ref(new Date());
-const props = withDefaults(defineProps<Props>(), {
-  label: "Select Dates",
-  columns: 2,
-});
-const getDayAfter = (day: number) => {
-  return new Date().getTime() + day * 24 * 60 * 60 * 1000;
-};
-
-const mockRange = ref({
-  start: getDayAfter(1),
-  end: getDayAfter(2)
-});
-const disabledDates = ref([
-  {
-    repeat: {
-      months: [10, 11, 12, 1],
-    },
+const props = defineProps({
+  selectedDates: {
+    type: Object,
+    required: true,
   },
-]);
+  formattedDates: {
+    type: String,
+    required: true,
+  },
+});
+
+const emit = defineEmits(['change']);
+const showCalendar = ref(false);
+const handleDateChange = (dates: { start: Date | null; end: Date | null }) => {
+  emit('change', dates);
+};
+const closeCalendar = () => {
+  showCalendar.value = false;
+};
 </script>
 
 <template>
-  <div>
-    <span v-if="label"></span>
-    <button>
-      {{ mockRange.start }}
-      {{ mockRange.end }}
-    </button>
-  </div>
-
-  <DatePicker
-    ref="calendar"
-    v-model="mockRange"
-    :columns="columns"
-    :is-range="true"
-    :is-inline="false"
+  <div
+    class="trigger relative w-fit"
+    v-click-outside="closeCalendar"
   >
-    <template #footer>
-      <div class="w-full px-4 pb-3">
+    <button
+      class="w-full border font-raleway border-gray-300 rounded-lg px-4 py-2 text-left hover:border-black"
+      @click="showCalendar = !showCalendar"
+    >
+      {{ formattedDates }}
+    </button>
 
-      </div>
-    </template>
-  </DatePicker>
+    <DatePicker
+      v-if="showCalendar"
+      ref="calendar"
+      :model-value="selectedDates"
+      class="!absolute top-full z-10 left-0"
+      is-range
+      :columns="2"
+      :is-inline="false"
+      :popover="{ placement: 'bottom' }"
+      @blur="closeCalendar"
+      @update:model-value="handleDateChange"
+    />
+  </div>
 </template>

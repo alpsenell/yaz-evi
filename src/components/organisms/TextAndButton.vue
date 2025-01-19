@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
 import YazButton from "../atoms/YazButton.vue";
 defineProps({ buttonLabel: String });
 </script>

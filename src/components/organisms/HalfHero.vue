@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 interface Props {
   title: string
   description: string
@@ -28,10 +26,10 @@ function getImageUrl() {
       :class="props.imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
     />
     <div class="flex flex-1 flex-col gap-6 lg:gap-10 justify-center px-4 py-6 md:p-6">
-      <h3 class="text-2xl lg:text-6xl font-raleway lg:font-light">
+      <h3 class="text-2xl lg:text-4xl font-raleway lg:font-light">
         {{ props.title }}
       </h3>
-      <p class="font-raleway text-lg lg:text-2xl font-light">
+      <p class="font-raleway text-lg lg:text-xl font-light">
         {{ props.description }}
       </p>
     </div>

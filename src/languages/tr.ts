@@ -3,6 +3,10 @@ export default {
   exclusiveHome: "Bozcaada'nın en özel evi",
   home: "Ana Sayfa",
   rooms: "Odalar",
+  room: "Oda",
+  guests: "Misafirler",
+  nights: "Gece",
+  selectRoom: "Oda Seçimi",
   gallery: "Galeri",
   experiences: "Deneyimler",
   contact: "İletişim",
@@ -13,6 +17,8 @@ export default {
   room2: "Oda Hera",
   room3: "Oda Achilles",
   room1Description: "Oda açıklaması",
+  bookNow: "Şimdi Rezervasyon Yapın",
+  allInclusive: "Her Şey Dahil Fiyatlar",
   homepage: {
     untouchedNature: "El değmemiş doğa",
     textAndButton: {
@@ -33,5 +39,26 @@ export default {
       five: 'Dört özel villamızı keşfedin – Üzüm Bağı Manzarası, Sahil Sakinliği, Zeytin Bahçesi Saklanma Yeri ve Gün Batımı Cenneti.'
     },
     button: 'Fiyatlar ve Dahil Olanlar'
+  },
+  roomInformation: {
+    kingBed: 'Çift Kişilik Yatak',
+    sofa: 'Kanepe',
+    sleeps: 'Yatak Kapasitesi',
+    bathroom: 'Banyo',
+    wifi: 'Wifi',
+    nonSmoking: 'Sigara İçilmez',
+    airConditioning: 'Klima',
+    heating: 'Isıtma',
+    tv: 'TV',
+    minibar: 'Minibar',
+    safeBox: 'Kasa',
+    hairDryer: 'Saç Kurutma Makinesi',
+    roomService: 'Oda Servisi',
+    dailyCleaning: 'Günlük Temizlik',
+    towel: 'Havlu',
+    bathrobe: 'Bornoz',
+    slippers: 'Terlik',
+    toiletries: 'Kişisel Bakım Ürünleri',
+    balcony: 'Balkon'
   }
 }
