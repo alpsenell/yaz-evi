@@ -64,8 +64,8 @@ function getImageUrl(image) {
         </Splide>
       </div>
 
-      <div class="booking-card__information">
-        <div class="flex flex-col gap-2 md:ml-2 mt-3">
+      <div class="booking-card__information px-4">
+        <div class="flex flex-col gap-2 mt-3">
           <div class="text-lg font-raleway">
             {{ $t(room.title) }}
           </div>
@@ -136,9 +136,7 @@ function getImageUrl(image) {
             {{ nightNumber }} {{ $t('nights') }}, {{ guestNumber }} {{ $t('guests') }}
           </p>
         </div>
-        <YazButton
-          :label="$t('selectRoom')"
-        />
+        <YazButton :label="$t('selectRoom')"/>
       </div>
     </div>
   </div>

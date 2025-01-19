@@ -62,9 +62,10 @@ const updateDates = (dates: { start: Date | null; end: Date | null }) => {
       alt="Banner image"
     >
 
-    <div class="max-w-screen-lg mx-auto relative bottom-8">
-      <div class="border-solid border-primary p-4 border-2 rounded-xl flex gap-4 bg-white">
+    <div class="max-w-screen-lg mx-auto relative bottom-8 px-4">
+      <div class="border-solid border-primary p-4 border-2 rounded-xl flex gap-4 bg-white flex-col md:flex-row">
         <DatePicker
+          class="w-full md:w-fit"
           label="Select Dates"
           :selected-dates="selectedDates"
           :formatted-dates="formattedDates"
@@ -89,7 +90,23 @@ const updateDates = (dates: { start: Date | null; end: Date | null }) => {
             :room="room"
           />
         </div>
-        <div class="flex flex-col gap-2 py-6 px-3 shadow-2xl rounded-2xl h-fit sticky top-16">
+
+        <div class="flex justify-between md:hidden fixed bottom-0 left-0 p-4 bg-white border-t border-solid border-primary w-full z-10">
+          <div class="flex flex-col">
+            <p class="font-montserrat text-md">
+              {{ formattedDates }}
+            </p>
+            <p class="font-montserrat text-sm">
+              {{ nights }} nights
+            </p>
+          </div>
+          <YazButton
+            :label="$t('bookNow')"
+            type="primary"
+          />
+        </div>
+
+        <div class="hidden md:flex flex-col gap-2 py-6 px-3 shadow-2xl rounded-2xl h-fit sticky top-16">
           <div class="flex justify-between items-center">
             <p class="font-montserrat text-md">
               {{ formattedDates }}

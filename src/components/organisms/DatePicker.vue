@@ -21,6 +21,7 @@ const handleDateChange = (dates: { start: Date | null; end: Date | null }) => {
 const closeCalendar = () => {
   showCalendar.value = false;
 };
+const columns = computed(() => (window.innerWidth < 768 ? 1 : 2));
 </script>
 
 <template>
@@ -41,7 +42,7 @@ const closeCalendar = () => {
       :model-value="selectedDates"
       class="!absolute top-full z-10 left-0"
       is-range
-      :columns="2"
+      :columns="columns"
       :is-inline="false"
       :popover="{ placement: 'bottom' }"
       @blur="closeCalendar"
