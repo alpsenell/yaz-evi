@@ -43,10 +43,10 @@ function getImageUrl(image) {
             <SplideSlide
               v-for="(image, index) in images"
               :key="index"
-              class="aspect-square"
+              class="md:aspect-square"
             >
               <img
-                class="h-full w-full object-cover"
+                class="max-h-96 md:max-h-[unset] h-full w-full object-cover"
                 :src="getImageUrl(image)"
                 :alt="`Image of ${title}-${index + 1}`"
               />
