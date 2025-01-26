@@ -19,7 +19,7 @@ const onLoaded = () => {
   <div
     class="h-full w-full"
   >
-    <transition name="show">
+    <transition name="fade">
       <img
         :src="getImageUrl()"
         v-show="loaded"
@@ -31,18 +31,13 @@ const onLoaded = () => {
 </template>
 
 <style scoped>
-.show-enter-active {
-  animation: bounce-in 0.5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
-.show-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

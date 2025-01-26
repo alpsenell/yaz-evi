@@ -5,6 +5,7 @@ interface Props {
   type?: string
   label: string
   small?: boolean
+  externalLink?: boolean
   href?: string
 }
 
@@ -34,17 +35,26 @@ const classes = computed(() => {
     class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
     :class="`yaz-button__${props.type} ${classes}`"
   >
-    {{ props.label }}
+    {{ label }}
 
     <slot />
   </button>
+  <a
+    v-else-if="href && externalLink"
+    class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
+    :class="`yaz-button__${type} ${classes}`"
+    :href="href"
+    target="_blank"
+  >
+    {{ label }}
+  </a>
   <router-link
     v-else
-    :to="props.href"
+    :to="href"
     class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
-    :class="`yaz-button__${props.type} ${classes}`"
+    :class="`yaz-button__${type} ${classes}`"
   >
-    {{ props.label }}
+    {{ label }}
 
     <slot />
   </router-link>

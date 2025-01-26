@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import YazIcon from "./atoms/YazIcon.vue";
 </script>
 

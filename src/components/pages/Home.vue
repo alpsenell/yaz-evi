@@ -18,18 +18,14 @@ import TextAndButton from "../organisms/TextAndButton.vue";
 
     <HalfHero
       title="The Pavilions"
-      description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
-      natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
-      that reflects the beauty of the bushland outside."
+      :description="$t('homepage.textAndButton.descriptionSecond')"
       image="homepage-1-min.jpg"
       imagePosition="left"
     />
 
     <HalfHero
       title="The Pavilions"
-      description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
-      natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
-      that reflects the beauty of the bushland outside."
+      :description="$t('homepage.textAndButton.descriptionThird')"
       image="homepage-2-min.jpg"
       imagePosition="right"
     />
@@ -42,18 +38,14 @@ import TextAndButton from "../organisms/TextAndButton.vue";
 
     <HalfHero
       title="The Pavilions"
-      description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
-      natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
-      that reflects the beauty of the bushland outside."
+      :description="$t('homepage.textAndButton.descriptionFourth')"
       image="homepage-4-min.jpg"
       imagePosition="left"
     />
 
     <HalfHero
       title="The Pavilions"
-      description="Each of the four pavilions at Pretty Beach House is designed to make the most of the stunning views and
-      natural surroundings. The interiors are spacious and light-filled, with a contemporary Australian aesthetic
-      that reflects the beauty of the bushland outside."
+      :description="$t('homepage.textAndButton.descriptionFifth')"
       image="homepage-5-min.jpg"
       imagePosition="right"
     />

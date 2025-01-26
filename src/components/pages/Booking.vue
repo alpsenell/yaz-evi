@@ -62,7 +62,7 @@ const updateDates = (dates: { start: Date | null; end: Date | null }) => {
       alt="Banner image"
     >
 
-    <div class="max-w-screen-lg mx-auto relative bottom-8 px-4">
+    <div class="max-w-screen-xl mx-auto relative bottom-8 px-4">
       <div class="border-solid border-primary p-4 border-2 rounded-xl flex gap-4 bg-white flex-col md:flex-row">
         <DatePicker
           class="w-full md:w-fit"

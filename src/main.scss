@@ -1,3 +1,4 @@
+@use 'styles/reset';
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -115,5 +116,3 @@ body {
   transition: opacity .3s ease;
   width: 100%;
 }
-
-@import 'styles/reset';
