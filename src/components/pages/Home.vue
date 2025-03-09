@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import VideoHero from "../organisms/VideoHero.vue";
-import HalfHero from "../organisms/HalfHero.vue";
-import MixedGallery from "../organisms/MixedGallery.vue";
-import FullHero from "../organisms/FullHero.vue";
-import TextAndButton from "../organisms/TextAndButton.vue";
+  import VideoHero from "../organisms/VideoHero.vue";
+  import HalfHero from "../organisms/HalfHero.vue";
+  import MixedGallery from "../organisms/MixedGallery.vue";
+  import FullHero from "../organisms/FullHero.vue";
+  import TextAndButton from "../organisms/TextAndButton.vue";
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import Loader from "./Loader.vue";
 
 interface Props {
   type?: string
@@ -7,8 +8,10 @@ interface Props {
   small?: boolean
   externalLink?: boolean
   href?: string
+  disabled?: boolean
+  loading?: boolean
 }
-
+const emit = defineEmits(['click']);
 const props = withDefaults(defineProps<Props>(), {
   type: 'primary',
 })
@@ -33,7 +36,12 @@ const classes = computed(() => {
   <button
     v-if="!href"
     class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
-    :class="`yaz-button__${props.type} ${classes}`"
+    :class="[
+      `yaz-button__${type} ${classes}`,
+      { 'cursor-not-allowed': disabled },
+    ]"
+    :disabled="disabled"
+    @click="emit('click')"
   >
     {{ label }}
 

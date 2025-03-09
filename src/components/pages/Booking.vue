@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
+import { db } from "../../firebase/config.ts";
+import { collection, query, where, getDocs, addDoc, doc } from "firebase/firestore";
+import i18next from "i18next";
+
 import { ROOMS } from "../../enums/global.ts";
 
 import DatePicker from "../organisms/DatePicker.vue";
@@ -7,12 +11,17 @@ import RoomGuestSelector from "../organisms/RoomGuestSelector.vue";
 import BookingCard from "../organisms/BookingCard.vue";
 import YazButton from "../atoms/YazButton.vue";
 
+const selectedLanguage = ref(i18next.language<string>);
 const roomNumber = ref(1);
 const guestNumber = ref(2);
+const loadingState = ref(false);
 const selectedDates = ref({
   start: new Date(new Date().setDate(new Date().getDate() + 1)),
   end: new Date(new Date().setDate(new Date().getDate() + 2)),
 });
+const selectedRoom = ref({});
+const availableRooms = ref([]);
+const isBooking = ref(false);
 
 const updateRooms = (value: number) => {
   roomNumber.value = value;
@@ -35,11 +44,23 @@ const formatDate = (date: Date | null) => {
   if (!date) {
     return '';
   }
-  const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: '2-digit', month: 'short' };
-  return new Intl.DateTimeFormat('en-US', options).format(date);
+  const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' };
+  return new Intl.DateTimeFormat(selectedLanguage.value === 'en' ?'en-US' : 'tr-TR', options).format(date);
 };
 
 const nights = computed(() => calculateNights(selectedDates.value.start, selectedDates.value.end));
+
+const totalPrice = computed(() => {
+  if (!selectedRoom.value.id) {
+    return 0;
+  }
+  const total = selectedRoom.value.bookingInformation.price * nights.value;
+
+  return new Intl.NumberFormat('tr-TR', {
+    style: 'currency',
+    currency: 'TRY',
+  }).format(total)
+});
 
 const formattedDates = computed(() => {
   if (!selectedDates.value.start || !selectedDates.value.end) {
@@ -51,6 +72,63 @@ const formattedDates = computed(() => {
 const updateDates = (dates: { start: Date | null; end: Date | null }) => {
   selectedDates.value = dates;
 };
+
+const checkRooms = async () => {
+  availableRooms.value = await getAvailableRooms(selectedDates.value.start, selectedDates.value.end);
+};
+
+const isRoomAvailable = async (roomId: string, checkIn: string, checkOut: string) => {
+  const roomRef = doc(db, "rooms", roomId);
+  const bookingsRef = collection(roomRef, "bookings");
+
+  const q = query(bookingsRef, where("checkInDate", "<", checkOut), where("checkOutDate", ">", checkIn));
+  const querySnapshot = await getDocs(q);
+
+  return querySnapshot.empty;
+};
+
+const bookRoom = async (room: object) => {
+  isBooking.value = true;
+  const { id } = room;
+  const checkIn = selectedDates.value.start;
+  const checkOut = selectedDates.value.end;
+
+  if (await isRoomAvailable(id, checkIn, checkOut)) {
+    const roomRef = doc(db, "rooms", id);
+    const bookingsRef = collection(roomRef, "bookings");
+
+    await addDoc(bookingsRef, {
+      checkInDate: checkIn,
+      checkOutDate: checkOut,
+    });
+
+    isBooking.value = false;
+  } else {
+    isBooking.value = false;
+  }
+};
+
+const getAvailableRooms = async (checkIn: string, checkOut: string) => {
+  loadingState.value = true;
+  const roomsRef = collection(db, "rooms");
+  const roomsSnapshot = await getDocs(roomsRef);
+
+  let availableRooms = [];
+
+  for (const roomDoc of roomsSnapshot.docs) {
+    const roomId = roomDoc.id;
+    if (await isRoomAvailable(roomId, checkIn, checkOut)) {
+      availableRooms.push(roomId);
+    }
+  }
+
+  loadingState.value = false;
+  return availableRooms;
+};
+
+watch(() => selectedDates, () => {
+  checkRooms();
+}, { deep: true, immediate: true });
 
 </script>
 
@@ -88,6 +166,11 @@ const updateDates = (dates: { start: Date | null; end: Date | null }) => {
             :night-number="nights"
             :guest-number="guestNumber"
             :room="room"
+            :selected-dates="selectedDates"
+            :available="availableRooms.includes(room.id)"
+            :loading="loadingState"
+            :selected-room-id="selectedRoom.id"
+            @selectRoom="selectedRoom = room"
           />
         </div>
 
@@ -112,8 +195,9 @@ const updateDates = (dates: { start: Date | null; end: Date | null }) => {
               {{ formattedDates }}
             </p>
           </div>
+
           <p class="font-montserrat text-sm">
-            {{ nights }} nights
+            {{ nights }} {{ $t('nights') }}
           </p>
 
           <div class="flex gap-2">
@@ -127,9 +211,32 @@ const updateDates = (dates: { start: Date | null; end: Date | null }) => {
 
           <span class="h-[0.5px] bg-primary my-2"></span>
 
+          <div
+            v-if="selectedRoom.id"
+            class="w-full flex flex-col gap-2"
+          >
+            <div class="flex flex-col gap-1">
+              <p class="font-raleway font-bold">{{ $t(selectedRoom.title) }}</p>
+              <p class="font-montserrat text-xs text-primary">
+                {{ nights }} {{ $t('nights') }}
+              </p>
+            </div>
+            <span class="h-[0.5px] bg-primary my-2"></span>
+            <div class="w-full flex justify-between items-center">
+              <p class="font-raleway font-bold">
+                {{ $t('totalPrice') }}:
+              </p>
+              <p class="font-raleway font-bold">
+                {{ totalPrice }}
+              </p>
+            </div>
+          </div>
+
           <YazButton
+            :disabled="!selectedRoom.id"
             :label="$t('bookNow')"
             type="outlined"
+            @click="bookRoom(selectedRoom)"
           />
         </div>
       </div>

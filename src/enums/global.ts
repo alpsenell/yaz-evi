@@ -36,11 +36,12 @@ export const LANGUAGES = [
 
 export const ROOMS = [
   {
+    id: '1',
     title: 'room1',
     image: 'oda_1/oda1-min.jpg',
     description: 'room1Description',
     bookingInformation: {
-      price: 200,
+      price: 2000,
       guestNumber: 4,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
@@ -79,11 +80,12 @@ export const ROOMS = [
     ]
   },
   {
+    id: '2',
     title: 'room2',
     image: 'oda_2/oda2-1-min.jpg',
     description: 'room1Description',
     bookingInformation: {
-      price: 150,
+      price: 2000,
       guestNumber: 2,
       sleeps: ['kingBed'],
       bathroom: 1,
@@ -119,11 +121,12 @@ export const ROOMS = [
     ]
   },
   {
+    id: '3',
     title: 'room3',
     image: 'oda_3/oda3-1-min.jpg',
     description: 'room3Description',
     bookingInformation: {
-      price: 130,
+      price: 2000,
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
@@ -162,11 +165,12 @@ export const ROOMS = [
     ]
   },
   {
+    id: '4',
     title: 'room4',
     image: 'oda_4/oda4-1-min.jpg',
     description: 'room4Description',
     bookingInformation: {
-      price: 130,
+      price: 2000,
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
