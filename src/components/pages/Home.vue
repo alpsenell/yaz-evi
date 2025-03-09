@@ -8,7 +8,10 @@
 
 <template>
   <div class="home">
-    <VideoHero/>
+    <VideoHero
+      :title="$t('welcomeToYazEvi')"
+      src="https://yazevi.s3.eu-central-1.amazonaws.com/bozcaada.mp4"
+    />
 
     <TextAndButton :button-label="$t('homepage.textAndButton.button')">
       <h3 class="font-raleway text-3xl my-4">{{ $t('homepage.textAndButton.title') }}</h3>

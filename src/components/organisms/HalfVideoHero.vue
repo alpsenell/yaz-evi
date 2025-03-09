@@ -3,15 +3,17 @@ import { defineProps } from 'vue'
 
 const props = defineProps({
   src: String,
-  title: String,
   rotate: Boolean,
 })
 </script>
 
 <template>
-  <div class="full-height-section h-screen video-hero relative">
+  <div
+    class="full-height-section md:h-screen md:grid md:grid-cols-2 video-hero relative flex flex-col"
+  >
     <video
-      class="video-hero__video h-full w-full"
+      class="video-hero__video w-full h-full"
+      :class="rotate ? 'rotate-180' : ''"
       autoplay
       muted
       loop
@@ -22,12 +24,6 @@ const props = defineProps({
         type="video/mp4"
       >
     </video>
-    <div class="video-hero__content">
-      <h1 class="font-gravity text-9xl text-white">
-        {{ title }}
-      </h1>
-      <p class="video-hero__text"></p>
-    </div>
     <slot/>
   </div>
 </template>

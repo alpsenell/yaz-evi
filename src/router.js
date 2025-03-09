@@ -6,6 +6,7 @@ import Gallery from './components/pages/Gallery.vue';
 import Rooms from './components/pages/Rooms.vue';
 import Room from './components/pages/Room.vue';
 import Booking from './components/pages/Booking.vue';
+import Experiences from './components/pages/Experiences.vue';
 
 const routes = [
   { path: '/', component: Home },
@@ -14,6 +15,7 @@ const routes = [
   { path: '/rooms', component: Rooms },
   { path: '/room/:id', component: Room },
   { path: '/booking', component: Booking },
+  { path: '/experiences', component: Experiences },
 ]
 
 const router = createRouter({
