@@ -39,6 +39,7 @@ export const ROOMS = [
     id: '1',
     title: 'room1',
     image: 'oda_1/oda1-min.jpg',
+    name: 'Zeus',
     description: 'room1Description',
     bookingInformation: {
       price: 2000,
@@ -82,6 +83,7 @@ export const ROOMS = [
   {
     id: '2',
     title: 'room2',
+    name: 'Hera',
     image: 'oda_2/oda2-1-min.jpg',
     description: 'room1Description',
     bookingInformation: {
@@ -122,6 +124,7 @@ export const ROOMS = [
   },
   {
     id: '3',
+    name: 'tenedos',
     title: 'room3',
     image: 'oda_3/oda3-1-min.jpg',
     description: 'room3Description',
@@ -154,7 +157,6 @@ export const ROOMS = [
       'oda_3/oda3-2-min.jpg',
       'oda_3/oda3-3-min.jpg',
       'oda_3/oda3-4-min.jpg',
-      'oda_3/oda3-5-min.jpg',
       'oda_3/oda3-6-min.jpg',
       'oda_3/oda3-7-min.jpg',
       'oda_3/oda3-8-min.jpg',
@@ -167,6 +169,7 @@ export const ROOMS = [
   {
     id: '4',
     title: 'room4',
+    name: 'tenes',
     image: 'oda_4/oda4-1-min.jpg',
     description: 'room4Description',
     bookingInformation: {
@@ -208,7 +211,52 @@ export const ROOMS = [
       'oda_4/wcd-2-min.jpg',
       'oda_4/wcd-3-min.jpg',
     ]
-  }
+  },
+
+  {
+    id: '5',
+    name: 'ilyada',
+    title: 'room5',
+    image: 'oda_3/oda3-1-min.jpg',
+    description: 'room5Description',
+    bookingInformation: {
+      price: 2000,
+      guestNumber: 2,
+      sleeps: ['kingBed', 'sofa'],
+      bathroom: 1,
+      size: 30,
+      features: [
+        'wifi',
+        'nonSmoking',
+        'airConditioning',
+        'heating',
+        'tv',
+        'minibar',
+        'safeBox',
+        'hairDryer',
+        'roomService',
+        'dailyCleaning',
+        'towel',
+        'bathrobe',
+        'slippers',
+        'toiletries',
+        'balcony',
+      ]
+    },
+    images: [
+      'oda_3/oda3-9-min.jpg',
+      'oda_3/oda3-3-min.jpg',
+      'oda_3/oda3-1-min.jpg',
+      'oda_3/oda3-4-min.jpg',
+      'oda_3/oda3-2-min.jpg',
+      'oda_3/oda3-8-min.jpg',
+      'oda_3/oda3-6-min.jpg',
+      'oda_3/oda3-7-min.jpg',
+      'oda_3/wcc-1-min.jpg',
+      'oda_3/wcc-2-min.jpg',
+      'oda_3/wcc-3-min.jpg',
+    ]
+  },
 ];
 
 export const GALLERY_IMAGES = [

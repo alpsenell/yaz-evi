@@ -25,15 +25,15 @@ function getImageUrl() {
       class="flex-1 object-cover w-full h-full max-h-screen"
       :class="props.imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
     />
-    <div class="flex flex-1 flex-col gap-6 lg:gap-10 justify-center px-4 py-6 md:p-6">
+    <div class="flex flex-1 flex-col gap-6 lg:gap-10 justify-center px-4 py-6 md:p-20">
       <h3
         v-if="title"
-        class="text-2xl lg:text-4xl font-raleway lg:font-light">
+        class="text-3xl font-raleway font-light">
         {{ props.title }}
       </h3>
       <div>
         <p
-          class="font-raleway text-lg lg:text-xl font-light whitespace-pre-wrap"
+          class="font-raleway text-base font-light"
           v-html="description"
         />
 

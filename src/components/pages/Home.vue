@@ -32,7 +32,6 @@
     />
 
     <FullHero
-      :title="$t('homepage.untouchedNature').toUpperCase()"
       image="homepage-3-min.jpg"
       color="#ffffff"
     />
@@ -50,7 +49,6 @@
     />
 
     <FullHero
-      :title="$t('homepage.untouchedNature').toUpperCase()"
       image="homepage-6-min.jpg"
       color="#ffffff"
     />
@@ -75,7 +73,3 @@
     </MixedGallery>
   </div>
 </template>
-
-<style scoped>
-
-</style>
