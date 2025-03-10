@@ -7,7 +7,7 @@ import tr from './languages/tr.ts'
 i18next
   .use(LanguageDetector)
   .init({
-    debug: true,
+    debug: import.meta.env.MODE === 'development',
     fallbackLng: 'en',
     global: true,
     resources: {
