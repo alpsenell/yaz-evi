@@ -4,7 +4,6 @@ import { defineProps } from 'vue'
 const props = defineProps({
   src: String,
   title: String,
-  rotate: Boolean,
 })
 </script>
 

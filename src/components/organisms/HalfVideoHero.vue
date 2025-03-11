@@ -3,7 +3,6 @@ import { defineProps } from 'vue'
 
 const props = defineProps({
   src: String,
-  rotate: Boolean,
 })
 </script>
 
@@ -13,7 +12,6 @@ const props = defineProps({
   >
     <video
       class="video-hero__video w-full h-full"
-      :class="rotate ? 'rotate-180' : ''"
       autoplay
       muted
       loop
