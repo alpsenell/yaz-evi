@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",
     "firebase": "^11.4.0",

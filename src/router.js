@@ -7,6 +7,7 @@ import Rooms from './components/pages/Rooms.vue';
 import Room from './components/pages/Room.vue';
 import Booking from './components/pages/Booking.vue';
 import Experiences from './components/pages/Experiences.vue';
+import Contact from './components/pages/Contact.vue';
 
 const routes = [
   { path: '/', component: Home },
@@ -16,6 +17,7 @@ const routes = [
   { path: '/room/:id', component: Room },
   { path: '/booking', component: Booking },
   { path: '/experiences', component: Experiences },
+  { path: '/contact', component: Contact },
 ]
 
 const router = createRouter({
