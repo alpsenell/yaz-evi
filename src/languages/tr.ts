@@ -1,6 +1,6 @@
 export default {
   phoneNumber: "+90 530 306 20 21",
-  hotelAddress: "Murat Bey Sk. No:6, Alaybey, 17680 Bozcaada/Çanakkale",
+  hotelAddress: "Alaybey Mah. Muratbey Sk. 12 Bozcaada/Çanakkale",
   gallery: "Galeri",
   navigation: {
     about: "Hakkımızda",

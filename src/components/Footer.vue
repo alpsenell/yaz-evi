@@ -23,9 +23,9 @@ import YazIcon from "./atoms/YazIcon.vue";
 
           <a
             class="text-link font-raleway w-fit"
-            href="tel:+905303062021"
+            href="tel:+905324316734"
           >
-            0530 306 20 21
+            0532 431 67 34
           </a>
         </div>
         <div class="flex gap-4">
@@ -46,7 +46,7 @@ import YazIcon from "./atoms/YazIcon.vue";
             class="text-link font-raleway w-fit"
             href="https://goo.gl/maps/7Z3"
           >
-            Yaz Evi, Bozcaada, Turkey
+            {{ $t('hotelAddress') }}
           </a>
         </div>
       </div>
