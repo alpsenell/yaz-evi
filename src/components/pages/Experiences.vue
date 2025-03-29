@@ -9,7 +9,8 @@ import HalfHero from "../organisms/HalfHero.vue";
     <HalfVideoHero
       type="half"
       rotate
-      src="https://yazevi.s3.eu-central-1.amazonaws.com/IMG_6413.MOV"
+      media-name="experiences.MOV"
+      poster-name="experience-video-media.png"
     >
       <div class="flex flex-col w-full justify-center items-center gap-8 px-4 py-6 md:p-20">
         <h1 class="text-3xl font-raleway font-light">

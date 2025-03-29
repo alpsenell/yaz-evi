@@ -10,7 +10,8 @@
   <div class="home">
     <VideoHero
       :title="$t('welcomeToYazEvi')"
-      src="https://yazevi.s3.eu-central-1.amazonaws.com/bozcaada.mp4"
+      mediaName="opening_video.mp4"
+      posterName="homepage-3-min.jpg"
     />
 
     <TextAndButton :button-label="$t('homepage.textAndButton.button')">

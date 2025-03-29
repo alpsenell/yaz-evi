@@ -2,9 +2,13 @@
 import { defineProps } from 'vue'
 
 const props = defineProps({
-  src: String,
+  mediaName: String,
   title: String,
+  posterName: String,
 })
+function getAssetUrl(name) {
+  return new URL(`../../assets/media/${name}`, import.meta.url)
+}
 </script>
 
 <template>
@@ -15,9 +19,10 @@ const props = defineProps({
       muted
       loop
       playsinline
+      :poster="getAssetUrl(posterName)"
     >
       <source
-        :src="src"
+        :src="getAssetUrl(mediaName)"
         type="video/mp4"
       >
     </video>
