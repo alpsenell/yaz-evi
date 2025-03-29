@@ -25,6 +25,8 @@ export default {
       heroDescription: 'Bozcaada’nın en büyüleyici gün batımı manzaralarından birine ev sahipliği yapıyor. Ufka doğru uzanan yemyeşil doğa, bağların sıralandığı geniş alanlarla birleşerek huzur dolu bir atmosfer yaratıyor. Üzüm bağlarının arasından esen hafif meltem, doğanın kokularını taşırken gökyüzü turuncu ve pembe tonlarına bürünüyor. Gün batımının kızıllığı, bağların üzerinde yumuşak bir ışıltı oluştururken, bu doğal güzellik her anı özel kılıyor. Şarabınızı yudumlarken, yeşillikler içinde kaybolan güneşin büyüleyici dansına şahit olmak, Bozcaada’nın ruhunu hissetmenin en keyifli yollarından biri.'
     }
   },
+  details: "Detaylar",
+  reserve: "Rezervasyon Yapın",
   welcomeToYazEvi: "Yaz Evi",
   exclusiveHome: "Bozcaada'nın en özel evi",
   home: "Ana Sayfa",
@@ -59,7 +61,7 @@ export default {
       descriptionThird: 'Yaz Evi, sadece konaklama değil, aynı zamanda Bozcaada\'nın yaşamını deneyimleyeceğiniz bir alan sunar. Bozcaada\'nın dinamik yaşamına yakın bir konumda, adanın merkezinde bulunur. Adaya adımınızı attığınız anda, Yaz Evi’ne kolayca ulaşabilirsiniz.',
       descriptionFourth: 'Yaz Evi’ne doğru yürürken, adanın tarihi sokakları sizi geçmişin izlerini keşfetmeye davet eder. Geleneksel taş yapılar, ahşap detaylar, begonvillerle süslenmiş duvarlar bir geçit değil, aynı zamanda adanın hikayesini anlatan bir yolculuktur. Tarihi çeşmeler, ahşap cumbalı evler, antik taş duvarlar, kıvrımlı dar sokaklar, ve sokakların ardında görünen deniz manzaraları, Bozcaada’nın ruhunu hissetmenizi sağlar.',
       descriptionFifth: 'Bu sokaklarda dolaşırken tarihi taş evlerin yanında küçük kafeler, balıkçı restaurantları, sanat galerileri ve butik dükkanlar görmek mümkündür.',
-      button: "Konaklamanızı Ayırtın"
+      button: "Yerinizi Ayırtın"
     }
   },
   roomsPage: {

@@ -25,6 +25,8 @@ export default {
       heroDescription: 'Our property offers one of the most breathtaking sunset views in Bozcaada, surrounded by lush greenery and picturesque vineyards. As the sun slowly descends toward the horizon, the golden light casts a warm glow over the rolling vineyards, creating a serene and magical atmosphere. A gentle breeze carries the fresh scents of nature, blending with the rich aromas of the grapevines. The sky transforms into vibrant shades of orange and pink, reflecting beautifully over the landscape. Sipping your wine while watching the sun disappear behind the greenery is a truly unforgettable experience, allowing you to immerse yourself in the enchanting spirit of Bozcaada.'
     }
   },
+  details: "Details",
+  reserve: "Reserve",
   welcomeToYazEvi: "Welcome to Yaz Evi",
   exclusiveHome: "Bozcaada's most exclusive home",
   home: "Home",

@@ -65,8 +65,8 @@ function getImageUrl(image) {
         {{ description }}
       </p>
       <div class="flex gap-4">
-        <YazButton label="Learn More" type="outlined" />
-        <YazButton label="Book Now" type="primary" href="booking" />
+        <YazButton :label="$t('details')" type="outlined" />
+        <YazButton :label="$t('reserve')" type="primary" href="booking" />
       </div>
     </div>
   </section>
