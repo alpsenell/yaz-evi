@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface Props {
   title?: string
-  description: string
+  description?: string
   image: string
   imagePosition: string
   objectPosition?: string

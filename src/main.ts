@@ -9,7 +9,6 @@ import { setupCalendar } from 'v-calendar';
 import '@splidejs/vue-splide/css';
 import 'v-calendar/style.css';
 
-
 i18n(createApp(App))
   .directive('click-outside', clickOutside)
   .use(VueSplide)

@@ -10,6 +10,19 @@ export default {
     contact: "Contact"
   },
   pages: {
+    contact: {
+      title: "Contact Us",
+      intro: "We'd love to hear from you! Fill out the form or send us an email directly.",
+      name: "Name",
+      email: "Email",
+      subject: "Subject",
+      message: "Message",
+      send: "Send Message",
+      sending: "Sending...",
+      successMessage: "Your message has been sent successfully!",
+      errorMessage: "There was an error sending your message. Please try again.",
+      directEmail: "Direct Email"
+    },
     about: {
       title: "About Us",
       description: "Peace in a restored historic building.",
@@ -65,15 +78,8 @@ export default {
     }
   },
   roomsPage: {
-    title: 'Luxurious Guesthouse',
-    subtitle: 'A Private luxury pavilion surrounded by mother nature',
-    paragraphs: {
-      one: 'Bozcaada’s most exclusive luxury retreat awaits you on this serene Aegean island, offering a harmonious blend of modern indulgence and traditional charm. Stay in your own private villa surrounded by the island’s stunning landscapes and immerse yourself in the tranquil beauty of nature. With first-class amenities and impeccable service, Bozcaada Exclusive Villas redefine laidback luxury.',
-      two: 'The main villa features a curated selection of amenities, including an elegant dining room complemented by an open-plan kitchen, a cozy lounge with handcrafted local décor, a private wine cellar stocked with Aegean’s finest, an indulgent spa area, and an outdoor infinity pool that gazes over the sparkling sea. Enjoy alfresco dining in the garden, with a traditional stone oven serving freshly baked delicacies.',
-      three: 'The interiors reflect the island’s rich heritage, with handcrafted textiles, locally sourced wood, and unique artisanal details inspired by Bozcaada’s serene beauty. Natural stone walls and terracotta floors create a warm and inviting ambiance, echoing the charm of the Aegean.',
-      four: 'The property is nestled amidst rolling vineyards and overlooks the shimmering Aegean Sea, offering easy access to secluded beaches and quaint cobblestone streets lined with boutique shops and cafes.',
-      five: 'Discover our four exclusive villas – Vineyard View, Seaside Serenity, Olive Grove Hideaway, and Sunset Haven.'
-    },
+    title: 'Yaz Evi',
+    subtitle: 'Stay in the heart of Bozcaada',
     button: 'View Rates & Inclusions'
   },
   roomInformation: {

@@ -10,6 +10,19 @@ export default {
     contact: "İletişim"
   },
   pages: {
+    contact: {
+      title: "Bize Ulaşın",
+      intro: "Sizden haber almaktan mutluluk duyarız! Formu doldurun veya bize doğrudan e-posta gönderin.",
+      name: "Ad Soyad",
+      email: "E-posta",
+      subject: "Konu",
+      message: "Mesaj",
+      send: "Mesaj Gönder",
+      sending: "Gönderiliyor...",
+      successMessage: "Mesajınız başarıyla gönderildi!",
+      errorMessage: "Mesajınız gönderilirken bir hata oluştu. Lütfen tekrar deneyin.",
+      directEmail: "E-posta Adresi"
+    },
     about: {
       title: "Hakkımızda",
       description: "Restore edilmiş tarihi bir yapıdaki huzur.",
@@ -65,15 +78,8 @@ export default {
     }
   },
   roomsPage: {
-    title: 'Konforlu Konuk Evi',
-    subtitle: 'Doğanın kucağında özel bir taş ev',
-    paragraphs: {
-      one: 'Bozcaada\'nın en özel lüks tatil yeri, huzurlu Ege Adası\'nda sizleri bekliyor. Doğanın muhteşem güzellikleriyle çevrili, modern lüksle geleneksel cazibeyi bir araya getiren özel villalarımızda konaklayın ve adanın sakin atmosferine kendinizi bırakın. Birinci sınıf olanaklar ve kusursuz hizmet anlayışıyla Bozcaada Exclusive Villas, huzurlu bir lüks deneyimini yeniden tanımlıyor.',
-      two: 'Ana villa, zarif bir yemek odası ve açık plan mutfağın yanı sıra, el yapımı yerel dekorlarla döşenmiş rahat bir oturma alanı, Ege’nin en seçkin şaraplarıyla dolu özel bir mahzen, spa alanı ve parıldayan denizi kucaklayan sonsuzluk havuzuyla özenle seçilmiş imkanlar sunar. Bahçede taş fırında hazırlanan taze lezzetlerle açık hava yemeklerinin tadını çıkarın.',
-      three: 'İç mekanlar, Bozcaada\'nın zengin mirasını yansıtan el yapımı tekstiller, yerel malzemelerden üretilmiş ahşap mobilyalar ve adanın huzur veren güzelliklerinden ilham alan benzersiz detaylarla tasarlanmıştır. Doğal taş duvarlar ve toprak tonlarındaki zeminler, sıcak ve davetkar bir atmosfer yaratarak Ege\'nin cazibesini yansıtır.',
-      four: 'Mülk, dalgalanan üzüm bağlarının arasında, parıldayan Ege Denizi\'ne karşı konumlanmış olup, izole plajlara ve butik mağazalarla dolu taş sokaklara kolay erişim sağlar.',
-      five: 'Dört özel villamızı keşfedin – Üzüm Bağı Manzarası, Sahil Sakinliği, Zeytin Bahçesi Saklanma Yeri ve Gün Batımı Cenneti.'
-    },
+    title: 'Yaz Evi',
+    subtitle: 'Bozcaada’nın en özel taş evi',
     button: 'Fiyatlar ve Dahil Olanlar'
   },
   roomInformation: {
