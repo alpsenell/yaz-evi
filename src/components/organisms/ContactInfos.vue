@@ -44,7 +44,7 @@ import YazIcon from "../atoms/YazIcon.vue";
       />
       <a
         class="text-link font-raleway w-fit"
-        href="https://goo.gl/maps/7Z3"
+        href="https://maps.app.goo.gl/ggPm96WbCZujmtQq5"
       >
         {{ $t('hotelAddress') }}
       </a>
