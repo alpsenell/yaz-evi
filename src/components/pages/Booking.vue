@@ -184,7 +184,9 @@ watch(() => selectedDates, () => {
             </p>
           </div>
           <YazButton
-            :label="$t('bookNow')"
+            external-link
+            href="https://www.instagram.com/yazevibozcaada_/"
+            :label="$t('contactOnInstagram')"
             type="primary"
           />
         </div>
@@ -233,8 +235,9 @@ watch(() => selectedDates, () => {
           </div>
 
           <YazButton
-            :disabled="!selectedRoom.id"
-            :label="$t('bookNow')"
+            external-link
+            href="https://www.instagram.com/yazevibozcaada_/"
+            :label="$t('contactOnInstagram')"
             type="outlined"
             @click="bookRoom(selectedRoom)"
           />

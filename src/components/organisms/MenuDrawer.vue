@@ -3,6 +3,7 @@ import { ref, watch, computed } from "vue";
 import { HEADER_MENU_ITEMS } from "../../enums/global.ts";
 import LanguageSelector from "./LanguageSelector.vue";
 import YazIcon from "../atoms/YazIcon.vue";
+import ContactInfos from "./ContactInfos.vue";
 
 const props = defineProps({
   visibility: Boolean,
@@ -66,6 +67,8 @@ const openPosition = computed(() => {
         </li>
 
         <LanguageSelector :open-position="openPosition" />
+
+        <ContactInfos />
       </ul>
     </nav>
     <div

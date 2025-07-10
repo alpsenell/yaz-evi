@@ -42,8 +42,8 @@ export const ROOMS = [
     name: 'Zeus',
     description: 'room1Description',
     bookingInformation: {
-      price: 5000,
-      guestNumber: 4,
+      price: '-',
+      guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
       size: 40,
@@ -87,7 +87,7 @@ export const ROOMS = [
     image: 'oda_2/oda2-1-min.jpg',
     description: 'room1Description',
     bookingInformation: {
-      price: 5000,
+      price: '-',
       guestNumber: 2,
       sleeps: ['kingBed'],
       bathroom: 1,
@@ -173,7 +173,7 @@ export const ROOMS = [
     image: 'oda_4/oda4-1-min.jpg',
     description: 'room4Description',
     bookingInformation: {
-      price: 5000,
+      price: '-',
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,

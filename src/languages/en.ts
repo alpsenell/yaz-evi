@@ -64,6 +64,7 @@ export default {
   room4Description: "Tenes, the hero of a legend, is considered the island's first settler. The Tenes Room is adorned with stone walls that carry the spirit of Tenes' settlement, elegant wooden details, and traditional island touches. In every corner of the room, you can feel the texture of the past and the deep roots of Bozcaada.",
   room5Description: "The Iliad is the first epic where traces of Bozcaada's history are found. The Iliad Room carries deep significance, reflecting the historical and mythological layers of Bozcaada.\nWith its architectural touches, the Iliad Room makes you feel as if you are immersed in an epic. Each detail of the room brings together historical depth and elegant touches through the harmony of wood and stone.",
   bookNow: "Book Now",
+  contactOnInstagram: "Contact us on Instagram",
   allInclusive: "All Inclusive Rates",
   homepage: {
     untouchedNature: "Untouched nature",

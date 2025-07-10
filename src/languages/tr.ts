@@ -64,6 +64,7 @@ export default {
   room4Description: "Tenes, adanın ilk yerleşimcisi olarak kabul edilen, bir efsanenin kahramanıdır. Tenes Oda, Tenes yerleşiminin ruhunu taşıyan taş duvarlar, zarif ahşap detaylar ve geleneksel adalı dokunuşlarla dekore edilmiştir. Odanın her köşesinde, geçmişin dokusunu ve Bozcaada'nın derin köklerini hissedebilirsiniz.",
   room5Description: "İlyada Destanı, Bozcaadanın tarihi izlerine ilk rastlanan destandır. İlyada Oda, Bozcaada'nın tarihi ve mitolojik katmanlarını yansıtan, derin bir anlam taşır.\nİlyada Oda, mimari dokunuşlarıyla bir destanın içinde kaybolmuş gibi hissettirir. Odanın her bir detayında ahşap ve taşın uyumuyla tarihsel derinlik ve zarif dokunuşlar bir araya gelir.",
   bookNow: "Şimdi Rezervasyon Yapın",
+  contactOnInstagram: "Instagram'dan İletişime Geçin",
   allInclusive: "Her Şey Dahil",
   homepage: {
     untouchedNature: "El değmemiş doğa",
