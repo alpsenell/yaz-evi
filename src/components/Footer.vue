@@ -5,9 +5,15 @@ import YazIcon from "./atoms/YazIcon.vue";
 <template>
   <footer class="full-height-section bg-tertiary w-full pb-12">
     <div class="w-full h-[500px]">
-      <gmp-map center="39.833438873291016,26.07203483581543" zoom="14" map-id="DEMO_MAP_ID">
-        <gmp-advanced-marker position="39.833438873291016,26.07203483581543" title="My location"></gmp-advanced-marker>
-      </gmp-map>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3063.824069050704!2d26.072010299999995!3d39.833362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b0413fb0eae813%3A0x96d129952cee20ad!2sYazevi%20Bozcaada!5e0!3m2!1sen!2str!4v1754561882895!5m2!1sen!2str"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen="true"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      />
     </div>
 
     <div class="max-w-screen-2xl flex flex-col md:flex-row gap-10 md:gap-20 mx-auto px-10 mt-10">
