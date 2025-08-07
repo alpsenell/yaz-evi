@@ -129,7 +129,7 @@ export const ROOMS = [
     image: 'oda_3/oda3-1-min.jpg',
     description: 'room3Description',
     bookingInformation: {
-      price: 5000,
+      price: '-',
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
@@ -219,7 +219,7 @@ export const ROOMS = [
     image: 'oda_3/oda3-1-min.jpg',
     description: 'room5Description',
     bookingInformation: {
-      price: 5000,
+      price: '-',
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
