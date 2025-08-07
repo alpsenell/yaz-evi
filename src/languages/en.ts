@@ -2,6 +2,14 @@ export default {
   phoneNumber: "+90 530 306 20 21",
   hotelAddress: "Alaybey Mah. Muratbey Sk. 12 Bozcaada/Canakkale",
   gallery: "Gallery",
+  galleryModal: {
+    instructions: "Use arrow keys to navigate between images, or press Escape to close the gallery.",
+    imageAlt: "Gallery image",
+    of: "of",
+    previousImage: "Previous image",
+    nextImage: "Next image",
+    closeGallery: "Close gallery"
+  },
   navigation: {
     about: "About",
     rooms: "Rooms",

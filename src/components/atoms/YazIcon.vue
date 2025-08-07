@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { c } from "vite/dist/node/types.d-aGj9QkWt";
 
 defineProps({
   name: String,

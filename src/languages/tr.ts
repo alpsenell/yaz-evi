@@ -2,6 +2,14 @@ export default {
   phoneNumber: "+90 530 306 20 21",
   hotelAddress: "Alaybey Mah. Muratbey Sk. 12 Bozcaada/Çanakkale",
   gallery: "Galeri",
+  galleryModal: {
+    instructions: "Resimler arasında gezinmek için ok tuşlarını kullanın veya galeriyi kapatmak için Escape tuşuna basın.",
+    imageAlt: "Galeri resmi",
+    of: "adet",
+    previousImage: "Önceki resim",
+    nextImage: "Sonraki resim",
+    closeGallery: "Galeriyi kapat"
+  },
   navigation: {
     about: "Hakkımızda",
     rooms: "Odalar",
