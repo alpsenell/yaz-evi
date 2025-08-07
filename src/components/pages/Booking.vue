@@ -224,14 +224,14 @@ watch(() => selectedDates, () => {
               </p>
             </div>
             <span class="h-[0.5px] bg-primary my-2"></span>
-            <div class="w-full flex justify-between items-center">
+            <!-- <div class="w-full flex justify-between items-center">
               <p class="font-raleway font-bold">
                 {{ $t('totalPrice') }}:
               </p>
               <p class="font-raleway font-bold">
                 {{ totalPrice }}
               </p>
-            </div>
+            </div> -->
           </div>
 
           <YazButton
