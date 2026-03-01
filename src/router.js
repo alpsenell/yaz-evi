@@ -10,14 +10,14 @@ import Experiences from './components/pages/Experiences.vue';
 import Contact from './components/pages/Contact.vue';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/about', component: About },
-  { path: '/gallery', component: Gallery },
-  { path: '/rooms', component: Rooms },
-  { path: '/room/:id', component: Room },
-  { path: '/booking', component: Booking },
-  { path: '/experiences', component: Experiences },
-  { path: '/contact', component: Contact },
+  { path: '/', component: Home, meta: { seoKey: 'home' } },
+  { path: '/about', component: About, meta: { seoKey: 'about' } },
+  { path: '/gallery', component: Gallery, meta: { seoKey: 'gallery' } },
+  { path: '/rooms', component: Rooms, meta: { seoKey: 'rooms' } },
+  { path: '/room/:id', component: Room, meta: { seoKey: 'room' } },
+  { path: '/booking', component: Booking, meta: { seoKey: 'booking' } },
+  { path: '/experiences', component: Experiences, meta: { seoKey: 'experiences' } },
+  { path: '/contact', component: Contact, meta: { seoKey: 'contact' } },
 ]
 
 const router = createRouter({

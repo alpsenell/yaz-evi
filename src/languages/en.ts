@@ -1,4 +1,38 @@
 export default {
+  seo: {
+    home: {
+      title: "Yaz Evi | Boutique Hotel in Bozcaada, Turkey",
+      description: "Experience Bozcaada's most exclusive boutique hotel. Yaz Evi offers luxury accommodation in a restored historic stone house with stunning views and authentic island charm."
+    },
+    about: {
+      title: "About Yaz Evi | Our Story in Bozcaada",
+      description: "Discover the story behind Yaz Evi, a beautifully restored historic stone building in Bozcaada. Learn about our heritage and the island's rich history."
+    },
+    rooms: {
+      title: "Rooms & Suites | Yaz Evi Bozcaada",
+      description: "Explore our uniquely designed rooms inspired by Bozcaada's mythology. Each room features natural stone walls, elegant wooden details, and modern comforts."
+    },
+    room: {
+      title: "Room Details | Yaz Evi Bozcaada",
+      description: "View room details, amenities, and availability at Yaz Evi. Experience luxury accommodation with king beds, air conditioning, and authentic Bozcaada charm."
+    },
+    gallery: {
+      title: "Photo Gallery | Yaz Evi Bozcaada",
+      description: "Browse photos of Yaz Evi's rooms, views, and surroundings. See our restored stone house hotel and the beautiful island of Bozcaada."
+    },
+    booking: {
+      title: "Book Your Stay | Yaz Evi Bozcaada",
+      description: "Reserve your room at Yaz Evi in Bozcaada. Check availability, select your dates, and book your boutique hotel experience on this beautiful Aegean island."
+    },
+    experiences: {
+      title: "Wine Tasting & Sunset Experience | Yaz Evi Bozcaada",
+      description: "Join our wine tasting and sunset experience in Bozcaada. Enjoy local wines and artisan cheese platters while watching the sunset over the Aegean Sea."
+    },
+    contact: {
+      title: "Contact Us | Yaz Evi Bozcaada",
+      description: "Get in touch with Yaz Evi in Bozcaada. Reach us by phone, email, or visit us at Alaybey Mah. Muratbey Sk. 12, Bozcaada."
+    }
+  },
   phoneNumber: "+90 530 306 20 21",
   hotelAddress: "Alaybey Mah. Muratbey Sk. 12 Bozcaada/Canakkale",
   gallery: "Gallery",

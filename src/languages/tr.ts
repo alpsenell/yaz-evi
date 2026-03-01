@@ -1,4 +1,38 @@
 export default {
+  seo: {
+    home: {
+      title: "Yaz Evi | Bozcaada Butik Otel",
+      description: "Bozcaada'nın en özel butik oteli Yaz Evi'nde konaklayın. Restore edilmiş tarihi taş evde lüks konaklama, eşsiz manzara ve otantik ada deneyimi."
+    },
+    about: {
+      title: "Hakkımızda | Yaz Evi Bozcaada",
+      description: "Yaz Evi'nin hikayesini keşfedin. Bozcaada'da restore edilmiş tarihi taş yapımız ve adanın zengin tarihini öğrenin."
+    },
+    rooms: {
+      title: "Odalar | Yaz Evi Bozcaada",
+      description: "Bozcaada mitolojisinden ilham alan benzersiz odalarımızı keşfedin. Doğal taş duvarlar, zarif ahşap detaylar ve modern konfor bir arada."
+    },
+    room: {
+      title: "Oda Detayları | Yaz Evi Bozcaada",
+      description: "Yaz Evi'nde oda detayları, olanaklar ve müsaitlik durumunu görüntüleyin. Çift kişilik yatak, klima ve otantik Bozcaada deneyimi."
+    },
+    gallery: {
+      title: "Fotoğraf Galerisi | Yaz Evi Bozcaada",
+      description: "Yaz Evi'nin odaları, manzaraları ve çevresinin fotoğraflarına göz atın. Restore edilmiş taş ev otelimizi ve güzel Bozcaada adasını görün."
+    },
+    booking: {
+      title: "Rezervasyon | Yaz Evi Bozcaada",
+      description: "Bozcaada Yaz Evi'nde odanızı rezerve edin. Müsaitlik durumunu kontrol edin, tarihlerinizi seçin ve Ege'nin güzel adasında butik otel deneyiminizi ayırtın."
+    },
+    experiences: {
+      title: "Şarap Tadımı ve Gün Batımı Deneyimi | Yaz Evi Bozcaada",
+      description: "Bozcaada'da şarap tadımı ve gün batımı deneyimimize katılın. Ege Denizi üzerinde gün batımını izlerken yerel şaraplar ve peynir tabaklarının keyfini çıkarın."
+    },
+    contact: {
+      title: "İletişim | Yaz Evi Bozcaada",
+      description: "Bozcaada Yaz Evi ile iletişime geçin. Telefon, e-posta ile bize ulaşın veya Alaybey Mah. Muratbey Sk. 12, Bozcaada adresimizi ziyaret edin."
+    }
+  },
   phoneNumber: "+90 530 306 20 21",
   hotelAddress: "Alaybey Mah. Muratbey Sk. 12 Bozcaada/Çanakkale",
   gallery: "Galeri",

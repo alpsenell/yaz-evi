@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import MenuDrawer from "./components/organisms/MenuDrawer.vue";
+import SeoHead from "./components/SeoHead.vue";
 
 const menuVisibility = ref(false);
 
@@ -29,6 +30,7 @@ watch(menuVisibility, (value) => {
 </script>
 
 <template>
+  <SeoHead />
   <div>
     <Header
       :menuVisibility="menuVisibility"
