@@ -10,12 +10,13 @@
   <div class="home">
     <VideoHero
       :title="$t('welcomeToYazEvi')"
+      :subtitle="$t('exclusiveHome')"
       mediaName="opening_video.mp4"
       posterName="homepage-3-min.jpg"
     />
 
     <TextAndButton :button-label="$t('homepage.textAndButton.button')">
-      <h3 class="font-raleway text-3xl my-4">{{ $t('homepage.textAndButton.title') }}</h3>
+      <h2 class="font-raleway text-3xl my-4">{{ $t('homepage.textAndButton.title') }}</h2>
       <p class="font-raleway text-lg my-6">{{ $t('homepage.textAndButton.descriptionFirst') }}</p>
       <p class="font-raleway text-lg my-6">{{ $t('homepage.textAndButton.descriptionSecond') }}</p>
     </TextAndButton>
@@ -56,7 +57,7 @@
 
     <MixedGallery>
       <template #left>
-        <h3 class="font-raleway text-3xl my-4">Gallery</h3>
+        <h2 class="font-raleway text-3xl my-4">{{ $t('gallery') }}</h2>
         <img
           class="w-full md:w-9/12"
           src="../../assets/media/home-gallery/gallery_left_1.jpg"

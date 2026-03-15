@@ -4,6 +4,7 @@ import { defineProps } from 'vue'
 const props = defineProps({
   mediaName: String,
   title: String,
+  subtitle: String,
   posterName: String,
 })
 function getAssetUrl(name) {
@@ -30,7 +31,7 @@ function getAssetUrl(name) {
       <h1 class="font-gravity text-9xl text-white">
         {{ title }}
       </h1>
-      <p class="video-hero__text"></p>
+      <p class="video-hero__subtitle font-raleway text-xl text-white mt-2" v-if="subtitle">{{ subtitle }}</p>
     </div>
     <slot/>
   </div>

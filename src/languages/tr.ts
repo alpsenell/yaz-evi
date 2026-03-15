@@ -1,36 +1,36 @@
 export default {
   seo: {
     home: {
-      title: "Yaz Evi | Bozcaada Butik Otel",
-      description: "Bozcaada'nın en özel butik oteli Yaz Evi'nde konaklayın. Restore edilmiş tarihi taş evde lüks konaklama, eşsiz manzara ve otantik ada deneyimi."
+      title: "Yaz Evi Bozcaada | Butik Otel - Tarihi Taş Ev Konaklama",
+      description: "Bozcaada'nın en özel butik oteli Yaz Evi'nde konaklayın. Restore edilmiş tarihi taş evde lüks konaklama, eşsiz manzara ve otantik ada deneyimi. Bozcaada otel rezervasyon."
     },
     about: {
-      title: "Hakkımızda | Yaz Evi Bozcaada",
-      description: "Yaz Evi'nin hikayesini keşfedin. Bozcaada'da restore edilmiş tarihi taş yapımız ve adanın zengin tarihini öğrenin."
+      title: "Hakkımızda | Yaz Evi Bozcaada Butik Otel",
+      description: "Yaz Evi Bozcaada'nın hikayesini keşfedin. Bozcaada'da restore edilmiş tarihi taş yapımız, adanın zengin tarihi ve butik otel deneyimimiz hakkında bilgi alın."
     },
     rooms: {
-      title: "Odalar | Yaz Evi Bozcaada",
-      description: "Bozcaada mitolojisinden ilham alan benzersiz odalarımızı keşfedin. Doğal taş duvarlar, zarif ahşap detaylar ve modern konfor bir arada."
+      title: "Bozcaada Otel Odaları | Yaz Evi Butik Otel",
+      description: "Yaz Evi Bozcaada'da mitolojiden ilham alan benzersiz butik otel odalarımızı keşfedin. Doğal taş duvarlar, zarif ahşap detaylar ve modern konfor bir arada."
     },
     room: {
-      title: "Oda Detayları | Yaz Evi Bozcaada",
-      description: "Yaz Evi'nde oda detayları, olanaklar ve müsaitlik durumunu görüntüleyin. Çift kişilik yatak, klima ve otantik Bozcaada deneyimi."
+      title: "Oda Detayları | Yaz Evi Bozcaada Butik Otel",
+      description: "Yaz Evi Bozcaada'da oda detayları, olanaklar ve müsaitlik durumu. Çift kişilik yatak, klima, minibar ve otantik Bozcaada konaklama deneyimi."
     },
     gallery: {
-      title: "Fotoğraf Galerisi | Yaz Evi Bozcaada",
-      description: "Yaz Evi'nin odaları, manzaraları ve çevresinin fotoğraflarına göz atın. Restore edilmiş taş ev otelimizi ve güzel Bozcaada adasını görün."
+      title: "Fotoğraf Galerisi | Yaz Evi Bozcaada Butik Otel",
+      description: "Yaz Evi Bozcaada butik otelin odaları, manzaraları ve çevresinin fotoğraflarına göz atın. Restore edilmiş tarihi taş ev otelimizi görün."
     },
     booking: {
-      title: "Rezervasyon | Yaz Evi Bozcaada",
-      description: "Bozcaada Yaz Evi'nde odanızı rezerve edin. Müsaitlik durumunu kontrol edin, tarihlerinizi seçin ve Ege'nin güzel adasında butik otel deneyiminizi ayırtın."
+      title: "Bozcaada Otel Rezervasyon | Yaz Evi Butik Otel",
+      description: "Yaz Evi Bozcaada'da odanızı hemen rezerve edin. Müsaitlik durumunu kontrol edin, tarihlerinizi seçin ve Bozcaada'nın en özel butik otelinde yerinizi ayırtın."
     },
     experiences: {
-      title: "Şarap Tadımı ve Gün Batımı Deneyimi | Yaz Evi Bozcaada",
-      description: "Bozcaada'da şarap tadımı ve gün batımı deneyimimize katılın. Ege Denizi üzerinde gün batımını izlerken yerel şaraplar ve peynir tabaklarının keyfini çıkarın."
+      title: "Bozcaada Şarap Tadımı ve Gün Batımı | Yaz Evi",
+      description: "Yaz Evi Bozcaada'da şarap tadımı ve gün batımı deneyimi. Ege Denizi üzerinde gün batımını izlerken yerel Bozcaada şarapları ve peynir tabaklarının keyfini çıkarın."
     },
     contact: {
-      title: "İletişim | Yaz Evi Bozcaada",
-      description: "Bozcaada Yaz Evi ile iletişime geçin. Telefon, e-posta ile bize ulaşın veya Alaybey Mah. Muratbey Sk. 12, Bozcaada adresimizi ziyaret edin."
+      title: "İletişim | Yaz Evi Bozcaada Butik Otel",
+      description: "Yaz Evi Bozcaada butik otel ile iletişime geçin. Telefon, e-posta ile bize ulaşın veya Alaybey Mah. Muratbey Sk. 12, Bozcaada adresimizi ziyaret edin."
     }
   },
   phoneNumber: "+90 530 306 20 21",

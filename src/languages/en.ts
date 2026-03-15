@@ -1,36 +1,36 @@
 export default {
   seo: {
     home: {
-      title: "Yaz Evi | Boutique Hotel in Bozcaada, Turkey",
-      description: "Experience Bozcaada's most exclusive boutique hotel. Yaz Evi offers luxury accommodation in a restored historic stone house with stunning views and authentic island charm."
+      title: "Yaz Evi Bozcaada | Boutique Hotel - Historic Stone House",
+      description: "Stay at Yaz Evi, Bozcaada's most exclusive boutique hotel. Luxury accommodation in a restored historic stone house with stunning Aegean views and authentic island experience."
     },
     about: {
-      title: "About Yaz Evi | Our Story in Bozcaada",
-      description: "Discover the story behind Yaz Evi, a beautifully restored historic stone building in Bozcaada. Learn about our heritage and the island's rich history."
+      title: "About Us | Yaz Evi Bozcaada Boutique Hotel",
+      description: "Discover the story of Yaz Evi, a beautifully restored historic stone building in Bozcaada, Turkey. Our heritage, the island's rich history, and boutique hotel experience."
     },
     rooms: {
-      title: "Rooms & Suites | Yaz Evi Bozcaada",
-      description: "Explore our uniquely designed rooms inspired by Bozcaada's mythology. Each room features natural stone walls, elegant wooden details, and modern comforts."
+      title: "Bozcaada Hotel Rooms | Yaz Evi Boutique Hotel",
+      description: "Explore uniquely designed boutique hotel rooms at Yaz Evi Bozcaada. Inspired by mythology, featuring natural stone walls, elegant wooden details, and modern comforts."
     },
     room: {
-      title: "Room Details | Yaz Evi Bozcaada",
-      description: "View room details, amenities, and availability at Yaz Evi. Experience luxury accommodation with king beds, air conditioning, and authentic Bozcaada charm."
+      title: "Room Details | Yaz Evi Bozcaada Boutique Hotel",
+      description: "View room details, amenities, and availability at Yaz Evi Bozcaada. King beds, air conditioning, minibar, and authentic Bozcaada boutique hotel experience."
     },
     gallery: {
-      title: "Photo Gallery | Yaz Evi Bozcaada",
-      description: "Browse photos of Yaz Evi's rooms, views, and surroundings. See our restored stone house hotel and the beautiful island of Bozcaada."
+      title: "Photo Gallery | Yaz Evi Bozcaada Boutique Hotel",
+      description: "Browse photos of Yaz Evi Bozcaada boutique hotel rooms, stunning views, and surroundings. See our restored stone house hotel on the beautiful island of Bozcaada."
     },
     booking: {
-      title: "Book Your Stay | Yaz Evi Bozcaada",
-      description: "Reserve your room at Yaz Evi in Bozcaada. Check availability, select your dates, and book your boutique hotel experience on this beautiful Aegean island."
+      title: "Book Your Stay in Bozcaada | Yaz Evi Boutique Hotel",
+      description: "Reserve your room at Yaz Evi Bozcaada. Check availability, select your dates, and book your boutique hotel stay on this beautiful Aegean island in Turkey."
     },
     experiences: {
-      title: "Wine Tasting & Sunset Experience | Yaz Evi Bozcaada",
-      description: "Join our wine tasting and sunset experience in Bozcaada. Enjoy local wines and artisan cheese platters while watching the sunset over the Aegean Sea."
+      title: "Bozcaada Wine Tasting & Sunset | Yaz Evi",
+      description: "Join our wine tasting and sunset experience at Yaz Evi Bozcaada. Enjoy local wines and artisan cheese platters while watching the sunset over the Aegean Sea."
     },
     contact: {
-      title: "Contact Us | Yaz Evi Bozcaada",
-      description: "Get in touch with Yaz Evi in Bozcaada. Reach us by phone, email, or visit us at Alaybey Mah. Muratbey Sk. 12, Bozcaada."
+      title: "Contact | Yaz Evi Bozcaada Boutique Hotel",
+      description: "Get in touch with Yaz Evi Bozcaada boutique hotel. Reach us by phone, email, or visit us at Alaybey Mah. Muratbey Sk. 12, Bozcaada, Çanakkale, Turkey."
     }
   },
   phoneNumber: "+90 530 306 20 21",
