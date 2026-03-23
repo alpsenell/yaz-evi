@@ -5,7 +5,9 @@ import YazButton from "../atoms/YazButton.vue";
 
 <template>
   <section class="about">
+    <h1 class="sr-only">{{ $t('pages.about.title') }} - Yaz Evi Bozcaada</h1>
     <HalfHero
+      :title="$t('pages.about.title')"
       :description="$t('pages.about.history')"
       image="windmills-vertical.webp"
       imagePosition="left"

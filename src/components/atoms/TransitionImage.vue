@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { defineProps, ref } from 'vue'
+import { getMediaUrl } from '../../utils/media'
 
 const props = defineProps({
   image: String,
 })
 
 const loaded = ref(false)
-const getImageUrl = () => {
-  return new URL(`../../assets/media/${props.image}`, import.meta.url)
-}
 
 const onLoaded = () => {
   loaded.value = true
@@ -21,7 +19,7 @@ const onLoaded = () => {
   >
     <transition name="fade">
       <img
-        :src="getImageUrl()"
+        :src="getMediaUrl(props.image)"
         v-show="loaded"
         v-on:load="onLoaded"
         :alt="`Image of ${props.image}`"

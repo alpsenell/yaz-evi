@@ -10,6 +10,7 @@ import DatePicker from "../organisms/DatePicker.vue";
 import RoomGuestSelector from "../organisms/RoomGuestSelector.vue";
 import BookingCard from "../organisms/BookingCard.vue";
 import YazButton from "../atoms/YazButton.vue";
+import { getMediaUrl } from '../../utils/media';
 
 const selectedLanguage = ref(i18next.language<string>);
 const roomNumber = ref(1);
@@ -136,8 +137,8 @@ watch(() => selectedDates, () => {
   <section class="booking">
     <img
       class="max-h-72 w-full object-cover object-left"
-      src="../../assets/media/home-gallery/gallery_left_1.jpg"
-      alt="Banner image"
+      :src="getMediaUrl('home-gallery/gallery_left_1.jpg')"
+      alt="Yaz Evi Bozcaada rezervasyon"
     >
 
     <div class="max-w-screen-xl mx-auto relative bottom-8 px-4">

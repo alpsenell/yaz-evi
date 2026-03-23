@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import { getMediaUrl } from '../../utils/media'
 
 const props = defineProps({
   mediaName: String,
   posterName: String,
 })
-
-function getAssetUrl(name) {
-  return new URL(`../../assets/media/${name}`, import.meta.url)
-}
 </script>
 
 <template>
@@ -21,10 +18,11 @@ function getAssetUrl(name) {
       muted
       loop
       playsinline
-      :poster="getAssetUrl(posterName)"
+      preload="metadata"
+      :poster="getMediaUrl(posterName)"
     >
       <source
-        :src="getAssetUrl(mediaName)"
+        :src="getMediaUrl(mediaName)"
         type="video/mp4"
       >
     </video>

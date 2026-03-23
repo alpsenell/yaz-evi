@@ -60,9 +60,9 @@ const sendEmail = async () => {
       imagePosition="left"
     >
       <div class="flex flex-col w-full justify-center gap-8 px-4 py-6">
-        <h2 class="text-3xl font-raleway font-light">
+        <h1 class="text-3xl font-raleway font-light">
           {{ $t('pages.contact.title') }}
-        </h2>
+        </h1>
 
         <div
           v-if="submitSuccess"

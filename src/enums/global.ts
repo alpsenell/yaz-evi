@@ -290,7 +290,6 @@ export const GALLERY_IMAGES = [
   'oda_3/oda3-2-min.jpg',
   'oda_3/oda3-3-min.jpg',
   'oda_3/oda3-4-min.jpg',
-  'oda_3/oda3-5-min.jpg',
   'oda_3/oda3-6-min.jpg',
   'oda_3/oda3-7-min.jpg',
   'oda_3/oda3-8-min.jpg',

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import { getMediaUrl } from '../../utils/media'
 
 interface Props {
   title?: string
@@ -9,10 +10,6 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
-function getImageUrl() {
-  return new URL(`../../assets/media/${props.image}`, import.meta.url)
-}
 </script>
 
 <template>
@@ -20,8 +17,10 @@ function getImageUrl() {
     class="full-height-section full-hero w-screen h-screen relative"
   >
     <img
-      :src="getImageUrl()"
+      :src="getMediaUrl(props.image)"
       class="object-cover w-full h-full max-h-screen"
+      loading="lazy"
+      :alt="props.title || 'Yaz Evi Bozcaada'"
     />
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <h3

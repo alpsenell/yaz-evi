@@ -3,6 +3,7 @@ import { Splide, SplideSlide, SplideTrack } from '@splidejs/vue-splide';
 import { defineProps } from "vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import YazButton from "../atoms/YazButton.vue";
+import { getMediaUrl } from '../../utils/media';
 
 defineProps({
   images: Array,
@@ -11,10 +12,6 @@ defineProps({
   title: String,
   description: String,
 })
-
-function getImageUrl(image) {
-  return new URL(`../../assets/media/${image}`, import.meta.url)
-}
 </script>
 
 <template>
@@ -37,7 +34,7 @@ function getImageUrl(image) {
           >
             <img
               class="w-full h-full object-cover"
-              :src="getImageUrl(image)"
+              :src="getMediaUrl(image)"
               :alt="`Image of ${title}-${index + 1}`"
             />
           </SplideSlide>

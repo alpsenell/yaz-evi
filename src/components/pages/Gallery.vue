@@ -5,6 +5,7 @@ import { Splide, SplideSlide, SplideTrack } from "@splidejs/vue-splide";
 import TransitionImage from "../atoms/TransitionImage.vue";
 import YazModal from "../atoms/YazModal.vue";
 import YazIcon from "../atoms/YazIcon.vue";
+import { getMediaUrl } from '../../utils/media';
 
 import { GALLERY_IMAGES } from "../../enums/global.ts";
 
@@ -22,10 +23,6 @@ const handleClick = async (image: string) => {
   if (splideRef.value) {
     splideRef.value.go(imageIndex);
   }
-}
-
-const getImageUrl = (value: string) => {
-  return new URL(`../../assets/media/${value}`, import.meta.url).href;
 }
 
 // Keyboard navigation
@@ -165,7 +162,7 @@ onUnmounted(() => {
           >
             <img
               class="w-full h-full object-cover"
-              :src="getImageUrl(image)"
+              :src="getMediaUrl(image)"
               :alt="`${$t('galleryModal.imageAlt')} ${index + 1} ${$t('galleryModal.of')} ${GALLERY_IMAGES.length}`"
             />
           </SplideSlide>

@@ -4,6 +4,7 @@ import YazIcon from "../atoms/YazIcon.vue";
 import YazButton from "../atoms/YazButton.vue";
 import { computed } from "vue";
 import Loader from "../atoms/Loader.vue";
+import { getMediaUrl } from '../../utils/media';
 
 const props = defineProps({
   images: { type: Array, required: true },
@@ -17,10 +18,6 @@ const props = defineProps({
   loading: { type: Boolean },
 });
 const emit = defineEmits(['selectRoom']);
-
-function getImageUrl(image) {
-  return new URL(`../../assets/media/${image}`, import.meta.url)
-}
 const formatDate = (date: Date | null) => {
   if (!date) {
     return '';
@@ -50,7 +47,7 @@ const formattedDates = computed(() => {
             >
               <img
                 class="max-h-96 md:max-h-[unset] h-full w-full object-cover"
-                :src="getImageUrl(image)"
+                :src="getMediaUrl(image)"
                 :alt="`Image of ${title}-${index + 1}`"
               />
             </SplideSlide>
