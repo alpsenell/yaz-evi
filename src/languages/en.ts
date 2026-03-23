@@ -31,6 +31,14 @@ export default {
     contact: {
       title: "Contact | Yaz Evi Bozcaada Boutique Hotel",
       description: "Get in touch with Yaz Evi Bozcaada boutique hotel. Reach us by phone, email, or visit us at Alaybey Mah. Muratbey Sk. 12, Bozcaada, Çanakkale, Turkey."
+    },
+    checkout: {
+      title: "Checkout | Yaz Evi Bozcaada Boutique Hotel",
+      description: "Complete your reservation at Yaz Evi Bozcaada boutique hotel. Secure payment with iyzico."
+    },
+    confirmation: {
+      title: "Booking Confirmation | Yaz Evi Bozcaada",
+      description: "Your booking at Yaz Evi Bozcaada has been confirmed."
     }
   },
   phoneNumber: "+90 530 306 20 21",
@@ -108,6 +116,17 @@ export default {
   bookNow: "Book Now",
   contactOnInstagram: "Contact us on Instagram",
   allInclusive: "All Inclusive Rates",
+  booking: {
+    stepRoom: 'Choose Room',
+    stepDates: 'Select Dates',
+    stepSummary: 'Summary',
+    chooseRoom: 'Choose the room you would like to stay in',
+    chooseDates: 'Select your check-in and check-out dates',
+    changeRoom: 'Change room',
+    changeDates: 'Change dates',
+    perNight: 'night',
+    yourSelection: 'Your selection',
+  },
   homepage: {
     untouchedNature: "Untouched nature",
     textAndButton: {
@@ -145,5 +164,36 @@ export default {
     slippers: 'Slippers',
     toiletries: 'Toiletries',
     balcony: 'Balcony',
-  }
+  },
+  checkout: {
+    title: 'Complete Your Reservation',
+    guestInfo: 'Guest Information',
+    name: 'Full Name',
+    email: 'Email Address',
+    phone: 'Phone Number',
+    specialRequests: 'Special Requests',
+    termsAccept: 'I accept the booking terms and cancellation policy.',
+    payNow: 'Proceed to Payment',
+    processing: 'Processing...',
+    summary: 'Booking Summary',
+    checkIn: 'Check-in',
+    checkOut: 'Check-out',
+    pricePerNight: 'Price per night',
+    payment: 'Payment',
+  },
+  confirmation: {
+    title: 'Booking Confirmed!',
+    subtitle: 'Your reservation has been successfully confirmed.',
+    failedTitle: 'Payment Failed',
+    failedSubtitle: 'Your payment could not be processed. Please try again.',
+    reference: 'Reference Number',
+    room: 'Room',
+    emailSent: 'A confirmation email has been sent to {{email}}.',
+    backToHome: 'Back to Home',
+    tryAgain: 'Try Again',
+  },
+  calendar: {
+    dateBooked: 'Booked',
+    unavailable: 'Not available',
+  },
 }

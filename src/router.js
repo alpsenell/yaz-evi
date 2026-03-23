@@ -8,6 +8,8 @@ import Room from './components/pages/Room.vue';
 import Booking from './components/pages/Booking.vue';
 import Experiences from './components/pages/Experiences.vue';
 import Contact from './components/pages/Contact.vue';
+import Checkout from './components/pages/Checkout.vue';
+import BookingConfirmation from './components/pages/BookingConfirmation.vue';
 
 const routes = [
   { path: '/', component: Home, meta: { seoKey: 'home' } },
@@ -16,6 +18,8 @@ const routes = [
   { path: '/rooms', component: Rooms, meta: { seoKey: 'rooms' } },
   { path: '/room/:id', component: Room, meta: { seoKey: 'room' } },
   { path: '/booking', component: Booking, meta: { seoKey: 'booking' } },
+  { path: '/checkout', component: Checkout, meta: { seoKey: 'checkout' } },
+  { path: '/booking/confirmation/:bookingId', component: BookingConfirmation, meta: { seoKey: 'confirmation' } },
   { path: '/experiences', component: Experiences, meta: { seoKey: 'experiences' } },
   { path: '/contact', component: Contact, meta: { seoKey: 'contact' } },
 ]

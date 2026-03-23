@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
 
 if (!import.meta.env.VITE_FIREBASE_API_KEY) {
   throw new Error('VITE_FIREBASE_API_KEY is not defined');
@@ -20,8 +19,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebaseApp);
 const db = getFirestore(firebaseApp);
+
+// Load analytics lazily so ad blockers don't break the app
+import("firebase/analytics")
+  .then(({ getAnalytics }) => getAnalytics(firebaseApp))
+  .catch(() => {});
 
 export { db }
 

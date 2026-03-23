@@ -11,6 +11,14 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  disabledDates: {
+    type: Array,
+    default: () => [],
+  },
+  attributes: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 const emit = defineEmits(['change']);
@@ -22,6 +30,9 @@ const closeCalendar = () => {
   showCalendar.value = false;
 };
 const columns = computed(() => (window.innerWidth < 768 ? 1 : 2));
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 </script>
 
 <template>
@@ -44,6 +55,9 @@ const columns = computed(() => (window.innerWidth < 768 ? 1 : 2));
       is-range
       :columns="columns"
       :is-inline="false"
+      :min-date="today"
+      :disabled-dates="disabledDates"
+      :attributes="attributes"
       :popover="{ placement: 'bottom' }"
       @blur="closeCalendar"
       @update:model-value="handleDateChange"

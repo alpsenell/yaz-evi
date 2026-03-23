@@ -34,7 +34,9 @@ export const LANGUAGES = [
   }
 ];
 
-export const ROOMS = [
+import type { Room } from '../types/booking'
+
+export const ROOMS: Room[] = [
   {
     id: '1',
     title: 'room1',
@@ -42,7 +44,7 @@ export const ROOMS = [
     name: 'Zeus',
     description: 'room1Description',
     bookingInformation: {
-      price: '-',
+      price: 0,
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
@@ -87,7 +89,7 @@ export const ROOMS = [
     image: 'oda_2/oda2-1-min.jpg',
     description: 'room1Description',
     bookingInformation: {
-      price: '-',
+      price: 0,
       guestNumber: 2,
       sleeps: ['kingBed'],
       bathroom: 1,
@@ -129,7 +131,7 @@ export const ROOMS = [
     image: 'oda_3/oda3-1-min.jpg',
     description: 'room3Description',
     bookingInformation: {
-      price: '-',
+      price: 0,
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
@@ -173,7 +175,7 @@ export const ROOMS = [
     image: 'oda_4/oda4-1-min.jpg',
     description: 'room4Description',
     bookingInformation: {
-      price: '-',
+      price: 0,
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,
@@ -219,7 +221,7 @@ export const ROOMS = [
     image: 'oda_3/oda3-1-min.jpg',
     description: 'room5Description',
     bookingInformation: {
-      price: '-',
+      price: 0,
       guestNumber: 2,
       sleeps: ['kingBed', 'sofa'],
       bathroom: 1,

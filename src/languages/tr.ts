@@ -31,6 +31,14 @@ export default {
     contact: {
       title: "İletişim | Yaz Evi Bozcaada Butik Otel",
       description: "Yaz Evi Bozcaada butik otel ile iletişime geçin. Telefon, e-posta ile bize ulaşın veya Alaybey Mah. Muratbey Sk. 12, Bozcaada adresimizi ziyaret edin."
+    },
+    checkout: {
+      title: "Ödeme | Yaz Evi Bozcaada Butik Otel",
+      description: "Yaz Evi Bozcaada butik otel rezervasyonunuzu tamamlayın. iyzico ile güvenli ödeme."
+    },
+    confirmation: {
+      title: "Rezervasyon Onayı | Yaz Evi Bozcaada",
+      description: "Yaz Evi Bozcaada'daki rezervasyonunuz onaylandı."
     }
   },
   phoneNumber: "+90 530 306 20 21",
@@ -108,6 +116,17 @@ export default {
   bookNow: "Şimdi Rezervasyon Yapın",
   contactOnInstagram: "Instagram'dan İletişime Geçin",
   allInclusive: "Her Şey Dahil",
+  booking: {
+    stepRoom: 'Oda Seçin',
+    stepDates: 'Tarih Seçin',
+    stepSummary: 'Özet',
+    chooseRoom: 'Konaklmak istediğiniz odayı seçin',
+    chooseDates: 'Giriş ve çıkış tarihlerinizi seçin',
+    changeRoom: 'Oda değiştir',
+    changeDates: 'Tarih değiştir',
+    perNight: 'gece',
+    yourSelection: 'Seçiminiz',
+  },
   homepage: {
     untouchedNature: "El değmemiş doğa",
     textAndButton: {
@@ -145,5 +164,36 @@ export default {
     slippers: 'Terlik',
     toiletries: 'Kişisel Bakım Ürünleri',
     balcony: 'Balkon'
-  }
+  },
+  checkout: {
+    title: 'Rezervasyonunuzu Tamamlayın',
+    guestInfo: 'Misafir Bilgileri',
+    name: 'Ad Soyad',
+    email: 'E-posta Adresi',
+    phone: 'Telefon Numarası',
+    specialRequests: 'Özel İstekler',
+    termsAccept: 'Rezervasyon koşullarını ve iptal politikasını kabul ediyorum.',
+    payNow: 'Ödemeye Geç',
+    processing: 'İşleniyor...',
+    summary: 'Rezervasyon Özeti',
+    checkIn: 'Giriş',
+    checkOut: 'Çıkış',
+    pricePerNight: 'Gecelik fiyat',
+    payment: 'Ödeme',
+  },
+  confirmation: {
+    title: 'Rezervasyon Onaylandı!',
+    subtitle: 'Rezervasyonunuz başarıyla onaylanmıştır.',
+    failedTitle: 'Ödeme Başarısız',
+    failedSubtitle: 'Ödemeniz işlenemedi. Lütfen tekrar deneyin.',
+    reference: 'Referans Numarası',
+    room: 'Oda',
+    emailSent: '{{email}} adresine onay e-postası gönderildi.',
+    backToHome: 'Ana Sayfaya Dön',
+    tryAgain: 'Tekrar Dene',
+  },
+  calendar: {
+    dateBooked: 'Dolu',
+    unavailable: 'Müsait değil',
+  },
 }
