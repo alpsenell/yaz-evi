@@ -15,10 +15,12 @@ import SliderHero from "../organisms/SliderHero.vue";
     <div class="flex flex-col gap-10 md:gap-20">
       <SliderHero
         v-for="(room, index) in ROOMS"
+        :key="room.id"
         :title="$t(room.title)"
         :image-position="index % 2 === 0 ? 'left' : 'right'"
         :description="$t(room.description)"
         :images="room.images"
+        :room-id="room.id"
         size="half"
       />
     </div>

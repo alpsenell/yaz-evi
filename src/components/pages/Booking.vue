@@ -178,6 +178,19 @@ const goToCheckout = () => {
         </div>
       </div>
 
+      <!-- Instagram contact note -->
+      <p class="text-center font-raleway text-sm text-primary mb-6">
+        {{ $t('instagramContactNote') }}
+        <a
+          href="https://www.instagram.com/yazevibozcaada_/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline hover:text-secondaryDark"
+        >
+          Instagram
+        </a>
+      </p>
+
       <!-- Loading state -->
       <div
         v-if="initialLoading"
@@ -329,7 +342,7 @@ const goToCheckout = () => {
         </div>
 
         <!-- STEP 3: Summary (room + dates chosen) -->
-        <div v-if="currentStep === 3">
+        <div v-if="currentStep === 3" class="pb-20 md:pb-0">
           <div class="max-w-xl mx-auto">
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
               <!-- Room image -->
@@ -417,7 +430,7 @@ const goToCheckout = () => {
                 <YazButton
                   :label="$t('bookNow')"
                   type="primary"
-                  class="w-full mt-2"
+                  class="w-full mt-2 hidden md:flex"
                   @click="goToCheckout"
                 />
               </div>
@@ -430,7 +443,7 @@ const goToCheckout = () => {
     <!-- Mobile sticky footer for step 3 -->
     <div
       v-if="currentStep === 3 && selectedRoom"
-      class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 z-10 flex items-center justify-between"
+      class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-10 flex items-center justify-between"
     >
       <div>
         <p class="font-montserrat text-sm font-bold text-secondaryDark">{{ totalPrice }}</p>

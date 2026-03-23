@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import YazButton from "../atoms/YazButton.vue";
-defineProps({ buttonLabel: String });
+defineProps({ buttonLabel: String, buttonUrl: String });
 </script>
 
 <template>
@@ -8,8 +8,9 @@ defineProps({ buttonLabel: String });
     <slot />
 
     <yaz-button
-      class="mt-4 mx-auto"
+      class="mt-4 w-fit mx-auto"
       :label="buttonLabel"
+      :href="buttonUrl"
       type="outlined"
     />
   </section>

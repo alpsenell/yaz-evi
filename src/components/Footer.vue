@@ -13,6 +13,7 @@ import YazIcon from "./atoms/YazIcon.vue";
         allowfullscreen="true"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
+        tabindex="-1"
       />
     </div>
 
@@ -77,12 +78,12 @@ import YazIcon from "./atoms/YazIcon.vue";
         &copy; 2024 Yaz Evi
       </li>
       <li>
-        <a
+        <router-link
           class="text-link"
-          href="/"
+          to="/booking-terms"
         >
-          Privacy Policy
-        </a>
+          {{ $t('footer.termsAndPolicy') }}
+        </router-link>
       </li>
     </ul>
   </footer>

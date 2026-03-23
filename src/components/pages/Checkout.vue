@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import i18next from 'i18next'
+import { useTranslation } from 'i18next-vue'
 
 import { useBookingState } from '../../composables/useBookingState'
 import type { CheckoutState, GuestInfo } from '../../types/booking'
@@ -11,6 +12,7 @@ import Loader from '../atoms/Loader.vue'
 import { getMediaUrl } from '../../utils/media'
 
 const router = useRouter()
+const { t } = useTranslation()
 const { getState } = useBookingState()
 
 const bookingState = ref<CheckoutState | null>(null)
@@ -27,6 +29,15 @@ const guestInfo = ref<GuestInfo>({
 })
 
 const termsAccepted = ref(false)
+
+const touched = ref({
+  name: false,
+  email: false,
+  phone: false,
+  terms: false,
+})
+
+const submitAttempted = ref(false)
 
 onMounted(() => {
   const state = getState()
@@ -60,16 +71,73 @@ const formattedPricePerNight = computed(() => {
   }).format(bookingState.value.pricePerNight)
 })
 
+// Validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const turkishPhoneRegex = /^\+90 \(5\d{2}\) \d{3} \d{2} \d{2}$/
+
+const errors = computed(() => ({
+  name: guestInfo.value.name.trim() === '' ? t('validation.nameRequired') : '',
+  email: guestInfo.value.email.trim() === ''
+    ? t('validation.emailRequired')
+    : !emailRegex.test(guestInfo.value.email.trim())
+      ? t('validation.emailInvalid')
+      : '',
+  phone: guestInfo.value.phone.trim().length <= 4
+    ? t('validation.phoneRequired')
+    : !turkishPhoneRegex.test(guestInfo.value.phone.trim())
+      ? t('validation.phoneInvalid')
+      : '',
+  terms: !termsAccepted.value ? t('validation.termsRequired') : '',
+}))
+
 const isFormValid = computed(() => {
-  return (
-    guestInfo.value.name.trim() !== '' &&
-    guestInfo.value.email.trim() !== '' &&
-    guestInfo.value.phone.trim().length > 4 &&
-    termsAccepted.value
-  )
+  return Object.values(errors.value).every(e => e === '')
 })
 
+const shouldShowError = (field: keyof typeof touched.value) => {
+  return (touched.value[field] || submitAttempted.value) && errors.value[field]
+}
+
+// Phone masking
+const handlePhoneInput = (event: Event) => {
+  const input = event.target as HTMLInputElement
+  let digits = input.value.replace(/\D/g, '')
+
+  // Remove leading 90 country code if present
+  if (digits.startsWith('90')) {
+    digits = digits.slice(2)
+  }
+
+  // Cap at 10 digits
+  digits = digits.slice(0, 10)
+
+  // Format: +90 (5XX) XXX XX XX
+  let formatted = '+90 '
+  if (digits.length > 0) {
+    formatted += '(' + digits.slice(0, 3)
+    if (digits.length >= 3) {
+      formatted += ') '
+    }
+    if (digits.length > 3) {
+      formatted += digits.slice(3, 6)
+    }
+    if (digits.length > 6) {
+      formatted += ' ' + digits.slice(6, 8)
+    }
+    if (digits.length > 8) {
+      formatted += ' ' + digits.slice(8, 10)
+    }
+  }
+
+  guestInfo.value.phone = formatted
+  nextTick(() => {
+    input.value = formatted
+  })
+}
+
 const handleSubmit = async () => {
+  submitAttempted.value = true
+
   if (!isFormValid.value || !bookingState.value) return
 
   isSubmitting.value = true
@@ -146,6 +214,20 @@ const handleSubmit = async () => {
               {{ $t('checkout.guestInfo') }}
             </h2>
 
+            <!-- Instagram contact note -->
+            <p class="font-raleway text-sm text-primary -mt-2">
+              {{ $t('instagramContactNote') }}
+              <a
+                href="https://www.instagram.com/yazevibozcaada_/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline hover:text-secondaryDark"
+              >
+                Instagram
+              </a>
+            </p>
+
+            <!-- Name -->
             <div class="flex flex-col gap-2">
               <label
                 for="guest-name"
@@ -157,11 +239,19 @@ const handleSubmit = async () => {
                 type="text"
                 id="guest-name"
                 v-model="guestInfo.name"
-                required
+                @blur="touched.name = true"
                 class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                :class="{ 'border-red-500': shouldShowError('name') }"
               >
+              <p
+                v-if="shouldShowError('name')"
+                class="font-raleway text-xs text-red-500"
+              >
+                {{ errors.name }}
+              </p>
             </div>
 
+            <!-- Email -->
             <div class="flex flex-col gap-2">
               <label
                 for="guest-email"
@@ -173,11 +263,19 @@ const handleSubmit = async () => {
                 type="email"
                 id="guest-email"
                 v-model="guestInfo.email"
-                required
+                @blur="touched.email = true"
                 class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                :class="{ 'border-red-500': shouldShowError('email') }"
               >
+              <p
+                v-if="shouldShowError('email')"
+                class="font-raleway text-xs text-red-500"
+              >
+                {{ errors.email }}
+              </p>
             </div>
 
+            <!-- Phone -->
             <div class="flex flex-col gap-2">
               <label
                 for="guest-phone"
@@ -188,12 +286,22 @@ const handleSubmit = async () => {
               <input
                 type="tel"
                 id="guest-phone"
-                v-model="guestInfo.phone"
-                required
+                :value="guestInfo.phone"
+                @input="handlePhoneInput"
+                @blur="touched.phone = true"
+                placeholder="+90 (5__) ___ __ __"
                 class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                :class="{ 'border-red-500': shouldShowError('phone') }"
               >
+              <p
+                v-if="shouldShowError('phone')"
+                class="font-raleway text-xs text-red-500"
+              >
+                {{ errors.phone }}
+              </p>
             </div>
 
+            <!-- Special Requests -->
             <div class="flex flex-col gap-2">
               <label
                 for="special-requests"
@@ -209,19 +317,33 @@ const handleSubmit = async () => {
               ></textarea>
             </div>
 
-            <div class="flex items-start gap-2">
-              <input
-                type="checkbox"
-                id="terms"
-                v-model="termsAccepted"
-                class="mt-1"
+            <!-- Terms -->
+            <div class="flex flex-col gap-1">
+              <div class="flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  v-model="termsAccepted"
+                  @change="touched.terms = true"
+                  class="mt-1"
+                >
+                <label
+                  for="terms"
+                  class="font-raleway text-sm font-light"
+                >
+                  {{ $t('checkout.termsAcceptPrefix') }}<a
+                    href="/booking-terms"
+                    target="_blank"
+                    class="underline text-primary hover:text-secondaryDark"
+                  >{{ $t('checkout.termsAcceptLink') }}</a>{{ $t('checkout.termsAcceptSuffix') }}
+                </label>
+              </div>
+              <p
+                v-if="shouldShowError('terms')"
+                class="font-raleway text-xs text-red-500 ml-5"
               >
-              <label
-                for="terms"
-                class="font-raleway text-sm font-light"
-              >
-                {{ $t('checkout.termsAccept') }}
-              </label>
+                {{ errors.terms }}
+              </p>
             </div>
 
             <div
@@ -235,12 +357,12 @@ const handleSubmit = async () => {
               :label="isSubmitting ? $t('checkout.processing') : $t('checkout.payNow')"
               type="primary"
               class="w-fit"
-              :disabled="!isFormValid || isSubmitting"
+              :disabled="isSubmitting"
             />
           </form>
 
           <!-- Right: Booking summary sidebar -->
-          <div class="flex flex-col gap-4 py-6 px-4 shadow-2xl rounded-2xl h-fit sticky top-16 order-first md:order-last">
+          <div class="flex flex-col gap-4 py-6 px-4 shadow-2xl rounded-2xl h-fit md:sticky top-16 order-first md:order-last">
             <h2 class="text-lg font-raleway font-light">
               {{ $t('checkout.summary') }}
             </h2>

@@ -39,6 +39,10 @@ export default {
     confirmation: {
       title: "Booking Confirmation | Yaz Evi Bozcaada",
       description: "Your booking at Yaz Evi Bozcaada has been confirmed."
+    },
+    bookingTerms: {
+      title: "Booking Terms & Cancellation Policy | Yaz Evi Bozcaada",
+      description: "Read the booking terms, cancellation policy, and guest guidelines for Yaz Evi Bozcaada boutique hotel."
     }
   },
   phoneNumber: "+90 530 306 20 21",
@@ -144,6 +148,16 @@ export default {
     subtitle: 'Stay in the heart of Bozcaada',
     button: 'View Rates & Inclusions'
   },
+  roomDetail: {
+    amenities: 'Amenities',
+    about: 'About this room',
+    bookThisRoom: 'Book This Room',
+    otherRooms: 'Explore Other Rooms',
+    size: 'Size',
+    capacity: 'Capacity',
+    bedType: 'Bed Type',
+    guests: 'guests',
+  },
   roomInformation: {
     kingBed: 'King Bed',
     sofa: 'Sofa',
@@ -172,7 +186,9 @@ export default {
     email: 'Email Address',
     phone: 'Phone Number',
     specialRequests: 'Special Requests',
-    termsAccept: 'I accept the booking terms and cancellation policy.',
+    termsAcceptPrefix: 'I accept the ',
+    termsAcceptLink: 'booking terms and cancellation policy',
+    termsAcceptSuffix: '.',
     payNow: 'Proceed to Payment',
     processing: 'Processing...',
     summary: 'Booking Summary',
@@ -180,6 +196,18 @@ export default {
     checkOut: 'Check-out',
     pricePerNight: 'Price per night',
     payment: 'Payment',
+  },
+  validation: {
+    nameRequired: 'Full name is required.',
+    emailRequired: 'Email address is required.',
+    emailInvalid: 'Please enter a valid email address.',
+    phoneRequired: 'Phone number is required.',
+    phoneInvalid: 'Please enter a valid phone number.',
+    termsRequired: 'You must accept the booking terms and cancellation policy.',
+  },
+  instagramContactNote: 'For any questions, contact us on',
+  footer: {
+    termsAndPolicy: 'Terms & Policy',
   },
   confirmation: {
     title: 'Booking Confirmed!',
@@ -195,5 +223,24 @@ export default {
   calendar: {
     dateBooked: 'Booked',
     unavailable: 'Not available',
+  },
+  bookingTerms: {
+    title: 'Booking Terms & Cancellation Policy',
+    reservationTermsTitle: 'Reservation Terms',
+    reservationTermsContent: 'All reservations at Yaz Evi Bozcaada are confirmed upon successful completion of the online payment process. Once payment is received, you will receive a confirmation email with your booking reference number. The total accommodation fee is charged at the time of booking. Room prices may vary depending on the season and availability. The information provided during the reservation (name, contact details) must be accurate and belong to the guest staying at the hotel.',
+    cancellationTitle: 'Cancellation Policy',
+    cancellationFree: 'Free cancellation up to 7 days before the check-in date. A full refund will be processed within 5-10 business days.',
+    cancellationPartial: '50% of the total booking amount will be charged for cancellations made between 3 and 7 days before the check-in date.',
+    cancellationLate: 'No refund for cancellations made less than 3 days before the check-in date.',
+    cancellationNoShow: 'In case of a no-show (failure to arrive without prior cancellation), the full booking amount will be charged.',
+    checkInOutTitle: 'Check-in & Check-out',
+    checkInOutContent: 'Check-in time is from 14:00 onwards. Check-out time is until 11:00. Early check-in and late check-out are subject to availability and may incur additional charges. Please contact us in advance if you need to arrange early arrival or late departure.',
+    guestResponsibilitiesTitle: 'Guest Responsibilities',
+    guestResponsibilitiesContent: 'Guests are required to present a valid ID or passport upon check-in. Guests are responsible for any damage caused to the room or hotel property during their stay. Yaz Evi is a non-smoking property; smoking is strictly prohibited in all rooms and indoor areas. Quiet hours are observed between 22:00 and 08:00 out of respect for other guests. Pets are not allowed on the premises.',
+    privacyTitle: 'Privacy & Data Protection',
+    privacyContent: 'Personal information collected during the booking process is used solely for reservation management and guest communication. Your data will not be shared with third parties except as required for payment processing. We are committed to protecting your privacy in accordance with applicable data protection regulations.',
+    contactTitle: 'Contact',
+    contactContent: 'If you have any questions regarding these terms or your reservation, please do not hesitate to contact us.',
+    lastUpdated: 'Last updated: March 2026',
   },
 }
