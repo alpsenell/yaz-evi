@@ -11,7 +11,7 @@ defineProps({
   imagePosition: String,
   title: String,
   description: String,
-  roomId: String,
+  roomSlug: String,
 })
 </script>
 
@@ -63,8 +63,8 @@ defineProps({
         {{ description }}
       </p>
       <div class="flex gap-4">
-        <YazButton :label="$t('details')" type="outlined" :href="`/room/${roomId}`" />
-        <YazButton :label="$t('reserve')" type="primary" href="/booking" />
+        <YazButton :label="$t('details')" type="outlined" :href="`/room/${roomSlug}`" />
+        <YazButton :label="$t('reserve')" type="primary" :href="`/booking?room=${roomSlug}`" />
       </div>
     </div>
   </section>

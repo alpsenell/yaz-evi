@@ -47,6 +47,7 @@ export interface RoomBookingInfo {
 
 export interface Room {
   id: string
+  slug: string
   title: string
   name: string
   image: string

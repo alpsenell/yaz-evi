@@ -20,7 +20,7 @@ import SliderHero from "../organisms/SliderHero.vue";
         :image-position="index % 2 === 0 ? 'left' : 'right'"
         :description="$t(room.description)"
         :images="room.images"
-        :room-id="room.id"
+        :room-slug="room.slug"
         size="half"
       />
     </div>

@@ -1,5 +1,7 @@
 # Yaz Evi — Boutique Hotel Booking Website
 
+This project is deployed on: [yaz-evi.com](https://www.yaz-evi.com/)
+
 Yaz Evi is the official website and online reservation system for a boutique hotel located on the island of **Bozcaada, Çanakkale, Turkey**. The project provides guests with a seamless browsing and booking experience — from exploring rooms and galleries to completing a secure payment, all in one place.
 
 ## Purpose

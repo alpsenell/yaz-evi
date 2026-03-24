@@ -39,6 +39,7 @@ import type { Room } from '../types/booking'
 export const ROOMS: Room[] = [
   {
     id: '1',
+    slug: 'zeus',
     title: 'room1',
     image: 'oda_1/oda1-min.jpg',
     name: 'Zeus',
@@ -84,6 +85,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '2',
+    slug: 'hera',
     title: 'room2',
     name: 'Hera',
     image: 'oda_2/oda2-1-min.jpg',
@@ -126,6 +128,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '3',
+    slug: 'tenedos',
     name: 'tenedos',
     title: 'room3',
     image: 'oda_3/oda3-1-min.jpg',
@@ -170,6 +173,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '4',
+    slug: 'tenes',
     title: 'room4',
     name: 'tenes',
     image: 'oda_4/oda4-1-min.jpg',
@@ -216,6 +220,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '5',
+    slug: 'ilyada',
     name: 'ilyada',
     title: 'room5',
     image: 'oda_3/oda3-1-min.jpg',

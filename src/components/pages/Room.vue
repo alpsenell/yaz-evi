@@ -11,11 +11,11 @@ import YazIcon from '../atoms/YazIcon.vue'
 const route = useRoute()
 
 const room = computed(() => {
-  return ROOMS.find(r => r.id === route.params.id) ?? null
+  return ROOMS.find(r => r.slug === route.params.slug) ?? null
 })
 
 const otherRooms = computed(() => {
-  return ROOMS.filter(r => r.id !== route.params.id)
+  return ROOMS.filter(r => r.slug !== route.params.slug)
 })
 
 const lightboxOpen = ref(false)
@@ -117,7 +117,7 @@ if (typeof window !== 'undefined') {
         <YazButton
           :label="$t('roomDetail.bookThisRoom')"
           type="primary"
-          href="/booking"
+          :href="`/booking?room=${room.slug}`"
           class="hidden md:flex"
         />
       </div>
@@ -182,7 +182,7 @@ if (typeof window !== 'undefined') {
         <YazButton
           :label="$t('roomDetail.bookThisRoom')"
           type="primary"
-          href="/booking"
+          :href="`/booking?room=${room.slug}`"
           class="mx-auto w-fit"
         />
       </div>
@@ -196,7 +196,7 @@ if (typeof window !== 'undefined') {
           <router-link
             v-for="other in otherRooms"
             :key="other.id"
-            :to="`/room/${other.id}`"
+            :to="`/room/${other.slug}`"
             class="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
           >
             <div class="relative aspect-[3/4] overflow-hidden">

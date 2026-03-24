@@ -124,7 +124,7 @@ export default {
     stepRoom: 'Oda Seçin',
     stepDates: 'Tarih Seçin',
     stepSummary: 'Özet',
-    chooseRoom: 'Konaklmak istediğiniz odayı seçin',
+    chooseRoom: 'Konaklamak istediğiniz odayı seçin',
     chooseDates: 'Giriş ve çıkış tarihlerinizi seçin',
     changeRoom: 'Oda değiştir',
     changeDates: 'Tarih değiştir',

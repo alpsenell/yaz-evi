@@ -8,6 +8,7 @@ import { useBookingState } from '../../composables/useBookingState'
 import type { CheckoutState, GuestInfo } from '../../types/booking'
 
 import YazButton from '../atoms/YazButton.vue'
+import YazIcon from '../atoms/YazIcon.vue'
 import Loader from '../atoms/Loader.vue'
 import { getMediaUrl } from '../../utils/media'
 
@@ -214,18 +215,28 @@ const handleSubmit = async () => {
               {{ $t('checkout.guestInfo') }}
             </h2>
 
-            <!-- Instagram contact note -->
-            <p class="font-raleway text-sm text-primary -mt-2">
-              {{ $t('instagramContactNote') }}
-              <a
-                href="https://www.instagram.com/yazevibozcaada_/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline hover:text-secondaryDark"
-              >
-                Instagram
-              </a>
-            </p>
+            <!-- Contact note -->
+            <div class="font-raleway text-sm text-primary -mt-2 flex flex-col gap-2">
+              <p>{{ $t('instagramContactNote') }}</p>
+              <div class="flex items-center gap-4">
+                <a
+                  href="tel:+905324316734"
+                  class="flex items-center gap-2 hover:text-secondaryDark transition-colors"
+                >
+                  <YazIcon name="phone" :size="18" color="currentColor" />
+                  <span>0532 431 67 34</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/yazevibozcaada_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 hover:text-secondaryDark transition-colors"
+                >
+                  <YazIcon name="instagram" :size="18" color="currentColor" />
+                  <span>yazevibozcaada_</span>
+                </a>
+              </div>
+            </div>
 
             <!-- Name -->
             <div class="flex flex-col gap-2">

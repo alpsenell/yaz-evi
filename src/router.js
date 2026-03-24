@@ -17,7 +17,7 @@ const routes = [
   { path: '/about', component: About, meta: { seoKey: 'about' } },
   { path: '/gallery', component: Gallery, meta: { seoKey: 'gallery' } },
   { path: '/rooms', component: Rooms, meta: { seoKey: 'rooms' } },
-  { path: '/room/:id', component: Room, meta: { seoKey: 'room' } },
+  { path: '/room/:slug', component: Room, meta: { seoKey: 'room' } },
   { path: '/booking', component: Booking, meta: { seoKey: 'booking' } },
   { path: '/checkout', component: Checkout, meta: { seoKey: 'checkout' } },
   { path: '/booking/confirmation/:bookingId', component: BookingConfirmation, meta: { seoKey: 'confirmation' } },

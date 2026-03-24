@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from "vue";
 import { db } from "../../firebase/config.ts";
 import { collection, query, where, getDocs, doc } from "firebase/firestore";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import i18next from "i18next";
 import { DatePicker as VCalendarDatePicker } from "v-calendar";
 
@@ -16,6 +16,7 @@ import YazIcon from "../atoms/YazIcon.vue";
 import Loader from "../atoms/Loader.vue";
 import { getMediaUrl } from '../../utils/media';
 
+const route = useRoute();
 const router = useRouter();
 const { fetchAllBookings, getDisabledDates, getCalendarAttributes } = useBookings();
 const { fetchPrices, getPrice } = useRoomPrices();
@@ -38,6 +39,15 @@ const currentStep = computed(() => {
 
 onMounted(async () => {
   await Promise.all([fetchAllBookings(), fetchPrices()]);
+
+  const roomSlug = route.query.room as string | undefined;
+  if (roomSlug) {
+    const preselected = ROOMS.find(r => r.slug === roomSlug);
+    if (preselected) {
+      selectedRoom.value = preselected;
+    }
+  }
+
   initialLoading.value = false;
 });
 
@@ -210,9 +220,14 @@ const goToCheckout = () => {
             <div
               v-for="room in ROOMS"
               :key="room.id"
-              class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              tabindex="0"
+              role="button"
+              :aria-label="$t(room.title)"
+              class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               :class="selectedRoom?.id === room.id ? 'ring-2 ring-primary' : ''"
               @click="selectRoom(room)"
+              @keydown.enter="selectRoom(room)"
+              @keydown.space.prevent="selectRoom(room)"
             >
               <!-- Room image -->
               <div class="relative h-56 overflow-hidden">
