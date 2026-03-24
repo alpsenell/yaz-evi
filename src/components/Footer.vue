@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useTranslation } from 'i18next-vue'
 import YazIcon from "./atoms/YazIcon.vue";
+import visaLogo from '../assets/media/visa.webp'
+import mastercardLogo from '../assets/media/mastercard.svg'
+import iyzicoLogo from '../assets/media/iyzico.svg'
+import iyzicoEnLogo from '../assets/media/iyzico-en.svg'
+
+const { i18next } = useTranslation()
+const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo : iyzicoEnLogo)
 </script>
 
 <template>
@@ -73,10 +82,7 @@ import YazIcon from "./atoms/YazIcon.vue";
       </div>
     </div>
 
-    <ul class="max-w-screen-2xl flex flex-row justify-center md:justify-end ga-6 font-raleway text-sm gap-8 mt-6 mx-auto">
-      <li>
-        &copy; 2024 Yaz Evi
-      </li>
+    <ul class="max-w-screen-2xl flex flex-row flex-wrap justify-center md:justify-end font-raleway text-sm gap-x-8 gap-y-2 mt-6 mx-auto px-10">
       <li>
         <router-link
           class="text-link"
@@ -85,7 +91,40 @@ import YazIcon from "./atoms/YazIcon.vue";
           {{ $t('footer.termsAndPolicy') }}
         </router-link>
       </li>
+      <li>
+        <router-link
+          class="text-link"
+          to="/privacy-policy"
+        >
+          {{ $t('footer.privacyPolicy') }}
+        </router-link>
+      </li>
+      <li>
+        <router-link
+          class="text-link"
+          to="/delivery-and-return"
+        >
+          {{ $t('footer.deliveryAndReturn') }}
+        </router-link>
+      </li>
+      <li>
+        <router-link
+          class="text-link"
+          to="/distance-sales-agreement"
+        >
+          {{ $t('footer.distanceSales') }}
+        </router-link>
+      </li>
     </ul>
+
+    <div class="max-w-screen-2xl flex flex-row flex-wrap items-center justify-center md:justify-end gap-4 mt-4 mx-auto px-10">
+      <span class="font-raleway text-xs text-gray-500">&copy; 2024 Yaz Evi</span>
+      <div class="flex items-center gap-3">
+        <img :src="visaLogo" alt="Visa" class="h-6">
+        <img :src="mastercardLogo" alt="Mastercard" class="h-6">
+        <img :src="iyzicoSrc" alt="iyzico" class="h-6">
+      </div>
+    </div>
   </footer>
 </template>
 

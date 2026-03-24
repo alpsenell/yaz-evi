@@ -43,6 +43,18 @@ export default {
     bookingTerms: {
       title: "Rezervasyon Koşulları ve İptal Politikası | Yaz Evi Bozcaada",
       description: "Yaz Evi Bozcaada butik otelin rezervasyon koşulları, iptal politikası ve misafir kurallarını okuyun."
+    },
+    deliveryAndReturn: {
+      title: "Teslimat ve İade Şartları | Yaz Evi Bozcaada",
+      description: "Yaz Evi Bozcaada butik otelin hizmet teslimat koşulları ve iade politikasını okuyun."
+    },
+    privacyPolicy: {
+      title: "Gizlilik Sözleşmesi | Yaz Evi Bozcaada",
+      description: "Yaz Evi Bozcaada butik otelin kişisel verilerin korunması ve gizlilik politikasını okuyun."
+    },
+    distanceSales: {
+      title: "Mesafeli Satış Sözleşmesi | Yaz Evi Bozcaada",
+      description: "Yaz Evi Bozcaada butik otelin mesafeli satış sözleşmesi hükümlerini okuyun."
     }
   },
   phoneNumber: "+90 530 306 20 21",
@@ -208,6 +220,9 @@ export default {
   instagramContactNote: 'Her türlü sorunuz için bizimle iletişime geçin:',
   footer: {
     termsAndPolicy: 'Koşullar ve Politika',
+    privacyPolicy: 'Gizlilik Sözleşmesi',
+    deliveryAndReturn: 'Teslimat ve İade Şartları',
+    distanceSales: 'Mesafeli Satış Sözleşmesi',
   },
   confirmation: {
     title: 'Rezervasyon Onaylandı!',
@@ -223,6 +238,69 @@ export default {
   calendar: {
     dateBooked: 'Dolu',
     unavailable: 'Müsait değil',
+  },
+  deliveryAndReturn: {
+    title: 'Teslimat ve İade Şartları',
+    serviceDeliveryTitle: 'Hizmet Teslimatı',
+    serviceDeliveryContent: 'Yaz Evi Bozcaada, konaklama hizmeti sunan bir butik oteldir. Hizmet teslimatı, misafirin otel rezervasyonu sırasında belirtilen giriş tarihinde otele gelmesiyle başlar. Konaklama hizmeti, fiziksel bir ürün teslimatı olmayıp, belirlenen tarihler arasında otel odasının kullanıma sunulması şeklinde gerçekleştirilir.',
+    checkInOutTitle: 'Giriş ve Çıkış Koşulları',
+    checkInOutContent: 'Giriş (check-in) saati 14:00\'den itibaren başlar. Çıkış (check-out) saati en geç 11:00\'dir. Erken giriş ve geç çıkış talepleri müsaitlik durumuna bağlı olup ek ücret gerektirebilir. Rezervasyon süresince otel odası münhasıran misafirin kullanımına tahsis edilir.',
+    refundTitle: 'İade Koşulları',
+    refundFree: 'Giriş tarihinden 7 gün veya daha önce yapılan iptallerde ödenen tutarın tamamı iade edilir. İade işlemi 5-10 iş günü içinde gerçekleştirilir.',
+    refundPartial: 'Giriş tarihinden 3 ila 7 gün önce yapılan iptallerde toplam tutarın %50\'si iade edilir.',
+    refundLate: 'Giriş tarihinden 3 günden az bir süre kala yapılan iptallerde ve gelmeme (no-show) durumunda iade yapılmaz.',
+    refundProcessTitle: 'İade Süreci',
+    refundProcessContent: 'İade talepleri info@yaz-evi.com adresine e-posta gönderilerek veya 0532 431 67 34 numaralı telefondan iletilerek yapılabilir. İade onaylandıktan sonra, ödemenin yapıldığı kredi kartına veya banka hesabına 5-10 iş günü içinde iade gerçekleştirilir. İade işlemi, ödeme kuruluşu iyzico aracılığıyla yapılır.',
+    forceMajeureTitle: 'Mücbir Sebepler',
+    forceMajeureContent: 'Doğal afet, salgın hastalık, savaş, terör, hükümet kararları gibi mücbir sebeplerin varlığı halinde, tarafların yükümlülükleri askıya alınır. Bu durumda misafire tam iade yapılır veya karşılıklı mutabakatla tarih değişikliği sağlanır.',
+    contactTitle: 'İletişim',
+    contactContent: 'Teslimat ve iade koşulları hakkında sorularınız için bizimle iletişime geçebilirsiniz.',
+    lastUpdated: 'Son güncelleme: Mart 2026',
+  },
+  privacyPolicy: {
+    title: 'Gizlilik Sözleşmesi',
+    dataControllerTitle: 'Veri Sorumlusu',
+    dataControllerContent: 'Yaz Evi Bozcaada olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında veri sorumlusu sıfatıyla kişisel verilerinizi aşağıda açıklanan amaçlar doğrultusunda ve mevzuata uygun olarak işlemekteyiz.',
+    collectedDataTitle: 'Toplanan Kişisel Veriler',
+    collectedDataContent: 'Rezervasyon ve konaklama sürecinde ad-soyad, e-posta adresi, telefon numarası, kimlik/pasaport bilgileri ve ödeme bilgileri toplanmaktadır. İletişim formu aracılığıyla ad-soyad, e-posta adresi ve mesaj içeriği toplanmaktadır. Web sitemizin kullanımı sırasında çerezler aracılığıyla tarayıcı bilgileri ve kullanım verileri toplanabilmektedir.',
+    purposeTitle: 'Verilerin İşlenme Amaçları',
+    purposeContent: 'Kişisel verileriniz; rezervasyon oluşturma ve yönetimi, ödeme işlemlerinin gerçekleştirilmesi, yasal yükümlülüklerin yerine getirilmesi (konaklama kayıtları vb.), misafir iletişimi ve hizmet kalitesinin artırılması amacıyla işlenmektedir.',
+    dataSharingTitle: 'Verilerin Paylaşılması',
+    dataSharingContent: 'Kişisel verileriniz, ödeme işlemleri için iyzico ödeme kuruluşu ile ve yasal zorunluluklar gereği yetkili kamu kurum ve kuruluşları ile paylaşılabilir. Bunun dışında, verileriniz açık rızanız olmaksızın üçüncü taraflarla paylaşılmaz.',
+    cookiesTitle: 'Çerezler (Cookies)',
+    cookiesContent: 'Web sitemizde kullanıcı deneyimini iyileştirmek amacıyla çerezler kullanılmaktadır. Çerezler, tarayıcı tercihleriniz ve site kullanımınız hakkında bilgi toplar. Tarayıcı ayarlarınızdan çerezleri devre dışı bırakabilirsiniz; ancak bu durumda bazı site özellikleri düzgün çalışmayabilir.',
+    dataSecurityTitle: 'Veri Güvenliği',
+    dataSecurityContent: 'Kişisel verilerinizin güvenliğini sağlamak için SSL şifreleme, güvenli ödeme altyapısı (iyzico PCI DSS sertifikalı) ve erişim kontrolü gibi teknik ve idari tedbirler uygulanmaktadır.',
+    userRightsTitle: 'Haklarınız',
+    userRightsContent: 'KVKK kapsamında; kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını öğrenme, yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme, eksik veya yanlış işlenmiş verilerin düzeltilmesini isteme, verilerin silinmesini veya yok edilmesini isteme ve işlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonuç doğmasına itiraz etme haklarına sahipsiniz.',
+    contactTitle: 'İletişim',
+    contactContent: 'Gizlilik politikamız ve kişisel verileriniz hakkında sorularınız için bizimle iletişime geçebilirsiniz.',
+    lastUpdated: 'Son güncelleme: Mart 2026',
+  },
+  distanceSales: {
+    title: 'Mesafeli Satış Sözleşmesi',
+    partiesTitle: 'Taraflar',
+    sellerTitle: 'Satıcı (Hizmet Sağlayıcı):',
+    sellerName: 'Unvan: Yaz Evi Bozcaada',
+    sellerAddress: 'Adres: Alaybey Mah. Muratbey Sk. No:12, Bozcaada/Çanakkale',
+    sellerPhone: 'Telefon: 0532 431 67 34',
+    sellerEmail: 'E-posta: info@yaz-evi.com',
+    subjectTitle: 'Sözleşmenin Konusu',
+    subjectContent: 'İşbu sözleşmenin konusu, Alıcı\'nın Satıcı\'ya ait yaz-evi.com internet sitesi üzerinden elektronik ortamda siparişini verdiği konaklama hizmetinin satışı ve ifası ile ilgili olarak 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği hükümleri gereğince tarafların hak ve yükümlülüklerinin belirlenmesidir.',
+    serviceDetailsTitle: 'Hizmetin Temel Nitelikleri',
+    serviceDetailsContent: 'Hizmetin türü, adedi, fiyatı ve ödeme bilgileri rezervasyon özeti sayfasında belirtilmektedir. Satın alınan hizmet, Yaz Evi Bozcaada butik otelde belirlenen tarihler arasında konaklama hizmetidir. Konaklama hizmeti, seçilen oda tipi ve belirtilen giriş-çıkış tarihleri doğrultusunda sunulur.',
+    priceTitle: 'Hizmet Bedeli ve Ödeme',
+    priceContent: 'Hizmet bedeli, rezervasyon sırasında web sitesinde belirtilen fiyattır ve KDV dahildir. Ödeme, iyzico güvenli ödeme altyapısı aracılığıyla kredi kartı veya banka kartı ile gerçekleştirilir. Toplam konaklama bedeli, rezervasyon sırasında tahsil edilir.',
+    withdrawalTitle: 'Cayma Hakkı',
+    withdrawalContent: '6502 sayılı Kanun\'un 15. maddesinin (g) bendi uyarınca, belirli bir tarihte yapılması gereken konaklama hizmetlerinde cayma hakkı kullanılamaz. Ancak Yaz Evi Bozcaada, misafir memnuniyetini ön planda tutarak kendi iptal politikası çerçevesinde iade imkânı sunmaktadır.',
+    cancellationTitle: 'İptal ve İade Koşulları',
+    cancellationContent: 'Giriş tarihinden 7 gün veya daha önce yapılan iptallerde toplam tutarın tamamı iade edilir. Giriş tarihinden 3-7 gün önce yapılan iptallerde toplam tutarın %50\'si tahsil edilir, kalan %50 iade edilir. Giriş tarihinden 3 günden az bir süre kala yapılan iptallerde ve no-show durumunda iade yapılmaz. İade işlemleri, iyzico aracılığıyla ödemenin yapıldığı araca 5-10 iş günü içinde gerçekleştirilir.',
+    responsibilitiesTitle: 'Tarafların Yükümlülükleri',
+    responsibilitiesContent: 'Satıcı, hizmetin sözleşmeye uygun olarak sunulmasından sorumludur. Alıcı, rezervasyon sırasında doğru ve eksiksiz bilgi vermekle yükümlüdür. Alıcı, konaklama süresince otel kurallarına uymakla yükümlüdür.',
+    disputeTitle: 'Uyuşmazlık Çözümü',
+    disputeContent: 'İşbu sözleşmeden doğan uyuşmazlıklarda Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri yetkilidir. Uyuşmazlık halinde Çanakkale Tüketici Hakem Heyeti ve Çanakkale Tüketici Mahkemesi yetkilidir.',
+    acceptanceContent: 'Alıcı, işbu sözleşmenin tüm koşullarını okuduğunu, anladığını ve kabul ettiğini, rezervasyonu onaylamak suretiyle beyan ve taahhüt eder.',
+    lastUpdated: 'Son güncelleme: Mart 2026',
   },
   bookingTerms: {
     title: 'Rezervasyon Koşulları ve İptal Politikası',

@@ -43,6 +43,18 @@ export default {
     bookingTerms: {
       title: "Booking Terms & Cancellation Policy | Yaz Evi Bozcaada",
       description: "Read the booking terms, cancellation policy, and guest guidelines for Yaz Evi Bozcaada boutique hotel."
+    },
+    deliveryAndReturn: {
+      title: "Delivery & Return Policy | Yaz Evi Bozcaada",
+      description: "Read the service delivery conditions and refund policy for Yaz Evi Bozcaada boutique hotel."
+    },
+    privacyPolicy: {
+      title: "Privacy Policy | Yaz Evi Bozcaada",
+      description: "Read the personal data protection and privacy policy for Yaz Evi Bozcaada boutique hotel."
+    },
+    distanceSales: {
+      title: "Distance Sales Agreement | Yaz Evi Bozcaada",
+      description: "Read the distance sales agreement terms for Yaz Evi Bozcaada boutique hotel."
     }
   },
   phoneNumber: "+90 530 306 20 21",
@@ -208,6 +220,9 @@ export default {
   instagramContactNote: 'For any questions, contact us on',
   footer: {
     termsAndPolicy: 'Terms & Policy',
+    privacyPolicy: 'Privacy Policy',
+    deliveryAndReturn: 'Delivery & Return',
+    distanceSales: 'Distance Sales Agreement',
   },
   confirmation: {
     title: 'Booking Confirmed!',
@@ -223,6 +238,69 @@ export default {
   calendar: {
     dateBooked: 'Booked',
     unavailable: 'Not available',
+  },
+  deliveryAndReturn: {
+    title: 'Delivery & Return Policy',
+    serviceDeliveryTitle: 'Service Delivery',
+    serviceDeliveryContent: 'Yaz Evi Bozcaada is a boutique hotel offering accommodation services. Service delivery begins when the guest arrives at the hotel on the check-in date specified during the reservation. Accommodation service is not a physical product delivery; it is provided by making the hotel room available for use between the specified dates.',
+    checkInOutTitle: 'Check-in & Check-out Conditions',
+    checkInOutContent: 'Check-in time starts from 14:00. Check-out time is 11:00 at the latest. Early check-in and late check-out requests are subject to availability and may incur additional charges. During the reservation period, the hotel room is exclusively allocated for the guest\'s use.',
+    refundTitle: 'Refund Conditions',
+    refundFree: 'Full refund for cancellations made 7 days or more before the check-in date. Refund is processed within 5-10 business days.',
+    refundPartial: '50% refund for cancellations made between 3 and 7 days before the check-in date.',
+    refundLate: 'No refund for cancellations made less than 3 days before the check-in date or for no-shows.',
+    refundProcessTitle: 'Refund Process',
+    refundProcessContent: 'Refund requests can be made by sending an email to info@yaz-evi.com or calling 0532 431 67 34. Once the refund is approved, it will be processed to the credit card or bank account used for payment within 5-10 business days. Refund transactions are processed through the payment provider iyzico.',
+    forceMajeureTitle: 'Force Majeure',
+    forceMajeureContent: 'In the event of force majeure circumstances such as natural disasters, pandemics, war, terrorism, or government decisions, the obligations of the parties shall be suspended. In such cases, a full refund will be provided to the guest, or a date change will be arranged by mutual agreement.',
+    contactTitle: 'Contact',
+    contactContent: 'For questions regarding delivery and return conditions, please contact us.',
+    lastUpdated: 'Last updated: March 2026',
+  },
+  privacyPolicy: {
+    title: 'Privacy Policy',
+    dataControllerTitle: 'Data Controller',
+    dataControllerContent: 'As Yaz Evi Bozcaada, in accordance with the Turkish Personal Data Protection Law (KVKK) No. 6698, we process your personal data as the data controller for the purposes explained below and in compliance with the applicable legislation.',
+    collectedDataTitle: 'Collected Personal Data',
+    collectedDataContent: 'During the reservation and accommodation process, we collect full name, email address, phone number, ID/passport information, and payment details. Through the contact form, we collect full name, email address, and message content. During the use of our website, browser information and usage data may be collected through cookies.',
+    purposeTitle: 'Purposes of Data Processing',
+    purposeContent: 'Your personal data is processed for the purposes of creating and managing reservations, processing payment transactions, fulfilling legal obligations (accommodation records, etc.), guest communication, and improving service quality.',
+    dataSharingTitle: 'Data Sharing',
+    dataSharingContent: 'Your personal data may be shared with the payment provider iyzico for payment transactions and with authorized public institutions as required by law. Beyond this, your data will not be shared with third parties without your explicit consent.',
+    cookiesTitle: 'Cookies',
+    cookiesContent: 'Cookies are used on our website to improve user experience. Cookies collect information about your browser preferences and site usage. You can disable cookies through your browser settings; however, some site features may not function properly in that case.',
+    dataSecurityTitle: 'Data Security',
+    dataSecurityContent: 'Technical and administrative measures such as SSL encryption, secure payment infrastructure (iyzico is PCI DSS certified), and access control are implemented to ensure the security of your personal data.',
+    userRightsTitle: 'Your Rights',
+    userRightsContent: 'Under KVKK, you have the right to learn whether your personal data is processed, request information if it has been processed, learn the purpose of processing, know the third parties to whom your data is transferred domestically or internationally, request correction of incomplete or inaccurate data, request deletion or destruction of data, and object to any adverse results arising from the analysis of processed data exclusively through automated systems.',
+    contactTitle: 'Contact',
+    contactContent: 'For questions about our privacy policy and your personal data, please contact us.',
+    lastUpdated: 'Last updated: March 2026',
+  },
+  distanceSales: {
+    title: 'Distance Sales Agreement',
+    partiesTitle: 'Parties',
+    sellerTitle: 'Seller (Service Provider):',
+    sellerName: 'Company: Yaz Evi Bozcaada',
+    sellerAddress: 'Address: Alaybey Mah. Muratbey Sk. No:12, Bozcaada/Çanakkale',
+    sellerPhone: 'Phone: 0532 431 67 34',
+    sellerEmail: 'Email: info@yaz-evi.com',
+    subjectTitle: 'Subject of the Agreement',
+    subjectContent: 'The subject of this agreement is the determination of the rights and obligations of the parties in relation to the sale and performance of the accommodation service ordered electronically by the Buyer through the Seller\'s website yaz-evi.com, in accordance with the Consumer Protection Law No. 6502 and the Distance Contracts Regulation.',
+    serviceDetailsTitle: 'Essential Characteristics of the Service',
+    serviceDetailsContent: 'The type, quantity, price, and payment information of the service are specified on the reservation summary page. The purchased service is accommodation at Yaz Evi Bozcaada boutique hotel between the specified dates. The accommodation service is provided according to the selected room type and specified check-in/check-out dates.',
+    priceTitle: 'Service Fee and Payment',
+    priceContent: 'The service fee is the price stated on the website at the time of reservation, inclusive of VAT. Payment is made by credit card or debit card through the iyzico secure payment infrastructure. The total accommodation fee is charged at the time of reservation.',
+    withdrawalTitle: 'Right of Withdrawal',
+    withdrawalContent: 'Pursuant to Article 15(g) of Law No. 6502, the right of withdrawal cannot be exercised for accommodation services that must be provided on a specific date. However, Yaz Evi Bozcaada prioritizes guest satisfaction and offers refund options within its own cancellation policy.',
+    cancellationTitle: 'Cancellation and Refund Conditions',
+    cancellationContent: 'Full refund for cancellations made 7 days or more before the check-in date. 50% of the total amount is charged for cancellations made 3-7 days before check-in, with the remaining 50% refunded. No refund for cancellations made less than 3 days before check-in or for no-shows. Refund transactions are processed through iyzico to the original payment method within 5-10 business days.',
+    responsibilitiesTitle: 'Obligations of the Parties',
+    responsibilitiesContent: 'The Seller is responsible for providing the service in accordance with the agreement. The Buyer is obligated to provide accurate and complete information during the reservation. The Buyer is obligated to comply with hotel rules during the accommodation period.',
+    disputeTitle: 'Dispute Resolution',
+    disputeContent: 'Consumer Arbitration Committees and Consumer Courts have jurisdiction over disputes arising from this agreement. In case of dispute, Çanakkale Consumer Arbitration Committee and Çanakkale Consumer Court have jurisdiction.',
+    acceptanceContent: 'The Buyer declares and undertakes that they have read, understood, and accepted all the conditions of this agreement by confirming the reservation.',
+    lastUpdated: 'Last updated: March 2026',
   },
   bookingTerms: {
     title: 'Booking Terms & Cancellation Policy',

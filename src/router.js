@@ -11,6 +11,9 @@ import Contact from './components/pages/Contact.vue';
 import Checkout from './components/pages/Checkout.vue';
 import BookingConfirmation from './components/pages/BookingConfirmation.vue';
 import BookingTerms from './components/pages/BookingTerms.vue';
+import DeliveryAndReturn from './components/pages/DeliveryAndReturn.vue';
+import PrivacyPolicy from './components/pages/PrivacyPolicy.vue';
+import DistanceSalesAgreement from './components/pages/DistanceSalesAgreement.vue';
 
 const routes = [
   { path: '/', component: Home, meta: { seoKey: 'home' } },
@@ -22,6 +25,9 @@ const routes = [
   { path: '/checkout', component: Checkout, meta: { seoKey: 'checkout' } },
   { path: '/booking/confirmation/:bookingId', component: BookingConfirmation, meta: { seoKey: 'confirmation' } },
   { path: '/booking-terms', component: BookingTerms, meta: { seoKey: 'bookingTerms' } },
+  { path: '/delivery-and-return', component: DeliveryAndReturn, meta: { seoKey: 'deliveryAndReturn' } },
+  { path: '/privacy-policy', component: PrivacyPolicy, meta: { seoKey: 'privacyPolicy' } },
+  { path: '/distance-sales-agreement', component: DistanceSalesAgreement, meta: { seoKey: 'distanceSales' } },
   { path: '/experiences', component: Experiences, meta: { seoKey: 'experiences' } },
   { path: '/contact', component: Contact, meta: { seoKey: 'contact' } },
 ]
