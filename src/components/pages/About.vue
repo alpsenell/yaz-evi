@@ -28,5 +28,6 @@ import YazButton from "../atoms/YazButton.vue";
         />
       </div>
     </HalfHero>
+
   </section>
 </template>
