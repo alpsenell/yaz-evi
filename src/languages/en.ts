@@ -219,6 +219,12 @@ export default {
     termsRequired: 'You must accept the booking terms and cancellation policy.',
   },
   instagramContactNote: 'For any questions, contact us on',
+  accessibility: {
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    goHome: 'Go to homepage',
+    navigationMenu: 'Navigation menu',
+  },
   footer: {
     termsAndPolicy: 'Terms & Policy',
     privacyPolicy: 'Privacy Policy',

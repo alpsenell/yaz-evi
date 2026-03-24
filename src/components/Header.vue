@@ -1,15 +1,19 @@
 <script setup lang="ts">
+  import { useTranslation } from 'i18next-vue';
   import YazIcon from "./atoms/YazIcon.vue";
 
+  const { t } = useTranslation();
   const emit = defineEmits(['toggleMobileMenu']);
 </script>
 
 <template>
   <header class="header fixed bg-transparent top-0 items-center flex z-10 transition-transform duration-500 w-full">
     <div class="header__inner mt-8 flex justify-between md:justify-start gap-10 mx-auto w-[90%]">
-      <div
-        class="block relative w-10 flex-column cursor-pointer top-4"
+      <button
+        type="button"
+        class="block relative w-10 flex-column cursor-pointer top-4 bg-transparent border-none p-0 h-10"
         :class="{ 'header__mobile-menu-open': false }"
+        :aria-label="t('accessibility.openMenu')"
         @click="emit('toggleMobileMenu')"
       >
         <span
@@ -18,9 +22,9 @@
           class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-2 origin-left"></span>
         <span
           class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-4 origin-left"></span>
-      </div>
+      </button>
 
-      <router-link to="/">
+      <router-link to="/" :aria-label="t('accessibility.goHome')">
         <YazIcon
           name="yaz-evi"
           color="white"

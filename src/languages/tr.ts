@@ -219,6 +219,12 @@ export default {
     termsRequired: 'Rezervasyon koşullarını ve iptal politikasını kabul etmelisiniz.',
   },
   instagramContactNote: 'Her türlü sorunuz için bizimle iletişime geçin:',
+  accessibility: {
+    openMenu: 'Menüyü aç',
+    closeMenu: 'Menüyü kapat',
+    goHome: 'Ana sayfaya git',
+    navigationMenu: 'Navigasyon menüsü',
+  },
   footer: {
     termsAndPolicy: 'Koşullar ve Politika',
     privacyPolicy: 'Gizlilik Sözleşmesi',
