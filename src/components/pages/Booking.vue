@@ -7,6 +7,7 @@ import i18next from "i18next";
 import { DatePicker as VCalendarDatePicker } from "v-calendar";
 
 import { ROOMS } from "../../enums/global.ts";
+import { ROOMS_V1 } from "../../data/rooms";
 import { useBookings } from "../../composables/useBookings.ts";
 import { useRoomPrices } from "../../composables/useRoomPrices.ts";
 import type { Room } from "../../types/booking.ts";
@@ -14,7 +15,12 @@ import type { Room } from "../../types/booking.ts";
 import YazButton from "../atoms/YazButton.vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import Loader from "../atoms/Loader.vue";
+import HotelImage from "../atoms/HotelImage.vue";
+import Eyebrow from "../atoms/Eyebrow.vue";
 import { getMediaUrl } from '../../utils/media';
+
+const editorialFor = (id: string | number) => ROOMS_V1.find(r => r.id === Number(id));
+const editorialLang = computed<'tr' | 'en'>(() => (i18next.language?.startsWith('tr') ? 'tr' : 'en'));
 
 const route = useRoute();
 const router = useRouter();
@@ -137,56 +143,48 @@ const goToCheckout = () => {
 </script>
 
 <template>
-  <section class="booking min-h-screen">
-    <!-- Hero banner -->
-    <div class="relative h-48 md:h-64 overflow-hidden">
-      <img
-        class="w-full h-full object-cover object-center"
-        :src="getMediaUrl('home-gallery/gallery_left_1.jpg')"
-        alt="Yaz Evi Bozcaada rezervasyon"
-      >
-      <div class="absolute inset-0 bg-secondaryDark/40 flex items-center justify-center">
-        <h1 class="text-3xl md:text-4xl font-raleway font-light text-white tracking-wide">
-          {{ $t('bookNow') }}
+  <section class="booking min-h-screen bg-cream text-ink">
+    <!-- Editorial hero -->
+    <div class="px-6 md:px-16 pt-12 md:pt-20 pb-10 md:pb-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-20 items-end">
+        <h1
+          class="md:col-span-7 font-display font-light leading-[0.95] m-0"
+          style="font-size: clamp(48px, 7vw, 96px); letter-spacing: -0.02em;"
+        >
+          <span class="italic text-peach">{{ $t('bookNow') }}</span>
         </h1>
+        <p class="md:col-span-5 text-[15px] md:text-[16px] leading-[1.7] opacity-80 m-0 font-raleway font-light">
+          {{ $t('booking.heroLede') }}
+        </p>
       </div>
     </div>
 
-    <!-- Steps indicator -->
-    <div class="max-w-screen-xl mx-auto px-4 py-6">
-      <div class="flex items-center justify-center gap-2 md:gap-4 mb-8">
+    <!-- Editorial steps indicator -->
+    <div class="px-6 md:px-16">
+      <div class="grid grid-cols-3 gap-4 md:gap-8 border-t border-ink/20 py-6 md:py-8">
         <div
-          v-for="(step, index) in [
+          v-for="(step) in [
             { num: 1, label: $t('booking.stepRoom') },
             { num: 2, label: $t('booking.stepDates') },
             { num: 3, label: $t('booking.stepSummary') },
           ]"
           :key="step.num"
-          class="flex items-center gap-2 md:gap-4"
+          class="flex items-baseline gap-3"
+          :class="currentStep === step.num ? 'opacity-100' : (currentStep > step.num ? 'opacity-60' : 'opacity-35')"
         >
-          <div class="flex items-center gap-2">
-            <div
-              class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-montserrat transition-colors"
-              :class="currentStep >= step.num
-                ? 'bg-primary text-white'
-                : 'bg-gray-200 text-gray-500'"
-            >
-              {{ step.num }}
-            </div>
-            <span
-              class="hidden md:block font-raleway text-sm transition-colors"
-              :class="currentStep >= step.num ? 'text-primary' : 'text-gray-400'"
-            >
-              {{ step.label }}
-            </span>
-          </div>
-          <div
-            v-if="index < 2"
-            class="w-8 md:w-16 h-[1px] transition-colors"
-            :class="currentStep > step.num ? 'bg-primary' : 'bg-gray-200'"
-          ></div>
+          <span class="font-mono text-[11px] tracking-nav">0{{ step.num }}</span>
+          <span class="text-[11px] md:text-[12px] tracking-widest3 uppercase font-raleway"
+            :class="currentStep === step.num ? 'font-semibold' : 'font-medium'">
+            {{ step.label }}
+          </span>
+          <span v-if="currentStep > step.num" class="text-peach text-[14px]">✓</span>
+          <span class="flex-1 h-px ml-2"
+            :class="currentStep === step.num ? 'bg-ink' : (currentStep > step.num ? 'bg-peach' : 'bg-ink/20')"></span>
         </div>
       </div>
+    </div>
+
+    <div class="max-w-screen-xl mx-auto px-4 py-6">
 
       <!-- Instagram contact note -->
       <p class="text-center font-raleway text-sm text-primary mb-6">
@@ -211,243 +209,212 @@ const goToCheckout = () => {
 
       <template v-else>
         <!-- STEP 1: Room Selection -->
-        <div v-if="currentStep === 1">
-          <p class="font-raleway text-lg text-primary mb-6 text-center">
+        <div v-if="currentStep === 1" class="px-2 md:px-16">
+          <p class="font-raleway text-[15px] md:text-[16px] opacity-80 mb-10 md:mb-12">
             {{ $t('booking.chooseRoom') }}
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="flex flex-col gap-4">
             <div
-              v-for="room in ROOMS"
+              v-for="(room, idx) in ROOMS"
               :key="room.id"
               tabindex="0"
               role="button"
               :aria-label="$t(room.title)"
-              class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-              :class="selectedRoom?.id === room.id ? 'ring-2 ring-primary' : ''"
+              class="booking-room-card cursor-pointer border rounded-[4px] p-4 md:p-6 grid grid-cols-1 md:grid-cols-[200px_1fr_auto] gap-4 md:gap-8 items-center transition-colors focus-visible:outline-none"
+              :class="selectedRoom?.id === room.id ? 'border-ink bg-peach/[0.08]' : 'border-ink/15 hover:border-ink/40'"
               @click="selectRoom(room)"
               @keydown.enter="selectRoom(room)"
               @keydown.space.prevent="selectRoom(room)"
             >
-              <!-- Room image -->
-              <div class="relative h-56 overflow-hidden">
-                <img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  :src="getMediaUrl(room.image)"
-                  :alt="$t(room.title)"
-                  loading="lazy"
-                >
-                <div
-                  v-if="formattedPricePerNight && getPrice(room.id)"
-                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1"
-                >
-                  <p class="font-montserrat text-sm font-bold text-secondaryDark">
-                    {{ new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(getPrice(room.id)!) }}
-                  </p>
-                  <p class="font-raleway text-[10px] text-primary text-right">/ {{ $t('booking.perNight') }}</p>
+              <HotelImage
+                :src="editorialFor(room.id)?.photos?.[0] || room.image"
+                :alt="$t(room.title)"
+                class="h-[180px] md:h-[140px]"
+              />
+
+              <div>
+                <div class="text-[10px] tracking-widest3 uppercase opacity-50 font-mono mb-1">0{{ idx + 1 }} / 05</div>
+                <h3 class="font-display font-light text-[28px] md:text-[36px] leading-none mb-2 m-0">
+                  {{ editorialFor(room.id) ? (editorialLang === 'tr' ? editorialFor(room.id)!.nameTr : editorialFor(room.id)!.nameEn) : $t(room.title) }}
+                </h3>
+                <div v-if="editorialFor(room.id)" class="font-display italic text-muted text-[14px] md:text-[16px] mb-3">
+                  {{ editorialLang === 'tr' ? editorialFor(room.id)!.subTr : editorialFor(room.id)!.subEn }}
+                </div>
+                <div class="text-[11px] tracking-nav uppercase opacity-60 flex flex-wrap gap-x-4 gap-y-1">
+                  <span>{{ room.bookingInformation.guestNumber }} {{ editorialLang === 'tr' ? 'kişi' : 'guests' }}</span>
+                  <span class="opacity-40">·</span>
+                  <span>{{ room.bookingInformation.size }} m²</span>
+                  <span v-if="editorialFor(room.id)" class="opacity-40">·</span>
+                  <span v-if="editorialFor(room.id)">{{ editorialFor(room.id)!.view[editorialLang] }}</span>
                 </div>
               </div>
 
-              <!-- Room info -->
-              <div class="p-4 bg-white">
-                <h3 class="font-raleway text-lg font-medium text-secondaryDark mb-2">
-                  {{ $t(room.title) }}
-                </h3>
-
-                <div class="flex flex-wrap gap-3 text-sm text-primary mb-3">
-                  <div class="flex items-center gap-1">
-                    <YazIcon name="person" :size="18" />
-                    <span class="font-raleway">{{ room.bookingInformation.guestNumber }}</span>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <YazIcon name="bed" :size="18" />
-                    <span class="font-raleway">
-                      {{ room.bookingInformation.sleeps.map(s => $t(`roomInformation.${s}`)).join(' & ') }}
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <span class="font-raleway">{{ room.bookingInformation.size }}m²</span>
-                  </div>
+              <div class="text-left md:text-right">
+                <div v-if="getPrice(room.id)" class="text-[10px] tracking-widest3 uppercase opacity-55 mb-1">
+                  {{ editorialLang === 'tr' ? 'Gecelik' : 'From' }}
                 </div>
-
-                <p class="font-raleway text-xs text-primary line-clamp-2">
-                  {{ $t(room.description) }}
-                </p>
+                <div v-if="getPrice(room.id)" class="font-display italic text-[24px] md:text-[28px] mb-4">
+                  {{ new Intl.NumberFormat(editorialLang === 'tr' ? 'tr-TR' : 'en-US', { style: 'currency', currency: 'TRY' }).format(getPrice(room.id)!) }}
+                </div>
+                <div
+                  class="inline-block px-5 py-2.5 rounded-full text-[11px] tracking-nav uppercase font-semibold border transition-colors"
+                  :class="selectedRoom?.id === room.id ? 'bg-ink text-cream border-ink' : 'border-ink text-ink'"
+                >
+                  {{ selectedRoom?.id === room.id
+                    ? (editorialLang === 'tr' ? 'Seçildi ✓' : 'Selected ✓')
+                    : (editorialLang === 'tr' ? 'Seç' : 'Select') }} →
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- STEP 2: Date Selection (room is chosen) -->
-        <div v-if="currentStep === 2">
+        <div v-if="currentStep === 2" class="px-2 md:px-16">
           <!-- Selected room summary bar -->
-          <div class="flex items-center gap-4 mb-6 p-4 bg-white rounded-xl shadow-sm">
-            <img
-              class="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover"
-              :src="getMediaUrl(selectedRoom!.image)"
+          <div class="grid grid-cols-[80px_1fr_auto] gap-4 md:gap-6 items-center mb-10 py-4 border-y border-ink/15">
+            <HotelImage
+              :src="editorialFor(selectedRoom!.id)?.photos?.[0] || selectedRoom!.image"
               :alt="$t(selectedRoom!.title)"
-            >
-            <div class="flex-1">
-              <h3 class="font-raleway font-medium text-lg text-secondaryDark">
-                {{ $t(selectedRoom!.title) }}
+              class="h-[80px]"
+            />
+            <div>
+              <div class="text-[10px] tracking-widest3 uppercase opacity-55 mb-1">
+                {{ editorialLang === 'tr' ? 'Seçilen oda' : 'Selected room' }}
+              </div>
+              <h3 class="font-display italic text-[22px] md:text-[26px] leading-none m-0">
+                {{ editorialFor(selectedRoom!.id) ? (editorialLang === 'tr' ? editorialFor(selectedRoom!.id)!.nameTr : editorialFor(selectedRoom!.id)!.nameEn) : $t(selectedRoom!.title) }}
               </h3>
-              <p class="font-raleway text-sm text-primary">
+              <p class="text-[11px] tracking-nav uppercase opacity-60 mt-2 m-0">
                 {{ selectedRoom!.bookingInformation.size }}m² · {{ selectedRoom!.bookingInformation.sleeps.map(s => $t(`roomInformation.${s}`)).join(' & ') }}
               </p>
             </div>
             <button
+              type="button"
               @click="changeRoom"
-              class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors"
+              class="text-[11px] tracking-nav uppercase font-medium border-b border-ink pb-1 bg-transparent border-x-0 border-t-0 cursor-pointer text-ink"
             >
               {{ $t('booking.changeRoom') }}
             </button>
           </div>
 
-          <p class="font-raleway text-lg text-primary mb-4 text-center">
-            {{ $t('booking.chooseDates') }}
-          </p>
-
-          <!-- Legend -->
-          <div class="flex items-center justify-center gap-6 mb-4">
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 rounded bg-red-100 border border-red-300"></div>
-              <span class="font-raleway text-xs text-primary">{{ $t('calendar.dateBooked') }}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 rounded bg-blue-100 border border-blue-300"></div>
-              <span class="font-raleway text-xs text-primary">{{ $t('booking.yourSelection') }}</span>
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end mb-8">
+            <h2 class="md:col-span-7 font-display font-light m-0" style="font-size: clamp(36px, 5vw, 64px); line-height: 0.95; letter-spacing: -0.02em;">
+              <span class="italic text-peach">{{ $t('booking.chooseDates') }}</span>
+            </h2>
+            <div class="md:col-span-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] tracking-nav uppercase opacity-70">
+              <div class="flex items-center gap-2">
+                <span class="inline-block w-3 h-3 rounded-full" style="background: rgba(250,170,141,0.3); border: 1px solid #FAAA8D;"></span>
+                <span>{{ $t('booking.yourSelection') }}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-block w-3 h-3 rounded-full bg-ink/20 border border-ink/40"></span>
+                <span>{{ $t('calendar.dateBooked') }}</span>
+              </div>
             </div>
           </div>
 
-          <!-- Inline calendar -->
-          <div class="flex justify-center">
-            <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 w-fit">
-              <VCalendarDatePicker
-                :key="calendarKey"
-                :columns="calendarColumns"
-                :min-date="today"
-                :disabled-dates="disabledDates"
-                :attributes="calendarAttributes"
-                is-range
-                :first-day-of-week="2"
-                @update:model-value="handleDateChange"
-              />
+          <!-- Editorial calendar wrapper -->
+          <div class="booking-calendar bg-cream rounded-[4px] py-4 md:py-6 px-2 md:px-4 border border-ink/15">
+            <VCalendarDatePicker
+              :key="calendarKey"
+              :columns="calendarColumns"
+              :min-date="today"
+              :disabled-dates="disabledDates"
+              :attributes="calendarAttributes"
+              is-range
+              :first-day-of-week="2"
+              @update:model-value="handleDateChange"
+            />
 
-              <!-- Guest count under calendar -->
-              <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                <span class="font-raleway text-sm text-primary">{{ $t('guests') }}</span>
-                <div class="flex items-center gap-3">
-                  <button
-                    @click="guestNumber = Math.max(1, guestNumber - 1)"
-                    class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                  >
-                    -
-                  </button>
-                  <span class="font-montserrat text-sm w-4 text-center">{{ guestNumber }}</span>
-                  <button
-                    @click="guestNumber = Math.min(selectedRoom!.bookingInformation.guestNumber, guestNumber + 1)"
-                    class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                  >
-                    +
-                  </button>
-                </div>
+            <!-- Guest count under calendar -->
+            <div class="flex items-center justify-between mt-6 pt-6 border-t border-ink/15 px-2 md:px-4">
+              <span class="text-[11px] tracking-widest3 uppercase opacity-55 font-semibold">{{ $t('guests') }}</span>
+              <div class="flex items-center gap-4">
+                <button
+                  type="button"
+                  @click="guestNumber = Math.max(1, guestNumber - 1)"
+                  class="w-9 h-9 rounded-full border border-ink/40 flex items-center justify-center hover:border-ink transition-colors bg-transparent cursor-pointer text-ink text-[16px] leading-none"
+                >−</button>
+                <span class="font-display italic text-[24px] w-6 text-center">{{ guestNumber }}</span>
+                <button
+                  type="button"
+                  @click="guestNumber = Math.min(selectedRoom!.bookingInformation.guestNumber, guestNumber + 1)"
+                  class="w-9 h-9 rounded-full border border-ink/40 flex items-center justify-center hover:border-ink transition-colors bg-transparent cursor-pointer text-ink text-[16px] leading-none"
+                >+</button>
               </div>
             </div>
           </div>
         </div>
 
         <!-- STEP 3: Summary (room + dates chosen) -->
-        <div v-if="currentStep === 3" class="pb-20 md:pb-0">
-          <div class="max-w-xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <!-- Room image -->
-              <div class="relative h-48 md:h-64">
-                <img
-                  class="w-full h-full object-cover"
-                  :src="getMediaUrl(selectedRoom!.image)"
-                  :alt="$t(selectedRoom!.title)"
-                >
+        <div v-if="currentStep === 3" class="pb-24 md:pb-12 px-2 md:px-16">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
+            <!-- Left: Recap -->
+            <div class="md:col-span-7">
+              <Eyebrow class="mb-6">{{ editorialLang === 'tr' ? 'Özet' : 'Summary' }}</Eyebrow>
+              <h2 class="font-display font-light m-0" style="font-size: clamp(48px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.02em;">
+                <span class="italic">{{ editorialFor(selectedRoom!.id) ? (editorialLang === 'tr' ? editorialFor(selectedRoom!.id)!.nameTr : editorialFor(selectedRoom!.id)!.nameEn) : $t(selectedRoom!.title) }}</span>
+              </h2>
+              <p v-if="editorialFor(selectedRoom!.id)" class="font-display italic text-muted text-[20px] md:text-[24px] mt-4 mb-10">
+                {{ editorialLang === 'tr' ? editorialFor(selectedRoom!.id)!.subTr : editorialFor(selectedRoom!.id)!.subEn }}
+              </p>
+
+              <div class="border-t border-ink/15 py-5 flex justify-between items-baseline gap-6">
+                <span class="text-[11px] tracking-widest3 uppercase opacity-55">{{ $t('checkout.checkIn') }}</span>
+                <span class="font-display italic text-[20px] md:text-[24px]">{{ formatDate(selectedDates.start) }}</span>
+              </div>
+              <div class="border-t border-ink/15 py-5 flex justify-between items-baseline gap-6">
+                <span class="text-[11px] tracking-widest3 uppercase opacity-55">{{ $t('checkout.checkOut') }}</span>
+                <span class="font-display italic text-[20px] md:text-[24px]">{{ formatDate(selectedDates.end) }}</span>
+              </div>
+              <div class="border-t border-ink/15 py-5 flex justify-between items-baseline gap-6">
+                <span class="text-[11px] tracking-widest3 uppercase opacity-55">{{ $t('nights') }}</span>
+                <span class="font-display italic text-[20px] md:text-[24px]">{{ nights }}</span>
+              </div>
+              <div class="border-t border-ink/15 py-5 flex justify-between items-baseline gap-6">
+                <span class="text-[11px] tracking-widest3 uppercase opacity-55">{{ $t('guests') }}</span>
+                <span class="font-display italic text-[20px] md:text-[24px]">{{ guestNumber }}</span>
               </div>
 
-              <div class="p-6 flex flex-col gap-4">
-                <div class="flex items-start justify-between">
-                  <div>
-                    <h3 class="font-raleway font-medium text-xl text-secondaryDark">
-                      {{ $t(selectedRoom!.title) }}
-                    </h3>
-                    <p class="font-raleway text-sm text-primary mt-1">
-                      {{ selectedRoom!.bookingInformation.size }}m² · {{ selectedRoom!.bookingInformation.sleeps.map(s => $t(`roomInformation.${s}`)).join(' & ') }}
-                    </p>
-                  </div>
-                  <button
-                    @click="changeRoom"
-                    class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors shrink-0"
-                  >
-                    {{ $t('booking.changeRoom') }}
-                  </button>
-                </div>
-
-                <span class="h-[0.5px] bg-gray-200"></span>
-
-                <!-- Dates -->
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('checkout.checkIn') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ formatDate(selectedDates.start) }}</p>
-                  </div>
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('checkout.checkOut') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ formatDate(selectedDates.end) }}</p>
-                  </div>
-                </div>
-
-                <div class="flex gap-4">
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('nights') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ nights }}</p>
-                  </div>
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('guests') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ guestNumber }}</p>
-                  </div>
-                </div>
-
+              <div class="flex flex-wrap gap-x-8 gap-y-2 mt-8">
                 <button
+                  type="button"
+                  @click="changeRoom"
+                  class="text-[11px] tracking-nav uppercase font-medium border-b border-ink pb-1 bg-transparent border-x-0 border-t-0 cursor-pointer text-ink"
+                >{{ $t('booking.changeRoom') }}</button>
+                <button
+                  type="button"
                   @click="selectedDates = { start: null, end: null }"
-                  class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors w-fit"
-                >
-                  {{ $t('booking.changeDates') }}
-                </button>
+                  class="text-[11px] tracking-nav uppercase font-medium border-b border-ink pb-1 bg-transparent border-x-0 border-t-0 cursor-pointer text-ink"
+                >{{ $t('booking.changeDates') }}</button>
+              </div>
+            </div>
 
-                <span class="h-[0.5px] bg-gray-200"></span>
-
-                <!-- Price -->
-                <div class="flex flex-col gap-2">
-                  <div
-                    v-if="formattedPricePerNight"
-                    class="flex justify-between"
-                  >
-                    <p class="font-raleway text-sm text-primary">
-                      {{ formattedPricePerNight }} x {{ nights }} {{ $t('nights') }}
-                    </p>
-                    <p class="font-montserrat text-sm text-secondaryDark">{{ totalPrice }}</p>
-                  </div>
-
-                  <div
-                    v-if="totalPrice"
-                    class="flex justify-between pt-2 border-t border-gray-100"
-                  >
-                    <p class="font-raleway font-bold text-base text-secondaryDark">{{ $t('totalPrice') }}</p>
-                    <p class="font-montserrat font-bold text-base text-secondaryDark">{{ totalPrice }}</p>
-                  </div>
+            <!-- Right: Dark booking card -->
+            <div class="md:col-span-5">
+              <div class="bg-ink text-cream rounded-[4px] p-8 md:p-10 md:sticky md:top-8">
+                <div class="text-[11px] tracking-widest3 uppercase opacity-70 mb-4">
+                  {{ formattedPricePerNight }} × {{ nights }} {{ $t('nights') }}
                 </div>
-
-                <YazButton
-                  :label="$t('bookNow')"
-                  type="primary"
-                  class="w-full mt-2 hidden md:flex"
-                  @click="goToCheckout"
+                <HotelImage
+                  :src="editorialFor(selectedRoom!.id)?.photos?.[0] || selectedRoom!.image"
+                  :alt="$t(selectedRoom!.title)"
+                  class="h-[180px] mb-8"
                 />
+                <div class="h-px bg-cream/15 mb-6"></div>
+                <div class="flex justify-between items-baseline mb-8">
+                  <span class="text-[11px] tracking-widest3 uppercase">{{ $t('totalPrice') }}</span>
+                  <span class="font-display italic text-peach" style="font-size: clamp(36px, 4vw, 48px); letter-spacing: -0.02em;">{{ totalPrice }}</span>
+                </div>
+                <button
+                  type="button"
+                  @click="goToCheckout"
+                  class="hidden md:block w-full px-8 py-5 bg-peach text-ink rounded-full text-[12px] tracking-nav uppercase font-semibold border-none cursor-pointer"
+                >
+                  {{ $t('bookNow') }} →
+                </button>
               </div>
             </div>
           </div>
@@ -458,17 +425,99 @@ const goToCheckout = () => {
     <!-- Mobile sticky footer for step 3 -->
     <div
       v-if="currentStep === 3 && selectedRoom"
-      class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-10 flex items-center justify-between"
+      class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-ink text-cream border-t border-ink z-10 flex items-center justify-between gap-4"
     >
       <div>
-        <p class="font-montserrat text-sm font-bold text-secondaryDark">{{ totalPrice }}</p>
-        <p class="font-raleway text-xs text-primary">{{ nights }} {{ $t('nights') }}</p>
+        <p class="font-display italic text-peach text-[22px] m-0 leading-none">{{ totalPrice }}</p>
+        <p class="text-[11px] tracking-nav uppercase opacity-70 mt-1 m-0">{{ nights }} {{ $t('nights') }}</p>
       </div>
-      <YazButton
-        :label="$t('bookNow')"
-        type="primary"
+      <button
+        type="button"
         @click="goToCheckout"
-      />
+        class="px-6 py-3 bg-peach text-ink rounded-full text-[11px] tracking-nav uppercase font-semibold border-none cursor-pointer"
+      >
+        {{ $t('bookNow') }} →
+      </button>
     </div>
   </section>
 </template>
+
+<style lang="scss">
+/* v-calendar editorial overrides */
+.booking-calendar {
+  .vc-container {
+    --vc-bg: transparent;
+    --vc-border: transparent;
+    background: transparent;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+    color: #1F1614;
+  }
+  .vc-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .vc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    color: #1F1614;
+    background: none;
+  }
+  .vc-arrow {
+    background: none;
+    color: #1F1614;
+    border-radius: 9999px;
+    &:hover { background: rgba(31, 22, 20, 0.08); }
+  }
+  .vc-weekday {
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(31, 22, 20, 0.5);
+    font-weight: 600;
+    padding-bottom: 8px;
+  }
+  .vc-day-content {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+    color: #1F1614;
+    border-radius: 9999px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    &:hover {
+      background: rgba(250, 170, 141, 0.25);
+      color: #1F1614;
+    }
+    &:focus {
+      background: rgba(250, 170, 141, 0.4);
+    }
+  }
+  .vc-highlight {
+    background: rgba(250, 170, 141, 0.25);
+    border: none;
+    &.vc-highlight-base-start,
+    &.vc-highlight-base-end {
+      background: #1F1614;
+    }
+  }
+  .vc-highlight-bg-solid + .vc-day-content,
+  .vc-highlights .vc-day-content {
+    color: #1F1614;
+  }
+  .vc-day.is-disabled .vc-day-content {
+    color: rgba(31, 22, 20, 0.25);
+    text-decoration: line-through;
+  }
+  .vc-dot {
+    background: #FAAA8D;
+  }
+  .vc-popover-content {
+    background: #F5EFE4;
+    border: 1px solid rgba(31, 22, 20, 0.15);
+  }
+}
+</style>

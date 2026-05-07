@@ -1,107 +1,59 @@
 <script setup lang="ts">
-import { getMediaUrl } from '../../utils/media'
+import { computed } from 'vue';
+import { useTranslation } from 'i18next-vue';
+import LegalPage from '../organisms/LegalPage.vue';
+import LegalSection from '../organisms/LegalSection.vue';
+
+const { i18next } = useTranslation();
+const isTr = computed(() => i18next.language?.startsWith('tr'));
 </script>
 
 <template>
-  <section class="delivery-return min-h-screen">
-    <div class="relative h-48 md:h-56 overflow-hidden">
-      <img
-        class="w-full h-full object-cover object-center"
-        :src="getMediaUrl('home-gallery/gallery_left_1.jpg')"
-        alt="Yaz Evi Bozcaada"
-      >
-      <div class="absolute inset-0 bg-secondaryDark/40 flex items-center justify-center">
-        <h1 class="text-2xl md:text-4xl font-raleway font-light text-white tracking-wide text-center px-4">
-          {{ $t('deliveryAndReturn.title') }}
-        </h1>
-      </div>
-    </div>
+  <LegalPage
+    :eyebrow="$t('footer.deliveryAndReturn')"
+    :title="$t('deliveryAndReturn.title')"
+    :lede="isTr ? 'Hizmet teslimi, iade koşulları ve mücbir sebep durumlarına ilişkin koşullar.' : 'Service delivery, refund conditions, and force majeure terms.'"
+    :last-updated="$t('deliveryAndReturn.lastUpdated')"
+  >
+    <LegalSection index="01" :title="$t('deliveryAndReturn.serviceDeliveryTitle')">
+      <p class="m-0">{{ $t('deliveryAndReturn.serviceDeliveryContent') }}</p>
+    </LegalSection>
 
-    <div class="max-w-screen-md mx-auto px-4 py-12">
-      <!-- Service Delivery -->
-      <div class="mb-10">
-        <h2 class="font-raleway text-xl font-medium text-secondaryDark mb-3">
-          {{ $t('deliveryAndReturn.serviceDeliveryTitle') }}
-        </h2>
-        <p class="font-raleway text-sm text-primary leading-relaxed">
-          {{ $t('deliveryAndReturn.serviceDeliveryContent') }}
-        </p>
-      </div>
+    <LegalSection index="02" :title="$t('deliveryAndReturn.checkInOutTitle')">
+      <p class="m-0">{{ $t('deliveryAndReturn.checkInOutContent') }}</p>
+    </LegalSection>
 
-      <!-- Check-in / Check-out -->
-      <div class="mb-10">
-        <h2 class="font-raleway text-xl font-medium text-secondaryDark mb-3">
-          {{ $t('deliveryAndReturn.checkInOutTitle') }}
-        </h2>
-        <p class="font-raleway text-sm text-primary leading-relaxed">
-          {{ $t('deliveryAndReturn.checkInOutContent') }}
-        </p>
-      </div>
+    <LegalSection index="03" :title="$t('deliveryAndReturn.refundTitle')">
+      <ul class="list-none m-0 p-0">
+        <li class="flex items-start gap-4 py-3 border-t border-ink/10 first:border-t-0">
+          <span class="font-display italic text-peach mt-1 leading-none" style="font-size: 22px;">·</span>
+          <p class="m-0">{{ $t('deliveryAndReturn.refundFree') }}</p>
+        </li>
+        <li class="flex items-start gap-4 py-3 border-t border-ink/10">
+          <span class="font-display italic text-peach mt-1 leading-none" style="font-size: 22px;">·</span>
+          <p class="m-0">{{ $t('deliveryAndReturn.refundPartial') }}</p>
+        </li>
+        <li class="flex items-start gap-4 py-3 border-t border-ink/10">
+          <span class="font-display italic text-peach mt-1 leading-none" style="font-size: 22px;">·</span>
+          <p class="m-0">{{ $t('deliveryAndReturn.refundLate') }}</p>
+        </li>
+      </ul>
+    </LegalSection>
 
-      <!-- Refund Policy -->
-      <div class="mb-10">
-        <h2 class="font-raleway text-xl font-medium text-secondaryDark mb-3">
-          {{ $t('deliveryAndReturn.refundTitle') }}
-        </h2>
-        <ul class="flex flex-col gap-3">
-          <li class="flex items-start gap-2">
-            <span class="w-2 h-2 rounded-full bg-green-500 mt-1.5 shrink-0"></span>
-            <p class="font-raleway text-sm text-primary leading-relaxed">
-              {{ $t('deliveryAndReturn.refundFree') }}
-            </p>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="w-2 h-2 rounded-full bg-yellow-500 mt-1.5 shrink-0"></span>
-            <p class="font-raleway text-sm text-primary leading-relaxed">
-              {{ $t('deliveryAndReturn.refundPartial') }}
-            </p>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0"></span>
-            <p class="font-raleway text-sm text-primary leading-relaxed">
-              {{ $t('deliveryAndReturn.refundLate') }}
-            </p>
-          </li>
-        </ul>
-      </div>
+    <LegalSection index="04" :title="$t('deliveryAndReturn.refundProcessTitle')">
+      <p class="m-0">{{ $t('deliveryAndReturn.refundProcessContent') }}</p>
+    </LegalSection>
 
-      <!-- Refund Process -->
-      <div class="mb-10">
-        <h2 class="font-raleway text-xl font-medium text-secondaryDark mb-3">
-          {{ $t('deliveryAndReturn.refundProcessTitle') }}
-        </h2>
-        <p class="font-raleway text-sm text-primary leading-relaxed">
-          {{ $t('deliveryAndReturn.refundProcessContent') }}
-        </p>
-      </div>
+    <LegalSection index="05" :title="$t('deliveryAndReturn.forceMajeureTitle')">
+      <p class="m-0">{{ $t('deliveryAndReturn.forceMajeureContent') }}</p>
+    </LegalSection>
 
-      <!-- Force Majeure -->
-      <div class="mb-10">
-        <h2 class="font-raleway text-xl font-medium text-secondaryDark mb-3">
-          {{ $t('deliveryAndReturn.forceMajeureTitle') }}
-        </h2>
-        <p class="font-raleway text-sm text-primary leading-relaxed">
-          {{ $t('deliveryAndReturn.forceMajeureContent') }}
-        </p>
+    <LegalSection index="06" :title="$t('deliveryAndReturn.contactTitle')">
+      <p class="mb-4">{{ $t('deliveryAndReturn.contactContent') }}</p>
+      <div class="flex flex-col gap-1">
+        <a href="mailto:info@yaz-evi.com" class="font-display italic text-[20px] md:text-[22px] text-ink no-underline w-fit">info@yaz-evi.com</a>
+        <a href="tel:+905324316734" class="font-display italic text-[20px] md:text-[22px] text-ink no-underline w-fit">0532 431 67 34</a>
       </div>
-
-      <!-- Contact -->
-      <div class="mb-10">
-        <h2 class="font-raleway text-xl font-medium text-secondaryDark mb-3">
-          {{ $t('deliveryAndReturn.contactTitle') }}
-        </h2>
-        <p class="font-raleway text-sm text-primary leading-relaxed mb-2">
-          {{ $t('deliveryAndReturn.contactContent') }}
-        </p>
-        <div class="flex flex-col gap-1 font-raleway text-sm text-primary">
-          <a href="mailto:info@yaz-evi.com" class="underline hover:text-secondaryDark w-fit">info@yaz-evi.com</a>
-          <a href="tel:+905324316734" class="underline hover:text-secondaryDark w-fit">0532 431 67 34</a>
-        </div>
-      </div>
-
-      <p class="font-raleway text-xs text-gray-400">
-        {{ $t('deliveryAndReturn.lastUpdated') }}
-      </p>
-    </div>
-  </section>
+    </LegalSection>
+  </LegalPage>
 </template>
