@@ -127,15 +127,14 @@ const formattedDates = computed(() => {
     <div
       v-if="available"
       class="booking-card__footer flex flex-col px-4 pb-4">
-      <p class="text-md font-raleway font-medium">
-        {{ $t('allInclusive') }}
-      </p>
-
-      <div class="flex justify-end gap-4">
+      <div class="flex justify-end items-center gap-4">
         <div class="flex flex-col items-end gap-2">
-          <p class="font-raleway text-md font-bold">
-            ₺ {{ room.bookingInformation.price }}
-          </p>
+          <router-link
+            to="/contact"
+            class="font-raleway text-md font-bold underline hover:text-secondaryDark transition-colors"
+          >
+            {{ $t('getInTouch') }}
+          </router-link>
 
           <p class="font-raleway text-xs text-primary">
             {{ nightNumber }} {{ $t('nights') }}, {{ guestNumber }} {{ $t('guests') }}

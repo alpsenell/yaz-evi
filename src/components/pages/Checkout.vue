@@ -16,6 +16,10 @@ const router = useRouter()
 const { t } = useTranslation()
 const { getState } = useBookingState()
 
+// Online payment is temporarily disabled until the payment provider is configured.
+// While false, guests are directed to /contact instead of the iyzipay checkout.
+const paymentEnabled: boolean = false
+
 const bookingState = ref<CheckoutState | null>(null)
 const isSubmitting = ref(false)
 const submitError = ref('')
@@ -137,6 +141,11 @@ const handlePhoneInput = (event: Event) => {
 }
 
 const handleSubmit = async () => {
+  if (!paymentEnabled) {
+    router.push('/contact')
+    return
+  }
+
   submitAttempted.value = true
 
   if (!isFormValid.value || !bookingState.value) return
@@ -365,10 +374,10 @@ const handleSubmit = async () => {
             </div>
 
             <YazButton
-              :label="isSubmitting ? $t('checkout.processing') : $t('checkout.payNow')"
+              :label="$t('getInTouch')"
               type="primary"
+              href="/contact"
               class="w-fit"
-              :disabled="isSubmitting"
             />
           </form>
 
@@ -410,14 +419,14 @@ const handleSubmit = async () => {
 
             <span class="h-[0.5px] bg-primary"></span>
 
-            <div class="flex justify-between">
-              <p class="font-raleway text-sm">{{ $t('checkout.pricePerNight') }}</p>
-              <p class="font-montserrat text-sm">{{ formattedPricePerNight }}</p>
-            </div>
-
-            <div class="flex justify-between">
+            <div class="flex justify-between items-center">
               <p class="font-raleway font-bold text-base">{{ $t('totalPrice') }}</p>
-              <p class="font-montserrat font-bold text-base">{{ formattedTotal }}</p>
+              <router-link
+                to="/contact"
+                class="font-raleway font-bold text-base underline hover:text-secondaryDark transition-colors"
+              >
+                {{ $t('getInTouch') }}
+              </router-link>
             </div>
           </div>
         </div>

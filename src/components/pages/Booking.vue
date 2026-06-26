@@ -238,13 +238,11 @@ const goToCheckout = () => {
                   loading="lazy"
                 >
                 <div
-                  v-if="formattedPricePerNight && getPrice(room.id)"
                   class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1"
                 >
-                  <p class="font-montserrat text-sm font-bold text-secondaryDark">
-                    {{ new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(getPrice(room.id)!) }}
+                  <p class="font-raleway text-xs font-bold text-secondaryDark">
+                    {{ $t('getInTouch') }}
                   </p>
-                  <p class="font-raleway text-[10px] text-primary text-right">/ {{ $t('booking.perNight') }}</p>
                 </div>
               </div>
 
@@ -421,25 +419,15 @@ const goToCheckout = () => {
 
                 <span class="h-[0.5px] bg-gray-200"></span>
 
-                <!-- Price -->
-                <div class="flex flex-col gap-2">
-                  <div
-                    v-if="formattedPricePerNight"
-                    class="flex justify-between"
+                <!-- Pricing handled via contact while online payment is unavailable -->
+                <div class="flex items-center justify-between">
+                  <p class="font-raleway font-bold text-base text-secondaryDark">{{ $t('totalPrice') }}</p>
+                  <router-link
+                    to="/contact"
+                    class="font-raleway font-bold text-base text-secondaryDark underline hover:text-primary transition-colors"
                   >
-                    <p class="font-raleway text-sm text-primary">
-                      {{ formattedPricePerNight }} x {{ nights }} {{ $t('nights') }}
-                    </p>
-                    <p class="font-montserrat text-sm text-secondaryDark">{{ totalPrice }}</p>
-                  </div>
-
-                  <div
-                    v-if="totalPrice"
-                    class="flex justify-between pt-2 border-t border-gray-100"
-                  >
-                    <p class="font-raleway font-bold text-base text-secondaryDark">{{ $t('totalPrice') }}</p>
-                    <p class="font-montserrat font-bold text-base text-secondaryDark">{{ totalPrice }}</p>
-                  </div>
+                    {{ $t('getInTouch') }}
+                  </router-link>
                 </div>
 
                 <YazButton
@@ -461,7 +449,7 @@ const goToCheckout = () => {
       class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-10 flex items-center justify-between"
     >
       <div>
-        <p class="font-montserrat text-sm font-bold text-secondaryDark">{{ totalPrice }}</p>
+        <p class="font-raleway text-sm font-bold text-secondaryDark">{{ $t('getInTouch') }}</p>
         <p class="font-raleway text-xs text-primary">{{ nights }} {{ $t('nights') }}</p>
       </div>
       <YazButton
