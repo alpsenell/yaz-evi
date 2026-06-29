@@ -39,7 +39,7 @@ function updateMeta() {
     el.setAttribute('content', value)
   }
 
-  const pageUrl = `https://www.yazevi.com${route.path}`
+  const pageUrl = `https://www.yaz-evi.com${route.path}`
 
   setMeta('name', 'description', description.value)
   setMeta('name', 'robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')
@@ -50,12 +50,12 @@ function updateMeta() {
   setMeta('property', 'og:locale', currentLang.value === 'tr' ? 'tr_TR' : 'en_US')
   setMeta('property', 'og:type', 'website')
   setMeta('property', 'og:site_name', 'Yaz Evi Bozcaada')
-  setMeta('property', 'og:image', 'https://www.yazevi.com/og-image.jpg')
+  setMeta('property', 'og:image', 'https://www.yaz-evi.com/og-image.jpg')
   setMeta('property', 'og:image:alt', 'Yaz Evi Bozcaada Butik Otel')
   setMeta('name', 'twitter:card', 'summary_large_image')
   setMeta('name', 'twitter:title', title.value)
   setMeta('name', 'twitter:description', description.value)
-  setMeta('name', 'twitter:image', 'https://www.yazevi.com/og-image.jpg')
+  setMeta('name', 'twitter:image', 'https://www.yaz-evi.com/og-image.jpg')
 
   // Canonical URL
   setOrCreateLink('canonical', '', pageUrl)
