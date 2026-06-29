@@ -23,6 +23,8 @@ const onLoaded = () => {
         v-show="loaded"
         v-on:load="onLoaded"
         :alt="`Image of ${props.image}`"
+        loading="lazy"
+        decoding="async"
       />
     </transition>
   </div>

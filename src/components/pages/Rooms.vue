@@ -21,6 +21,7 @@ import SliderHero from "../organisms/SliderHero.vue";
         :description="$t(room.description)"
         :images="room.images"
         :room-slug="room.slug"
+        :priority="index === 0"
         size="half"
       />
     </div>

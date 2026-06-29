@@ -53,6 +53,7 @@ const classes = computed(() => {
     :class="`yaz-button__${type} ${classes}`"
     :href="href"
     target="_blank"
+    @click="emit('click')"
   >
     {{ label }}
   </a>
@@ -61,6 +62,7 @@ const classes = computed(() => {
     :to="href"
     class="yaz-button font-raleway font-extralight text-base px-4 py-3 relative overflow-hidden flex justify-between items-center gap-4 cursor-pointer"
     :class="`yaz-button__${type} ${classes}`"
+    @click="emit('click')"
   >
     {{ label }}
 

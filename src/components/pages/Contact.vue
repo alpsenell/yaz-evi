@@ -5,6 +5,7 @@ import HalfHero from "../organisms/HalfHero.vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import YazButton from "../atoms/YazButton.vue";
 import ContactInfos from "../organisms/ContactInfos.vue";
+import { trackEvent } from '../../utils/analytics';
 
 const formData = ref({
   name: '',
@@ -39,6 +40,7 @@ const sendEmail = async () => {
 
     if (result.status === 200) {
       submitSuccess.value = true;
+      trackEvent('contact_form_submitted');
       formData.value = { name: '', email: '', subject: '', message: '' };
     } else {
       throw new Error('Failed to send email');

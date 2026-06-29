@@ -15,6 +15,8 @@ import YazButton from "../atoms/YazButton.vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import Loader from "../atoms/Loader.vue";
 import { getMediaUrl } from '../../utils/media';
+import { trackEvent } from '../../utils/analytics';
+import { buildWhatsAppUrl, buildBookingWhatsAppText } from '../../utils/whatsapp';
 
 const route = useRoute();
 const router = useRouter();
@@ -97,11 +99,30 @@ today.setHours(0, 0, 0, 0);
 const calendarColumns = computed(() => (window.innerWidth < 768 ? 1 : 2));
 const calendarKey = ref(0);
 
+const whatsappHref = computed(() => {
+  if (!selectedRoom.value) return buildWhatsAppUrl(buildBookingWhatsAppText({}, selectedLanguage.value));
+  return buildWhatsAppUrl(
+    buildBookingWhatsAppText(
+      {
+        roomName: selectedRoom.value.name,
+        checkIn: selectedDates.value.start ? formatDate(selectedDates.value.start) : undefined,
+        checkOut: selectedDates.value.end ? formatDate(selectedDates.value.end) : undefined,
+        nights: nights.value,
+        guests: guestNumber.value,
+      },
+      selectedLanguage.value,
+    ),
+  );
+});
+
+const onWhatsAppClick = () => trackEvent('whatsapp_booking_clicked');
+
 const selectRoom = (room: Room) => {
   if (selectedRoom.value?.id === room.id) return;
   selectedRoom.value = room;
   selectedDates.value = { start: null, end: null };
   calendarKey.value++;
+  trackEvent('room_selected');
 };
 
 const changeRoom = () => {
@@ -113,6 +134,7 @@ const changeRoom = () => {
 const handleDateChange = (dates: { start: Date | null; end: Date | null }) => {
   if (dates && dates.start && dates.end) {
     selectedDates.value = dates;
+    trackEvent('booking_dates_selected');
   }
 };
 
@@ -132,6 +154,7 @@ const goToCheckout = () => {
   };
 
   sessionStorage.setItem('bookingState', JSON.stringify(state));
+  trackEvent('booking_proceed_to_checkout');
   router.push('/checkout');
 };
 </script>
@@ -144,6 +167,8 @@ const goToCheckout = () => {
         class="w-full h-full object-cover object-center"
         :src="getMediaUrl('home-gallery/gallery_left_1.jpg')"
         alt="Yaz Evi Bozcaada rezervasyon"
+        fetchpriority="high"
+        decoding="async"
       >
       <div class="absolute inset-0 bg-secondaryDark/40 flex items-center justify-center">
         <h1 class="text-3xl md:text-4xl font-raleway font-light text-white tracking-wide">
@@ -436,6 +461,17 @@ const goToCheckout = () => {
                   class="w-full mt-2 hidden md:flex"
                   @click="goToCheckout"
                 />
+
+                <a
+                  :href="whatsappHref"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-md border border-[#25D366] text-[#25D366] font-raleway transition-colors hover:bg-[#25D366] hover:text-white"
+                  @click="onWhatsAppClick"
+                >
+                  <YazIcon name="whatsapp" :size="20" color="currentColor" />
+                  {{ $t('whatsapp.askOnWhatsApp') }}
+                </a>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { Splide, SplideSlide, SplideTrack } from '@splidejs/vue-splide'
 
 import { ROOMS } from '../../enums/global'
 import { getMediaUrl } from '../../utils/media'
+import { trackEvent } from '../../utils/analytics'
 import YazButton from '../atoms/YazButton.vue'
 import YazIcon from '../atoms/YazIcon.vue'
 
@@ -72,6 +73,9 @@ if (typeof window !== 'undefined') {
               class="w-full h-full object-cover"
               :src="getMediaUrl(image)"
               :alt="`${$t(room.title)} - ${index + 1}`"
+              decoding="async"
+              :loading="index === 0 ? 'eager' : 'lazy'"
+              :fetchpriority="index === 0 ? 'high' : undefined"
             >
           </SplideSlide>
         </SplideTrack>
@@ -119,6 +123,7 @@ if (typeof window !== 'undefined') {
           type="primary"
           :href="`/booking?room=${room.slug}`"
           class="hidden md:flex"
+          @click="trackEvent('book_now_clicked')"
         />
       </div>
     </div>
@@ -171,6 +176,7 @@ if (typeof window !== 'undefined') {
               :src="getMediaUrl(image)"
               :alt="`${$t(room.title)} - ${index + 1}`"
               loading="lazy"
+              decoding="async"
             >
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
           </div>
@@ -184,6 +190,7 @@ if (typeof window !== 'undefined') {
           type="primary"
           :href="`/booking?room=${room.slug}`"
           class="mx-auto w-fit"
+          @click="trackEvent('book_now_clicked')"
         />
       </div>
 
@@ -205,6 +212,7 @@ if (typeof window !== 'undefined') {
                 :src="getMediaUrl(other.image)"
                 :alt="$t(other.title)"
                 loading="lazy"
+                decoding="async"
               >
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div class="absolute bottom-3 left-3">

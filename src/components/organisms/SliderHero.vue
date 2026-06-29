@@ -4,6 +4,7 @@ import { defineProps } from "vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import YazButton from "../atoms/YazButton.vue";
 import { getMediaUrl } from '../../utils/media';
+import { trackEvent } from '../../utils/analytics';
 
 defineProps({
   images: Array,
@@ -12,6 +13,7 @@ defineProps({
   title: String,
   description: String,
   roomSlug: String,
+  priority: Boolean,
 })
 </script>
 
@@ -37,6 +39,9 @@ defineProps({
               class="w-full h-full object-cover"
               :src="getMediaUrl(image)"
               :alt="`Image of ${title}-${index + 1}`"
+              decoding="async"
+              :loading="priority && index === 0 ? 'eager' : 'lazy'"
+              :fetchpriority="priority && index === 0 ? 'high' : undefined"
             />
           </SplideSlide>
         </SplideTrack>
@@ -64,7 +69,12 @@ defineProps({
       </p>
       <div class="flex gap-4">
         <YazButton :label="$t('details')" type="outlined" :href="`/room/${roomSlug}`" />
-        <YazButton :label="$t('reserve')" type="primary" :href="`/booking?room=${roomSlug}`" />
+        <YazButton
+          :label="$t('reserve')"
+          type="primary"
+          :href="`/booking?room=${roomSlug}`"
+          @click="trackEvent('book_now_clicked')"
+        />
       </div>
     </div>
   </section>

@@ -20,6 +20,7 @@ const props = defineProps<Props>()
       :src="getMediaUrl(props.image)"
       class="object-cover w-full h-full max-h-screen"
       loading="lazy"
+      decoding="async"
       :alt="props.title || 'Yaz Evi Bozcaada'"
     />
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

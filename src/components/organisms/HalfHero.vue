@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
       class="flex-1 object-cover w-full h-full max-h-screen"
       :class="props.imagePosition === 'left' ? '' : 'order-0 lg:order-1'"
       loading="lazy"
+      decoding="async"
       :alt="props.title || 'Yaz Evi Bozcaada'"
     />
     <div class="flex flex-1 flex-col gap-6 lg:gap-10 justify-center px-4 py-6 md:p-20">

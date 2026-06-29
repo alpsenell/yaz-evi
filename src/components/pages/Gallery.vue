@@ -164,6 +164,7 @@ onUnmounted(() => {
               class="w-full h-full object-cover"
               :src="getMediaUrl(image)"
               :alt="`${$t('galleryModal.imageAlt')} ${index + 1} ${$t('galleryModal.of')} ${GALLERY_IMAGES.length}`"
+              decoding="async"
             />
           </SplideSlide>
         </SplideTrack>

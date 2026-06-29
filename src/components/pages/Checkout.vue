@@ -11,6 +11,8 @@ import YazButton from '../atoms/YazButton.vue'
 import YazIcon from '../atoms/YazIcon.vue'
 import Loader from '../atoms/Loader.vue'
 import { getMediaUrl } from '../../utils/media'
+import { trackEvent } from '../../utils/analytics'
+import { buildWhatsAppUrl, buildBookingWhatsAppText } from '../../utils/whatsapp'
 
 const router = useRouter()
 const { t } = useTranslation()
@@ -25,6 +27,9 @@ const isSubmitting = ref(false)
 const submitError = ref('')
 const showPaymentForm = ref(false)
 const paymentFormContent = ref('')
+const requestSent = ref(false)
+// Honeypot — left empty by humans, filled by bots.
+const honeypot = ref('')
 
 const guestInfo = ref<GuestInfo>({
   name: '',
@@ -75,6 +80,25 @@ const formattedPricePerNight = computed(() => {
     currency: 'TRY',
   }).format(bookingState.value.pricePerNight)
 })
+
+const whatsappHref = computed(() => {
+  const s = bookingState.value
+  if (!s) return buildWhatsAppUrl(buildBookingWhatsAppText({}, selectedLanguage.value))
+  return buildWhatsAppUrl(
+    buildBookingWhatsAppText(
+      {
+        roomName: s.room.name,
+        checkIn: formatDate(s.checkIn),
+        checkOut: formatDate(s.checkOut),
+        nights: s.nights,
+        guests: s.guests,
+      },
+      selectedLanguage.value,
+    ),
+  )
+})
+
+const onWhatsAppClick = () => trackEvent('whatsapp_booking_clicked')
 
 // Validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -141,11 +165,6 @@ const handlePhoneInput = (event: Event) => {
 }
 
 const handleSubmit = async () => {
-  if (!paymentEnabled) {
-    router.push('/contact')
-    return
-  }
-
   submitAttempted.value = true
 
   if (!isFormValid.value || !bookingState.value) return
@@ -154,30 +173,62 @@ const handleSubmit = async () => {
   submitError.value = ''
 
   try {
-    const response = await fetch('/api/payment/initialize', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        roomId: bookingState.value.room.id,
-        checkIn: bookingState.value.checkIn.toISOString(),
-        checkOut: bookingState.value.checkOut.toISOString(),
-        nights: bookingState.value.nights,
-        pricePerNight: bookingState.value.pricePerNight,
-        guest: guestInfo.value,
-        locale: selectedLanguage.value,
-      }),
-    })
+    if (paymentEnabled) {
+      // Online payment path (iyzico) — kept for when payments are re-enabled.
+      const response = await fetch('/api/payment/initialize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          roomId: bookingState.value.room.id,
+          checkIn: bookingState.value.checkIn.toISOString(),
+          checkOut: bookingState.value.checkOut.toISOString(),
+          nights: bookingState.value.nights,
+          pricePerNight: bookingState.value.pricePerNight,
+          guest: guestInfo.value,
+          locale: selectedLanguage.value,
+        }),
+      })
 
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message || 'Payment initialization failed')
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.message || 'Payment initialization failed')
+      }
+
+      const data = await response.json()
+      paymentFormContent.value = data.checkoutFormContent
+      showPaymentForm.value = true
+    } else {
+      // Request-to-book path — emails the hotel; no online payment.
+      const response = await fetch('/api/booking/request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          roomId: bookingState.value.room.id,
+          checkIn: bookingState.value.checkIn.toISOString(),
+          checkOut: bookingState.value.checkOut.toISOString(),
+          nights: bookingState.value.nights,
+          guests: bookingState.value.guests,
+          guest: guestInfo.value,
+          locale: selectedLanguage.value,
+          company: honeypot.value,
+        }),
+      })
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}))
+        throw new Error(error.message || 'Request failed')
+      }
+
+      requestSent.value = true
+      trackEvent('booking_request_submitted')
     }
-
-    const data = await response.json()
-    paymentFormContent.value = data.checkoutFormContent
-    showPaymentForm.value = true
   } catch (error) {
-    submitError.value = error instanceof Error ? error.message : 'An error occurred'
+    submitError.value = paymentEnabled
+      ? error instanceof Error
+        ? error.message
+        : 'An error occurred'
+      : t('checkout.requestError')
+    if (!paymentEnabled) trackEvent('booking_request_failed')
   } finally {
     isSubmitting.value = false
   }
@@ -194,9 +245,36 @@ const handleSubmit = async () => {
     </div>
 
     <template v-else>
+      <!-- Request-to-book success -->
+      <div
+        v-if="requestSent"
+        class="max-w-screen-md mx-auto py-20 px-4 text-center flex flex-col items-center gap-6"
+      >
+        <div class="w-16 h-16 rounded-full bg-[#25D366]/10 flex items-center justify-center">
+          <YazIcon name="whatsapp" :size="32" color="#25D366" />
+        </div>
+        <h1 class="text-3xl font-raleway font-light">{{ $t('checkout.requestSuccessTitle') }}</h1>
+        <p class="font-raleway text-base font-light text-primary max-w-md">
+          {{ $t('checkout.requestSuccessMessage') }}
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            :href="whatsappHref"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 px-4 py-3 rounded-md bg-[#25D366] text-white font-raleway hover:opacity-90 transition-opacity"
+            @click="onWhatsAppClick"
+          >
+            <YazIcon name="whatsapp" :size="20" color="#ffffff" />
+            {{ $t('whatsapp.askOnWhatsApp') }}
+          </a>
+          <YazButton :label="$t('checkout.backHome')" type="outlined" href="/" />
+        </div>
+      </div>
+
       <!-- Payment form overlay -->
       <div
-        v-if="showPaymentForm"
+        v-else-if="showPaymentForm"
         class="max-w-screen-md mx-auto py-12 px-4"
       >
         <h2 class="text-2xl font-raleway font-light mb-6">
@@ -243,6 +321,16 @@ const handleSubmit = async () => {
                 >
                   <YazIcon name="instagram" :size="18" color="currentColor" />
                   <span>yazevibozcaada_</span>
+                </a>
+                <a
+                  :href="whatsappHref"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 hover:text-secondaryDark transition-colors"
+                  @click="onWhatsAppClick"
+                >
+                  <YazIcon name="whatsapp" :size="18" color="currentColor" />
+                  <span>WhatsApp</span>
                 </a>
               </div>
             </div>
@@ -373,10 +461,21 @@ const handleSubmit = async () => {
               {{ submitError }}
             </div>
 
+            <!-- Honeypot: hidden from users, catches bots -->
+            <input
+              v-model="honeypot"
+              type="text"
+              name="company"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              class="hidden"
+            >
+
             <YazButton
-              :label="$t('getInTouch')"
+              :label="isSubmitting ? $t('checkout.requestSending') : $t('checkout.requestSubmit')"
               type="primary"
-              href="/contact"
+              :disabled="isSubmitting"
               class="w-fit"
             />
           </form>

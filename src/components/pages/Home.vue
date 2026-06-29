@@ -66,12 +66,14 @@
           :src="getMediaUrl('home-gallery/gallery_left_1.jpg')"
           alt="Yaz Evi Bozcaada butik otel iç mekan ve tarihi taş duvarlar"
           loading="lazy"
+          decoding="async"
         />
         <img
           class="w-full"
           :src="getMediaUrl('home-gallery/gallery_left_2.jpg')"
           alt="Yaz Evi Bozcaada oda dekorasyonu ve ahşap detaylar"
           loading="lazy"
+          decoding="async"
         />
       </template>
       <template #right>
@@ -79,6 +81,7 @@
           :src="getMediaUrl('home-gallery/gallery_right_1.jpg')"
           alt="Yaz Evi Bozcaada avlu ve bahçe manzarası"
           loading="lazy"
+          decoding="async"
         />
       </template>
     </MixedGallery>

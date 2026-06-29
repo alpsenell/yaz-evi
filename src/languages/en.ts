@@ -132,6 +132,10 @@ export default {
   room5Description: "The Iliad is the first epic where traces of Bozcaada's history are found. The Iliad Room carries deep significance, reflecting the historical and mythological layers of Bozcaada.\nWith its architectural touches, the Iliad Room makes you feel as if you are immersed in an epic. Each detail of the room brings together historical depth and elegant touches through the harmony of wood and stone.",
   bookNow: "Book Now",
   getInTouch: "Get in touch",
+  whatsapp: {
+    ariaLabel: "Contact us on WhatsApp",
+    askOnWhatsApp: "Ask on WhatsApp",
+  },
   contactOnInstagram: "Contact us on Instagram",
   allInclusive: "All Inclusive Rates",
   booking: {
@@ -210,6 +214,12 @@ export default {
     checkOut: 'Check-out',
     pricePerNight: 'Price per night',
     payment: 'Payment',
+    requestSubmit: 'Send Booking Request',
+    requestSending: 'Sending...',
+    requestError: 'Something went wrong. Please try again or reach us on WhatsApp.',
+    requestSuccessTitle: 'Request Received',
+    requestSuccessMessage: "Thank you! We've received your booking request and will confirm availability and pricing by email or WhatsApp shortly.",
+    backHome: 'Back to Home',
   },
   validation: {
     nameRequired: 'Full name is required.',

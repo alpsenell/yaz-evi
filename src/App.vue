@@ -5,6 +5,7 @@ import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import MenuDrawer from "./components/organisms/MenuDrawer.vue";
 import SeoHead from "./components/SeoHead.vue";
+import WhatsAppButton from "./components/organisms/WhatsAppButton.vue";
 
 const menuVisibility = ref(false);
 
@@ -43,4 +44,5 @@ watch(menuVisibility, (value) => {
     :visibility="menuVisibility"
     @toggleMobileMenu="toggleMobileMenu"
   />
+  <WhatsAppButton v-show="!menuVisibility" />
 </template>

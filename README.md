@@ -10,7 +10,8 @@ The goal of this project is to give Yaz Evi a modern, visually rich online prese
 
 - Discover the hotel, its rooms, and the experiences it offers
 - Check room availability in real time
-- Make a reservation and pay online with support for Turkish installment plans
+- Request a booking online — the hotel confirms availability and pricing by email or WhatsApp (direct online card payment is temporarily disabled)
+- Reach the hotel instantly on WhatsApp with the room/dates prefilled
 - Browse the hotel in both **English** and **Turkish**
 
 On the management side, a separate [admin panel](https://github.com/alpsenell/yaz-evi-admin) allows the hotel staff to update room pricing and manage reservations without touching any code.
@@ -28,8 +29,10 @@ Each room page showcases a photo gallery, amenities, guest capacity, and pricing
 1. **Pick a room** — The guest selects one of the five rooms.
 2. **Choose dates** — A calendar shows real-time availability; already-booked dates are automatically blocked.
 3. **Review & checkout** — A summary displays the selected room, dates, total price, and guest count.
-4. **Pay securely** — The guest fills in their details and is redirected to iyzico's secure payment form, which supports credit/debit cards and installment options (2, 3, or 6 months).
-5. **Confirmation** — After payment, the guest sees a confirmation page with their booking reference number and details.
+4. **Request to book** — The guest fills in their details and submits a booking request, which is emailed to the hotel (`info@yaz-evi.com`) via a Resend serverless function. They can also jump to WhatsApp with the room and dates prefilled.
+5. **Confirmation** — The hotel confirms availability and pricing by email or WhatsApp.
+
+> Online card payment via iyzico (credit/debit + 2/3/6-month installments) is fully built and can be re-enabled by flipping `paymentEnabled` in `src/components/pages/Checkout.vue`.
 
 ## Technologies & How They're Used
 
@@ -53,8 +56,8 @@ Each room page showcases a photo gallery, amenities, guest capacity, and pricing
 | **Vercel Serverless Functions** | Handles server-side logic — payment initialization, payment callbacks, and booking retrieval — without needing a dedicated backend server. |
 | **Firebase / Firestore** | The database that stores room information, pricing, and all booking records. The frontend reads availability in real time; the server writes and updates bookings. |
 | **iyzico** | Turkey's leading payment gateway. Handles secure card payments with 3D Secure verification and Turkish Lira (TRY) installment support — essential for local e-commerce compliance. |
-| **EmailJS** | Sends emails from the contact form directly from the browser, without a backend mail server. |
-| **Google reCAPTCHA v3** | Protects forms from spam and bot submissions invisibly, without annoying checkbox challenges. |
+| **EmailJS** | Sends contact-form emails directly from the browser, without a backend mail server. |
+| **Resend** | Sends booking-request emails to the hotel from a Vercel serverless function (`/api/booking/request`). A hidden honeypot field guards against bot spam. Requires `RESEND_API_KEY` and a verified sending domain. |
 
 ### Infrastructure & Media
 

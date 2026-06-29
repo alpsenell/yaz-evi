@@ -132,6 +132,10 @@ export default {
   room5Description: "İlyada Destanı, Bozcaadanın tarihi izlerine ilk rastlanan destandır. İlyada Oda, Bozcaada'nın tarihi ve mitolojik katmanlarını yansıtan, derin bir anlam taşır.\nİlyada Oda, mimari dokunuşlarıyla bir destanın içinde kaybolmuş gibi hissettirir. Odanın her bir detayında ahşap ve taşın uyumuyla tarihsel derinlik ve zarif dokunuşlar bir araya gelir.",
   bookNow: "Şimdi Rezervasyon Yapın",
   getInTouch: "İletişime Geçin",
+  whatsapp: {
+    ariaLabel: "WhatsApp ile bize ulaşın",
+    askOnWhatsApp: "WhatsApp'tan sor",
+  },
   contactOnInstagram: "Instagram'dan İletişime Geçin",
   allInclusive: "Her Şey Dahil",
   booking: {
@@ -210,6 +214,12 @@ export default {
     checkOut: 'Çıkış',
     pricePerNight: 'Gecelik fiyat',
     payment: 'Ödeme',
+    requestSubmit: 'Rezervasyon Talebi Gönder',
+    requestSending: 'Gönderiliyor...',
+    requestError: "Bir sorun oluştu. Lütfen tekrar deneyin veya WhatsApp'tan bize ulaşın.",
+    requestSuccessTitle: 'Talebiniz Alındı',
+    requestSuccessMessage: 'Teşekkürler! Rezervasyon talebinizi aldık. Müsaitlik ve fiyat bilgisini kısa süre içinde e-posta veya WhatsApp ile ileteceğiz.',
+    backHome: 'Ana Sayfaya Dön',
   },
   validation: {
     nameRequired: 'Ad soyad alanı zorunludur.',

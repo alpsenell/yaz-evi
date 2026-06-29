@@ -3,11 +3,13 @@ import { ref } from "vue";
 import i18next, { changeLanguage } from "i18next";
 import YazDropdown from "../atoms/YazDropdown.vue";
 import { LANGUAGES } from "../../enums/global.ts";
+import { trackEvent } from "../../utils/analytics";
 
 const selectedLanguage = ref(i18next.language<string> || 'en');
 const selectLanguage = (language: string) => {
   changeLanguage(language);
   selectedLanguage.value = language;
+  trackEvent('language_changed');
 }
 const props = withDefaults(defineProps(), {
   openPosition: 'down',
