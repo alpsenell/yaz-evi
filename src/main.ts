@@ -5,12 +5,14 @@ import router from './router'
 import i18n from './i18n'
 import VueSplide from '@splidejs/vue-splide';
 import clickOutside from './directives/clickOutside.ts';
+import track from './directives/track.ts';
 import { setupCalendar } from 'v-calendar';
 import '@splidejs/vue-splide/css';
 import 'v-calendar/style.css';
 
 const app = i18n(createApp(App))
   .directive('click-outside', clickOutside)
+  .directive('track', track)
   .use(VueSplide)
   .use(setupCalendar)
   .use(router)
