@@ -12,6 +12,7 @@ import YazIcon from '../atoms/YazIcon.vue'
 import Loader from '../atoms/Loader.vue'
 import { getMediaUrl } from '../../utils/media'
 import { trackEvent } from '../../utils/analytics'
+import { emailRegex, turkishPhoneRegex, formatTurkishPhone } from '../../utils/validation'
 
 const router = useRouter()
 const { t } = useTranslation()
@@ -78,8 +79,6 @@ const formattedPricePerNight = computed(() => {
 })
 
 // Validation
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const turkishPhoneRegex = /^\+90 \(5\d{2}\) \d{3} \d{2} \d{2}$/
 
 const errors = computed(() => ({
   name: guestInfo.value.name.trim() === '' ? t('validation.nameRequired') : '',
@@ -107,33 +106,7 @@ const shouldShowError = (field: keyof typeof touched.value) => {
 // Phone masking
 const handlePhoneInput = (event: Event) => {
   const input = event.target as HTMLInputElement
-  let digits = input.value.replace(/\D/g, '')
-
-  // Remove leading 90 country code if present
-  if (digits.startsWith('90')) {
-    digits = digits.slice(2)
-  }
-
-  // Cap at 10 digits
-  digits = digits.slice(0, 10)
-
-  // Format: +90 (5XX) XXX XX XX
-  let formatted = '+90 '
-  if (digits.length > 0) {
-    formatted += '(' + digits.slice(0, 3)
-    if (digits.length >= 3) {
-      formatted += ') '
-    }
-    if (digits.length > 3) {
-      formatted += digits.slice(3, 6)
-    }
-    if (digits.length > 6) {
-      formatted += ' ' + digits.slice(6, 8)
-    }
-    if (digits.length > 8) {
-      formatted += ' ' + digits.slice(8, 10)
-    }
-  }
+  const formatted = formatTurkishPhone(input.value)
 
   guestInfo.value.phone = formatted
   nextTick(() => {
