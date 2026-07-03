@@ -3,6 +3,8 @@
   lang="ts"
 >
 import YazIcon from "../atoms/YazIcon.vue";
+
+defineProps<{ trackContext: string }>();
 </script>
 
 <template>
@@ -17,6 +19,7 @@ import YazIcon from "../atoms/YazIcon.vue";
       <a
         class="text-link font-raleway w-fit"
         href="tel:+905324316734"
+        v-track="`clickOn${trackContext}Phone`"
       >
         0532 431 67 34
       </a>
@@ -31,6 +34,7 @@ import YazIcon from "../atoms/YazIcon.vue";
       <a
         class="text-link font-raleway w-fit !lowercase"
         href="mailto:info@yaz-evi.com"
+        v-track="`clickOn${trackContext}Email`"
       >
         info@yaz-evi.com
       </a>
@@ -45,6 +49,7 @@ import YazIcon from "../atoms/YazIcon.vue";
       <a
         class="text-link font-raleway w-fit"
         href="https://maps.app.goo.gl/ggPm96WbCZujmtQq5"
+        v-track="`clickOn${trackContext}Address`"
       >
         {{ $t('hotelAddress') }}
       </a>

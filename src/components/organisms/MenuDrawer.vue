@@ -5,6 +5,7 @@ import { HEADER_MENU_ITEMS } from "../../enums/global.ts";
 import LanguageSelector from "./LanguageSelector.vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import ContactInfos from "./ContactInfos.vue";
+import { capitalize } from "../../utils/analytics";
 
 const { t } = useTranslation();
 
@@ -64,6 +65,8 @@ const openPosition = computed(() => {
   return window.innerHeight < 500 ? 'up' : 'down';
 });
 
+const menuTrackName = (url: string) => `clickOnMenu${capitalize(url.replace('/', ''))}`;
+
 </script>
 
 <template>
@@ -94,7 +97,7 @@ const openPosition = computed(() => {
         />
       </button>
 
-      <router-link to="/" :aria-label="t('accessibility.goHome')">
+      <router-link to="/" :aria-label="t('accessibility.goHome')" v-track="'clickOnMenuLogo'">
         <YazIcon
           name="yaz-evi"
           color="black"
@@ -111,6 +114,7 @@ const openPosition = computed(() => {
           <router-link
             class="header__link sub-link text-base"
             :to="item.url"
+            v-track="menuTrackName(item.url)"
             @click="emits('toggleMobileMenu')"
           >
             {{ $t(`${item.title}`) }}
@@ -119,7 +123,7 @@ const openPosition = computed(() => {
 
         <LanguageSelector :open-position="openPosition" />
 
-        <ContactInfos />
+        <ContactInfos track-context="Menu" />
       </ul>
     </nav>
     <div

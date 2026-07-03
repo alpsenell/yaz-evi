@@ -14,6 +14,7 @@
         class="block relative w-10 flex-column cursor-pointer top-4 bg-transparent border-none p-0 h-10"
         :class="{ 'header__mobile-menu-open': false }"
         :aria-label="t('accessibility.openMenu')"
+        v-track="'clickOnHeaderMenuToggle'"
         @click="emit('toggleMobileMenu')"
       >
         <span
@@ -24,7 +25,7 @@
           class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-4 origin-left"></span>
       </button>
 
-      <router-link to="/" :aria-label="t('accessibility.goHome')">
+      <router-link to="/" :aria-label="t('accessibility.goHome')" v-track="'clickOnHeaderLogo'">
         <YazIcon
           name="yaz-evi"
           color="white"

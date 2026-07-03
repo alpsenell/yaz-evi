@@ -155,7 +155,7 @@ const sendEmail = async () => {
           </div>
         </form>
 
-        <ContactInfos />
+        <ContactInfos track-context="ContactPage" />
       </div>
     </HalfHero>
   </section>

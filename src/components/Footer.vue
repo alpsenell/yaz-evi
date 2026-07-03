@@ -40,6 +40,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
           <a
             class="text-link font-raleway w-fit"
             href="tel:+905324316734"
+            v-track="'clickOnFooterPhone'"
           >
             0532 431 67 34
           </a>
@@ -50,6 +51,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
           <a
             class="text-link font-raleway w-fit"
             href="mailto:info@yaz-evi.com"
+            v-track="'clickOnFooterEmail'"
           >
             info@yaz-evi.com
           </a>
@@ -61,6 +63,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
           <a
             class="text-link font-raleway w-fit"
             href="https://goo.gl/maps/7Z3"
+            v-track="'clickOnFooterAddress'"
           >
             {{ $t('hotelAddress') }}
           </a>
@@ -71,6 +74,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
         <div class="flex gap-4">
           <a
             href="https://www.instagram.com/yazevibozcaada_/"
+            v-track="'clickOnFooterInstagram'"
           >
             <img
               src="../assets/media/instagram.svg"
@@ -87,6 +91,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
         <router-link
           class="text-link"
           to="/booking-terms"
+          v-track="'clickOnFooterBookingTerms'"
         >
           {{ $t('footer.termsAndPolicy') }}
         </router-link>
@@ -95,6 +100,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
         <router-link
           class="text-link"
           to="/privacy-policy"
+          v-track="'clickOnFooterPrivacyPolicy'"
         >
           {{ $t('footer.privacyPolicy') }}
         </router-link>
@@ -103,6 +109,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
         <router-link
           class="text-link"
           to="/delivery-and-return"
+          v-track="'clickOnFooterDeliveryAndReturn'"
         >
           {{ $t('footer.deliveryAndReturn') }}
         </router-link>
@@ -111,6 +118,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
         <router-link
           class="text-link"
           to="/distance-sales-agreement"
+          v-track="'clickOnFooterDistanceSales'"
         >
           {{ $t('footer.distanceSales') }}
         </router-link>
