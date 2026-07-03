@@ -5,6 +5,7 @@ import { Splide, SplideSlide, SplideTrack } from '@splidejs/vue-splide'
 
 import { ROOMS } from '../../enums/global'
 import { getMediaUrl } from '../../utils/media'
+import { capitalize } from '../../utils/analytics'
 import YazButton from '../atoms/YazButton.vue'
 import YazIcon from '../atoms/YazIcon.vue'
 
@@ -17,6 +18,8 @@ const room = computed(() => {
 const otherRooms = computed(() => {
   return ROOMS.filter(r => r.slug !== route.params.slug)
 })
+
+const roomTrackName = computed(() => room.value ? capitalize(room.value.slug) : '')
 
 const lightboxOpen = ref(false)
 const lightboxIndex = ref(0)
@@ -66,6 +69,7 @@ if (typeof window !== 'undefined') {
             v-for="(image, index) in room.images"
             :key="index"
             class="cursor-pointer"
+            v-track="`clickOnRoomHeroImage${roomTrackName}`"
             @click="openLightbox(index)"
           >
             <img
@@ -77,10 +81,10 @@ if (typeof window !== 'undefined') {
         </SplideTrack>
 
         <div class="splide__arrows absolute bottom-4 right-4">
-          <button class="splide__arrow splide__arrow--prev relative">
+          <button class="splide__arrow splide__arrow--prev relative" v-track="`clickOnRoomSliderPrev${roomTrackName}`">
             <YazIcon name="left" color="white" />
           </button>
-          <button class="splide__arrow splide__arrow--next relative">
+          <button class="splide__arrow splide__arrow--next relative" v-track="`clickOnRoomSliderNext${roomTrackName}`">
             <YazIcon name="right" color="white" />
           </button>
         </div>
@@ -119,6 +123,7 @@ if (typeof window !== 'undefined') {
           type="primary"
           :href="`/booking?room=${room.slug}`"
           class="hidden md:flex"
+          v-track="`clickOnRoomInfoBarBook${roomTrackName}`"
         />
       </div>
     </div>
@@ -164,6 +169,7 @@ if (typeof window !== 'undefined') {
             v-for="(image, index) in room.images"
             :key="index"
             class="relative overflow-hidden rounded-lg cursor-pointer group aspect-[4/3]"
+            v-track="`clickOnRoomGalleryImage${roomTrackName}`"
             @click="openLightbox(index)"
           >
             <img
@@ -184,6 +190,7 @@ if (typeof window !== 'undefined') {
           type="primary"
           :href="`/booking?room=${room.slug}`"
           class="mx-auto w-fit"
+          v-track="`clickOnRoomCtaBook${roomTrackName}`"
         />
       </div>
 
@@ -198,6 +205,7 @@ if (typeof window !== 'undefined') {
             :key="other.id"
             :to="`/room/${other.slug}`"
             class="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+            v-track="`clickOnRoomOtherRoom${capitalize(other.slug)}`"
           >
             <div class="relative aspect-[3/4] overflow-hidden">
               <img
@@ -233,6 +241,7 @@ if (typeof window !== 'undefined') {
 
         <button
           class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-colors"
+          v-track="`clickOnRoomLightboxPrev${roomTrackName}`"
           @click="prevImage"
         >
           <YazIcon name="left" color="white" :size="24" />
@@ -246,6 +255,7 @@ if (typeof window !== 'undefined') {
 
         <button
           class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-colors"
+          v-track="`clickOnRoomLightboxNext${roomTrackName}`"
           @click="nextImage"
         >
           <YazIcon name="right" color="white" :size="24" />
@@ -262,7 +272,7 @@ if (typeof window !== 'undefined') {
   <div v-else class="min-h-screen flex items-center justify-center">
     <div class="text-center">
       <p class="font-raleway text-lg text-primary mb-4">Room not found</p>
-      <YazButton label="Back to Rooms" type="primary" href="/rooms" />
+      <YazButton label="Back to Rooms" type="primary" href="/rooms" v-track="'clickOnRoomNotFoundBackToRooms'" />
     </div>
   </div>
 </template>

@@ -83,6 +83,7 @@ onUnmounted(() => {
           <div
             v-if="(childIndex + 1) % 4 === (index % 4)"
             class="relative overflow-hidden hover:scale-105 transition-transform duration-200 ease-in-out focus-within:outline focus-within:outline-2 focus-within:outline-blue-500 focus-within:outline-offset-2 cursor-pointer"
+            v-track="`clickOnGalleryImage${childIndex + 1}`"
             @click="handleClick(image)"
             tabindex="0"
             @keydown.enter="handleClick(image)"
@@ -109,6 +110,7 @@ onUnmounted(() => {
           <div
             v-if="(childIndex + 1) % 2 === (index % 2)"
             class="relative overflow-hidden hover:scale-105 transition-transform duration-200 ease-in-out focus-within:outline focus-within:outline-2 focus-within:outline-blue-500 focus-within:outline-offset-2 cursor-pointer"
+            v-track="`clickOnGalleryImage${childIndex + 1}`"
             @click="handleClick(image)"
             tabindex="0"
             @keydown.enter="handleClick(image)"
@@ -169,15 +171,17 @@ onUnmounted(() => {
         </SplideTrack>
 
         <div class="splide__arrows absolute bottom-4 right-4">
-          <button 
+          <button
             class="splide__arrow splide__arrow--prev relative focus:outline focus:outline-2 focus:outline-white focus:outline-offset-2"
             :aria-label="$t('galleryModal.previousImage')"
+            v-track="'clickOnGalleryModalPrev'"
           >
             <YazIcon name="left" color="white"/>
           </button>
-          <button 
+          <button
             class="splide__arrow splide__arrow--next relative focus:outline focus:outline-2 focus:outline-white focus:outline-offset-2"
             :aria-label="$t('galleryModal.nextImage')"
+            v-track="'clickOnGalleryModalNext'"
           >
             <YazIcon name="right" color="white"/>
           </button>
