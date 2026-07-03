@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/vue-splide';
-import { defineProps } from "vue";
+import { computed } from "vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import YazButton from "../atoms/YazButton.vue";
 import { getMediaUrl } from '../../utils/media';
+import { capitalize } from '../../utils/analytics';
 
-defineProps({
+const props = defineProps({
   images: Array,
   size: String,
   imagePosition: String,
@@ -13,6 +14,8 @@ defineProps({
   description: String,
   roomSlug: String,
 })
+
+const roomTrackName = computed(() => capitalize(props.roomSlug ?? ''));
 </script>
 
 <template>
@@ -42,10 +45,10 @@ defineProps({
         </SplideTrack>
 
         <div class="splide__arrows absolute bottom-4 right-4">
-          <button class="splide__arrow splide__arrow--prev relative">
+          <button class="splide__arrow splide__arrow--prev relative" v-track="`clickOnRoomsSliderPrev${roomTrackName}`">
             <YazIcon name="left" color="white" />
           </button>
-          <button class="splide__arrow splide__arrow--next relative">
+          <button class="splide__arrow splide__arrow--next relative" v-track="`clickOnRoomsSliderNext${roomTrackName}`">
             <YazIcon name="right" color="white" />
           </button>
         </div>
@@ -63,8 +66,8 @@ defineProps({
         {{ description }}
       </p>
       <div class="flex gap-4">
-        <YazButton :label="$t('details')" type="outlined" :href="`/room/${roomSlug}`" />
-        <YazButton :label="$t('reserve')" type="primary" :href="`/booking?room=${roomSlug}`" />
+        <YazButton :label="$t('details')" type="outlined" :href="`/room/${roomSlug}`" v-track="`clickOnRoomsDetails${roomTrackName}`" />
+        <YazButton :label="$t('reserve')" type="primary" :href="`/booking?room=${roomSlug}`" v-track="`clickOnRoomsReserve${roomTrackName}`" />
       </div>
     </div>
   </section>

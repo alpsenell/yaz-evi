@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import YazButton from "../atoms/YazButton.vue";
-defineProps({ buttonLabel: String, buttonUrl: String });
+defineProps({ buttonLabel: String, buttonUrl: String, trackName: String });
 </script>
 
 <template>
@@ -12,6 +12,7 @@ defineProps({ buttonLabel: String, buttonUrl: String });
       :label="buttonLabel"
       :href="buttonUrl"
       type="outlined"
+      v-track="trackName"
     />
   </section>
 </template>
