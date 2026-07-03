@@ -5,6 +5,7 @@ import HalfHero from "../organisms/HalfHero.vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import YazButton from "../atoms/YazButton.vue";
 import ContactInfos from "../organisms/ContactInfos.vue";
+import { trackEvent } from '../../utils/analytics';
 
 const formData = ref({
   name: '',
@@ -19,6 +20,7 @@ const submitError = ref(false);
 const errorMessage = ref('');
 
 const sendEmail = async () => {
+  trackEvent('submitContactForm');
   isSubmitting.value = true;
   submitSuccess.value = false;
   submitError.value = false;
@@ -38,12 +40,14 @@ const sendEmail = async () => {
     );
 
     if (result.status === 200) {
+      trackEvent('submitContactFormSuccess');
       submitSuccess.value = true;
       formData.value = { name: '', email: '', subject: '', message: '' };
     } else {
       throw new Error('Failed to send email');
     }
   } catch (error) {
+    trackEvent('submitContactFormError');
     submitError.value = true;
     errorMessage.value = error instanceof Error ? error.message : 'Unknown error occurred';
     console.error('Email sending failed:', error);

@@ -11,6 +11,7 @@ import YazButton from '../atoms/YazButton.vue'
 import YazIcon from '../atoms/YazIcon.vue'
 import Loader from '../atoms/Loader.vue'
 import { getMediaUrl } from '../../utils/media'
+import { trackEvent } from '../../utils/analytics'
 
 const router = useRouter()
 const { t } = useTranslation()
@@ -141,6 +142,7 @@ const handlePhoneInput = (event: Event) => {
 }
 
 const handleSubmit = async () => {
+  trackEvent('submitCheckoutForm')
   if (!paymentEnabled) {
     router.push('/contact')
     return
@@ -231,6 +233,7 @@ const handleSubmit = async () => {
                 <a
                   href="tel:+905324316734"
                   class="flex items-center gap-2 hover:text-secondaryDark transition-colors"
+                  v-track="'clickOnCheckoutPhone'"
                 >
                   <YazIcon name="phone" :size="18" color="currentColor" />
                   <span>0532 431 67 34</span>
@@ -240,6 +243,7 @@ const handleSubmit = async () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex items-center gap-2 hover:text-secondaryDark transition-colors"
+                  v-track="'clickOnCheckoutInstagram'"
                 >
                   <YazIcon name="instagram" :size="18" color="currentColor" />
                   <span>yazevibozcaada_</span>
@@ -355,6 +359,7 @@ const handleSubmit = async () => {
                     href="/booking-terms"
                     target="_blank"
                     class="underline text-primary hover:text-secondaryDark"
+                    v-track="'clickOnCheckoutTermsLink'"
                   >{{ $t('checkout.termsAcceptLink') }}</a>{{ $t('checkout.termsAcceptSuffix') }}
                 </label>
               </div>
@@ -378,6 +383,7 @@ const handleSubmit = async () => {
               type="primary"
               href="/contact"
               class="w-fit"
+              v-track="'clickOnCheckoutGetInTouch'"
             />
           </form>
 
@@ -424,6 +430,7 @@ const handleSubmit = async () => {
               <router-link
                 to="/contact"
                 class="font-raleway font-bold text-base underline hover:text-secondaryDark transition-colors"
+                v-track="'clickOnCheckoutSummaryGetInTouch'"
               >
                 {{ $t('getInTouch') }}
               </router-link>

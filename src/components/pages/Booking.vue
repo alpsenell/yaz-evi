@@ -15,6 +15,7 @@ import YazButton from "../atoms/YazButton.vue";
 import YazIcon from "../atoms/YazIcon.vue";
 import Loader from "../atoms/Loader.vue";
 import { getMediaUrl } from '../../utils/media';
+import { trackEvent, capitalize } from "../../utils/analytics";
 
 const route = useRoute();
 const router = useRouter();
@@ -99,6 +100,7 @@ const calendarKey = ref(0);
 
 const selectRoom = (room: Room) => {
   if (selectedRoom.value?.id === room.id) return;
+  trackEvent(`selectBookingRoom${capitalize(room.slug)}`);
   selectedRoom.value = room;
   selectedDates.value = { start: null, end: null };
   calendarKey.value++;
@@ -112,12 +114,15 @@ const changeRoom = () => {
 
 const handleDateChange = (dates: { start: Date | null; end: Date | null }) => {
   if (dates && dates.start && dates.end) {
+    trackEvent('selectBookingDates');
     selectedDates.value = dates;
   }
 };
 
 const goToCheckout = () => {
   if (!selectedRoom.value || !selectedDates.value.start || !selectedDates.value.end) return;
+
+  trackEvent('clickOnBookingBookNow');
 
   const state = {
     roomId: selectedRoom.value.id,
@@ -196,6 +201,7 @@ const goToCheckout = () => {
           target="_blank"
           rel="noopener noreferrer"
           class="underline hover:text-secondaryDark"
+          v-track="'clickOnBookingInstagram'"
         >
           Instagram
         </a>
@@ -296,6 +302,7 @@ const goToCheckout = () => {
             <button
               @click="changeRoom"
               class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors"
+              v-track="'clickOnBookingDatesChangeRoom'"
             >
               {{ $t('booking.changeRoom') }}
             </button>
@@ -338,6 +345,7 @@ const goToCheckout = () => {
                   <button
                     @click="guestNumber = Math.max(1, guestNumber - 1)"
                     class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                    v-track="'clickOnBookingGuestMinus'"
                   >
                     -
                   </button>
@@ -345,6 +353,7 @@ const goToCheckout = () => {
                   <button
                     @click="guestNumber = Math.min(selectedRoom!.bookingInformation.guestNumber, guestNumber + 1)"
                     class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                    v-track="'clickOnBookingGuestPlus'"
                   >
                     +
                   </button>
@@ -380,6 +389,7 @@ const goToCheckout = () => {
                   <button
                     @click="changeRoom"
                     class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors shrink-0"
+                    v-track="'clickOnBookingSummaryChangeRoom'"
                   >
                     {{ $t('booking.changeRoom') }}
                   </button>
@@ -413,6 +423,7 @@ const goToCheckout = () => {
                 <button
                   @click="selectedDates = { start: null, end: null }"
                   class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors w-fit"
+                  v-track="'clickOnBookingChangeDates'"
                 >
                   {{ $t('booking.changeDates') }}
                 </button>
@@ -425,6 +436,7 @@ const goToCheckout = () => {
                   <router-link
                     to="/contact"
                     class="font-raleway font-bold text-base text-secondaryDark underline hover:text-primary transition-colors"
+                    v-track="'clickOnBookingSummaryGetInTouch'"
                   >
                     {{ $t('getInTouch') }}
                   </router-link>
