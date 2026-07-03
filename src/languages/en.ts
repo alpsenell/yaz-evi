@@ -83,7 +83,6 @@ export default {
       email: "Email",
       phone: "Phone",
       phoneOptional: "(optional)",
-      subject: "Subject",
       message: "Message",
       send: "Send Message",
       sending: "Sending...",

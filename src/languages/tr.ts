@@ -83,7 +83,6 @@ export default {
       email: "E-posta",
       phone: "Telefon",
       phoneOptional: "(isteğe bağlı)",
-      subject: "Konu",
       message: "Mesaj",
       send: "Mesaj Gönder",
       sending: "Gönderiliyor...",
