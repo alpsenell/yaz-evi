@@ -22,7 +22,6 @@
     >
       <h2 class="font-raleway text-3xl my-4">{{ $t('homepage.textAndButton.title') }}</h2>
       <p class="font-raleway text-lg my-6">{{ $t('homepage.textAndButton.descriptionFirst') }}</p>
-      <p class="font-raleway text-lg my-6">{{ $t('homepage.textAndButton.descriptionSecond') }}</p>
     </TextAndButton>
 
     <HalfHero

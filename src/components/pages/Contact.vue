@@ -64,6 +64,7 @@ const handlePhoneInput = (event: Event) => {
 };
 
 const sendEmail = async () => {
+  if (isSubmitting.value) return;
   trackEvent('submitContactForm');
   submitAttempted.value = true;
   if (!isFormValid.value) return;
@@ -237,6 +238,7 @@ const sendEmail = async () => {
               :label="isSubmitting ? $t('pages.contact.sending') : $t('pages.contact.send')"
               class="w-fit"
               type="primary"
+              :disabled="isSubmitting"
             />
           </div>
         </form>

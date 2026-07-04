@@ -113,7 +113,8 @@ const changeRoom = () => {
 };
 
 const handleDateChange = (dates: { start: Date | null; end: Date | null }) => {
-  if (dates && dates.start && dates.end) {
+  // Require at least one night — reject same-day (0-night) selections
+  if (dates && dates.start && dates.end && calculateNights(dates.start, dates.end) > 0) {
     trackEvent('selectBookingDates');
     selectedDates.value = dates;
   }

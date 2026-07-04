@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/vue-splide'
 
@@ -50,9 +50,8 @@ const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === 'ArrowRight') nextImage()
 }
 
-if (typeof window !== 'undefined') {
-  window.addEventListener('keydown', handleKeydown)
-}
+onMounted(() => window.addEventListener('keydown', handleKeydown))
+onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 </script>
 
 <template>

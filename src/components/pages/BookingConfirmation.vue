@@ -64,7 +64,7 @@ onMounted(async () => {
         v-else-if="error"
         class="text-center"
       >
-        <p class="font-raleway text-lg text-red-500">{{ error }}</p>
+        <p class="font-raleway text-lg text-red-500">{{ $t('confirmation.failedSubtitle') }}</p>
         <YazButton
           :label="$t('confirmation.backToHome')"
           href="/"

@@ -18,15 +18,7 @@ const router = useRouter()
 const { t } = useTranslation()
 const { getState } = useBookingState()
 
-// Online payment is temporarily disabled until the payment provider is configured.
-// While false, guests are directed to /contact instead of the iyzipay checkout.
-const paymentEnabled: boolean = false
-
 const bookingState = ref<CheckoutState | null>(null)
-const isSubmitting = ref(false)
-const submitError = ref('')
-const showPaymentForm = ref(false)
-const paymentFormContent = ref('')
 
 const guestInfo = ref<GuestInfo>({
   name: '',
@@ -43,8 +35,6 @@ const touched = ref({
   phone: false,
   terms: false,
 })
-
-const submitAttempted = ref(false)
 
 onMounted(() => {
   const state = getState()
@@ -95,12 +85,8 @@ const errors = computed(() => ({
   terms: !termsAccepted.value ? t('validation.termsRequired') : '',
 }))
 
-const isFormValid = computed(() => {
-  return Object.values(errors.value).every(e => e === '')
-})
-
 const shouldShowError = (field: keyof typeof touched.value) => {
-  return (touched.value[field] || submitAttempted.value) && errors.value[field]
+  return touched.value[field] && errors.value[field]
 }
 
 // Phone masking
@@ -114,48 +100,10 @@ const handlePhoneInput = (event: Event) => {
   })
 }
 
-const handleSubmit = async () => {
+// Online payment is not available; guests complete their reservation via /contact.
+const handleSubmit = () => {
   trackEvent('submitCheckoutForm')
-  if (!paymentEnabled) {
-    router.push('/contact')
-    return
-  }
-
-  submitAttempted.value = true
-
-  if (!isFormValid.value || !bookingState.value) return
-
-  isSubmitting.value = true
-  submitError.value = ''
-
-  try {
-    const response = await fetch('/api/payment/initialize', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        roomId: bookingState.value.room.id,
-        checkIn: bookingState.value.checkIn.toISOString(),
-        checkOut: bookingState.value.checkOut.toISOString(),
-        nights: bookingState.value.nights,
-        pricePerNight: bookingState.value.pricePerNight,
-        guest: guestInfo.value,
-        locale: selectedLanguage.value,
-      }),
-    })
-
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message || 'Payment initialization failed')
-    }
-
-    const data = await response.json()
-    paymentFormContent.value = data.checkoutFormContent
-    showPaymentForm.value = true
-  } catch (error) {
-    submitError.value = error instanceof Error ? error.message : 'An error occurred'
-  } finally {
-    isSubmitting.value = false
-  }
+  router.push('/contact')
 }
 </script>
 
@@ -169,20 +117,8 @@ const handleSubmit = async () => {
     </div>
 
     <template v-else>
-      <!-- Payment form overlay -->
-      <div
-        v-if="showPaymentForm"
-        class="max-w-screen-md mx-auto py-12 px-4"
-      >
-        <h2 class="text-2xl font-raleway font-light mb-6">
-          {{ $t('checkout.payment') }}
-        </h2>
-        <div v-html="paymentFormContent"></div>
-      </div>
-
       <!-- Checkout form -->
       <div
-        v-else
         class="max-w-screen-xl mx-auto py-12 px-4"
       >
         <h1 class="text-3xl font-raleway font-light mb-8">
@@ -342,13 +278,6 @@ const handleSubmit = async () => {
               >
                 {{ errors.terms }}
               </p>
-            </div>
-
-            <div
-              v-if="submitError"
-              class="font-raleway text-base font-light text-red-500"
-            >
-              {{ submitError }}
             </div>
 
             <YazButton

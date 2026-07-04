@@ -34,7 +34,7 @@ export default {
     },
     checkout: {
       title: "Ödeme | Yaz Evi Bozcaada Butik Otel",
-      description: "Yaz Evi Bozcaada butik otel rezervasyonunuzu tamamlayın. iyzico ile güvenli ödeme."
+      description: "Yaz Evi Bozcaada butik otel rezervasyonunuzu tamamlayın."
     },
     confirmation: {
       title: "Rezervasyon Onayı | Yaz Evi Bozcaada",
@@ -57,7 +57,7 @@ export default {
       description: "Yaz Evi Bozcaada butik otelin mesafeli satış sözleşmesi hükümlerini okuyun."
     }
   },
-  phoneNumber: "+90 530 306 20 21",
+  phoneNumber: "+90 532 431 67 34",
   hotelAddress: "Alaybey Mah. Muratbey Sk. 12 Bozcaada/Çanakkale",
   gallery: "Galeri",
   galleryModal: {
@@ -93,7 +93,7 @@ export default {
     about: {
       title: "Hakkımızda",
       description: "Restore edilmiş tarihi bir yapıdaki huzur.",
-      history: "Bozcaada, tarih boyunca Tenedos olarak bilinen ve kültürel zenginliğiyle dikkat çeken bir Ege adasıdır. Homeros'un *İlyada* destanında geçen ada, Truva Savaşı sırasında stratejik bir rol oynamış ve Yunan donanmasının Truva'ya saldırmadan önce saklandığı yer olarak anılmıştır. Tarih boyunca Fenikeliler, Aioller ve Yunanlılar gibi birçok medeniyete ev sahipliği yapmış ve Klasik ile Helenistik dönemlerde önemli bir denizcilik merkezi olarak gelişmiştir.<br><br>Roma ve Bizans dönemlerinde ise Çanakkale Boğazı'na yakın stratejik konumu nedeniyle hayati bir ileri karakol olma özelliğini sürdürmüştür. 15. yüzyılda Osmanlı İmparatorluğu topraklarına katılan ada, bu dönemde Bozcaada Kalesi gibi önemli yapılarla zenginleştirilmiştir. 1923 yılında Lozan Antlaşması ile Türkiye Cumhuriyeti'ne bağlanmıştır.<br><br>Günümüzde Bozcaada, tarihi taş evleri, göz alıcı üzüm bağları, rüzgar gülleri ve berrak plajlarıyla tanınmaktadır. Ada, tarihi, doğası ve Akdeniz'e özgü yaşam tarzını bir araya getiren eşsiz bir deneyim sunmaktadır.<br><br>Yaz Evi, 2024 yılında Bozcaada'nın tarihi Alaybey Mahallesi'nde hizmete açılmıştır. Adanın özgün mimari dokusuna sadık kalınarak özenle restore edilen bu tarihi taş yapı, geleneksel Bozcaada ruhunu modern konforla buluşturmak amacıyla tasarlanmıştır. Beş özel odanın her biri, adanın mitolojik geçmişinden ilham alarak Zeus, Hera, Tenedos, Tenes ve İlyada isimleriyle adlandırılmıştır. Yaz Evi, sadece bir konaklama mekanı değil; adanın tarihini, kültürünü ve doğasını misafirlerine en samimi şekilde deneyimleten bir yaşam alanıdır.",
+      history: "Bozcaada, tarih boyunca Tenedos olarak bilinen ve kültürel zenginliğiyle dikkat çeken bir Ege adasıdır. Homeros'un <em>İlyada</em> destanında geçen ada, Truva Savaşı sırasında stratejik bir rol oynamış ve Yunan donanmasının Truva'ya saldırmadan önce saklandığı yer olarak anılmıştır. Tarih boyunca Fenikeliler, Aioller ve Yunanlılar gibi birçok medeniyete ev sahipliği yapmış ve Klasik ile Helenistik dönemlerde önemli bir denizcilik merkezi olarak gelişmiştir.<br><br>Roma ve Bizans dönemlerinde ise Çanakkale Boğazı'na yakın stratejik konumu nedeniyle hayati bir ileri karakol olma özelliğini sürdürmüştür. 15. yüzyılda Osmanlı İmparatorluğu topraklarına katılan ada, bu dönemde Bozcaada Kalesi gibi önemli yapılarla zenginleştirilmiştir. 1923 yılında Lozan Antlaşması ile Türkiye Cumhuriyeti'ne bağlanmıştır.<br><br>Günümüzde Bozcaada, tarihi taş evleri, göz alıcı üzüm bağları, rüzgar gülleri ve berrak plajlarıyla tanınmaktadır. Ada, tarihi, doğası ve Akdeniz'e özgü yaşam tarzını bir araya getiren eşsiz bir deneyim sunmaktadır.<br><br>Yaz Evi, 2024 yılında Bozcaada'nın tarihi Alaybey Mahallesi'nde hizmete açılmıştır. Adanın özgün mimari dokusuna sadık kalınarak özenle restore edilen bu tarihi taş yapı, geleneksel Bozcaada ruhunu modern konforla buluşturmak amacıyla tasarlanmıştır. Beş özel odanın her biri, adanın mitolojik geçmişinden ilham alarak Zeus, Hera, Tenedos, Tenes ve İlyada isimleriyle adlandırılmıştır. Yaz Evi, sadece bir konaklama mekanı değil; adanın tarihini, kültürünü ve doğasını misafirlerine en samimi şekilde deneyimleten bir yaşam alanıdır.",
       getDirections: "Yol Tarifi",
 
     },
@@ -127,7 +127,7 @@ export default {
   room4: "Oda Tenes",
   room5: "Oda Ilyada",
   room1Description: "Antik Yunan tanrısı, gücün ve asaletin simgesi Zeus; Bozcadanın mitolojik hikayelerinde ve antik para biriminde yer alır. Zeus'un adıyla özdeşleşen bu oda, doğal taşlar ve zarif ahşap detaylarla tasarlanmıştır. Doğal taşlarla örülmüş duvarlar, Zeus'un gücünü simgelerken, ahşap detaylar ise sıcaklık ve huzur yaratır.",
-  room2Description: "Hera, adada zamanında yerleşim bulmuş ve büyülü doğayı simgeleyen bir tanrıça olarak anlatılır; huzur ve dengeyi simgeler. Bozcaadanın mitolojik hikayelerinde ve antik para biriminde yer alır. Hera odası, Bozcaada'nın dingin ve güvenli atmosferine mükemmel uyum sağlar.\n Doğal taşlar ve zarif ahşap detaylarla tasarlanan Zeus odası, Bozcaada'nın mitolojik ruhunu ve doğanın dokusunu yaşatma arzusunun bir göstergesidir.",
+  room2Description: "Hera, adada zamanında yerleşim bulmuş ve büyülü doğayı simgeleyen bir tanrıça olarak anlatılır; huzur ve dengeyi simgeler. Bozcaadanın mitolojik hikayelerinde ve antik para biriminde yer alır. Hera odası, Bozcaada'nın dingin ve güvenli atmosferine mükemmel uyum sağlar.\n Doğal taşlar ve zarif ahşap detaylarla tasarlanan Hera odası, Bozcaada'nın mitolojik ruhunu ve doğanın dokusunu yaşatma arzusunun bir göstergesidir.",
   room3Description: "Bozcaada'nın antik dönemdeki adlarından biri Tenedos'tur.Tenedos, mitolojik savaşların ve destanların adasıdır.\nTenedos Odası, tarihi kimliğin izlerini dekorasyonunda ve atmosferinde yaşatır.Taş ve ahşabın doğal uyumuyla geçmiş ve günümüz arasındaki bağları somutlaştırır.",
   room4Description: "Tenes, adanın ilk yerleşimcisi olarak kabul edilen, bir efsanenin kahramanıdır. Tenes Oda, Tenes yerleşiminin ruhunu taşıyan taş duvarlar, zarif ahşap detaylar ve geleneksel adalı dokunuşlarla dekore edilmiştir. Odanın her köşesinde, geçmişin dokusunu ve Bozcaada'nın derin köklerini hissedebilirsiniz.",
   room5Description: "İlyada Destanı, Bozcaadanın tarihi izlerine ilk rastlanan destandır. İlyada Oda, Bozcaada'nın tarihi ve mitolojik katmanlarını yansıtan, derin bir anlam taşır.\nİlyada Oda, mimari dokunuşlarıyla bir destanın içinde kaybolmuş gibi hissettirir. Odanın her bir detayında ahşap ve taşın uyumuyla tarihsel derinlik ve zarif dokunuşlar bir araya gelir.",
@@ -260,7 +260,7 @@ export default {
     refundPartial: 'Giriş tarihinden 3 ila 7 gün önce yapılan iptallerde toplam tutarın %50\'si iade edilir.',
     refundLate: 'Giriş tarihinden 3 günden az bir süre kala yapılan iptallerde ve gelmeme (no-show) durumunda iade yapılmaz.',
     refundProcessTitle: 'İade Süreci',
-    refundProcessContent: 'İade talepleri info@yaz-evi.com adresine e-posta gönderilerek veya 0532 431 67 34 numaralı telefondan iletilerek yapılabilir. İade onaylandıktan sonra, ödemenin yapıldığı kredi kartına veya banka hesabına 5-10 iş günü içinde iade gerçekleştirilir. İade işlemi, ödeme kuruluşu iyzico aracılığıyla yapılır.',
+    refundProcessContent: 'İade talepleri info@yaz-evi.com adresine e-posta gönderilerek veya 0532 431 67 34 numaralı telefondan iletilerek yapılabilir. İade onaylandıktan sonra, ödemenin yapıldığı kredi kartına veya banka hesabına 5-10 iş günü içinde iade gerçekleştirilir.',
     forceMajeureTitle: 'Mücbir Sebepler',
     forceMajeureContent: 'Doğal afet, salgın hastalık, savaş, terör, hükümet kararları gibi mücbir sebeplerin varlığı halinde, tarafların yükümlülükleri askıya alınır. Bu durumda misafire tam iade yapılır veya karşılıklı mutabakatla tarih değişikliği sağlanır.',
     contactTitle: 'İletişim',
@@ -276,11 +276,11 @@ export default {
     purposeTitle: 'Verilerin İşlenme Amaçları',
     purposeContent: 'Kişisel verileriniz; rezervasyon oluşturma ve yönetimi, ödeme işlemlerinin gerçekleştirilmesi, yasal yükümlülüklerin yerine getirilmesi (konaklama kayıtları vb.), misafir iletişimi ve hizmet kalitesinin artırılması amacıyla işlenmektedir.',
     dataSharingTitle: 'Verilerin Paylaşılması',
-    dataSharingContent: 'Kişisel verileriniz, ödeme işlemleri için iyzico ödeme kuruluşu ile ve yasal zorunluluklar gereği yetkili kamu kurum ve kuruluşları ile paylaşılabilir. Bunun dışında, verileriniz açık rızanız olmaksızın üçüncü taraflarla paylaşılmaz.',
+    dataSharingContent: 'Kişisel verileriniz, yasal zorunluluklar gereği yetkili kamu kurum ve kuruluşları ile paylaşılabilir. Bunun dışında, verileriniz açık rızanız olmaksızın üçüncü taraflarla paylaşılmaz.',
     cookiesTitle: 'Çerezler (Cookies)',
     cookiesContent: 'Web sitemizde kullanıcı deneyimini iyileştirmek amacıyla çerezler kullanılmaktadır. Çerezler, tarayıcı tercihleriniz ve site kullanımınız hakkında bilgi toplar. Tarayıcı ayarlarınızdan çerezleri devre dışı bırakabilirsiniz; ancak bu durumda bazı site özellikleri düzgün çalışmayabilir.',
     dataSecurityTitle: 'Veri Güvenliği',
-    dataSecurityContent: 'Kişisel verilerinizin güvenliğini sağlamak için SSL şifreleme, güvenli ödeme altyapısı (iyzico PCI DSS sertifikalı) ve erişim kontrolü gibi teknik ve idari tedbirler uygulanmaktadır.',
+    dataSecurityContent: 'Kişisel verilerinizin güvenliğini sağlamak için SSL şifreleme ve erişim kontrolü gibi teknik ve idari tedbirler uygulanmaktadır.',
     userRightsTitle: 'Haklarınız',
     userRightsContent: 'KVKK kapsamında; kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını öğrenme, yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme, eksik veya yanlış işlenmiş verilerin düzeltilmesini isteme, verilerin silinmesini veya yok edilmesini isteme ve işlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonuç doğmasına itiraz etme haklarına sahipsiniz.',
     contactTitle: 'İletişim',
@@ -300,11 +300,11 @@ export default {
     serviceDetailsTitle: 'Hizmetin Temel Nitelikleri',
     serviceDetailsContent: 'Hizmetin türü, adedi, fiyatı ve ödeme bilgileri rezervasyon özeti sayfasında belirtilmektedir. Satın alınan hizmet, Yaz Evi Bozcaada butik otelde belirlenen tarihler arasında konaklama hizmetidir. Konaklama hizmeti, seçilen oda tipi ve belirtilen giriş-çıkış tarihleri doğrultusunda sunulur.',
     priceTitle: 'Hizmet Bedeli ve Ödeme',
-    priceContent: 'Hizmet bedeli, rezervasyon sırasında web sitesinde belirtilen fiyattır ve KDV dahildir. Ödeme, iyzico güvenli ödeme altyapısı aracılığıyla kredi kartı veya banka kartı ile gerçekleştirilir. Toplam konaklama bedeli, rezervasyon sırasında tahsil edilir.',
+    priceContent: 'Hizmet bedeli, rezervasyon sırasında web sitesinde belirtilen fiyattır ve KDV dahildir. Ödeme, güvenli ödeme altyapısı aracılığıyla kredi kartı veya banka kartı ile gerçekleştirilir. Toplam konaklama bedeli, rezervasyon sırasında tahsil edilir.',
     withdrawalTitle: 'Cayma Hakkı',
     withdrawalContent: '6502 sayılı Kanun\'un 15. maddesinin (g) bendi uyarınca, belirli bir tarihte yapılması gereken konaklama hizmetlerinde cayma hakkı kullanılamaz. Ancak Yaz Evi Bozcaada, misafir memnuniyetini ön planda tutarak kendi iptal politikası çerçevesinde iade imkânı sunmaktadır.',
     cancellationTitle: 'İptal ve İade Koşulları',
-    cancellationContent: 'Giriş tarihinden 7 gün veya daha önce yapılan iptallerde toplam tutarın tamamı iade edilir. Giriş tarihinden 3-7 gün önce yapılan iptallerde toplam tutarın %50\'si tahsil edilir, kalan %50 iade edilir. Giriş tarihinden 3 günden az bir süre kala yapılan iptallerde ve no-show durumunda iade yapılmaz. İade işlemleri, iyzico aracılığıyla ödemenin yapıldığı araca 5-10 iş günü içinde gerçekleştirilir.',
+    cancellationContent: 'Giriş tarihinden 7 gün veya daha önce yapılan iptallerde toplam tutarın tamamı iade edilir. Giriş tarihinden 3-7 gün önce yapılan iptallerde toplam tutarın %50\'si tahsil edilir, kalan %50 iade edilir. Giriş tarihinden 3 günden az bir süre kala yapılan iptallerde ve no-show durumunda iade yapılmaz. İade işlemleri, ödemenin yapıldığı araca 5-10 iş günü içinde gerçekleştirilir.',
     responsibilitiesTitle: 'Tarafların Yükümlülükleri',
     responsibilitiesContent: 'Satıcı, hizmetin sözleşmeye uygun olarak sunulmasından sorumludur. Alıcı, rezervasyon sırasında doğru ve eksiksiz bilgi vermekle yükümlüdür. Alıcı, konaklama süresince otel kurallarına uymakla yükümlüdür.',
     disputeTitle: 'Uyuşmazlık Çözümü',

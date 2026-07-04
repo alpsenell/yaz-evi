@@ -34,7 +34,7 @@ export default {
     },
     checkout: {
       title: "Checkout | Yaz Evi Bozcaada Boutique Hotel",
-      description: "Complete your reservation at Yaz Evi Bozcaada boutique hotel. Secure payment with iyzico."
+      description: "Complete your reservation at Yaz Evi Bozcaada boutique hotel."
     },
     confirmation: {
       title: "Booking Confirmation | Yaz Evi Bozcaada",
@@ -57,7 +57,7 @@ export default {
       description: "Read the distance sales agreement terms for Yaz Evi Bozcaada boutique hotel."
     }
   },
-  phoneNumber: "+90 530 306 20 21",
+  phoneNumber: "+90 532 431 67 34",
   hotelAddress: "Alaybey Mah. Muratbey Sk. 12 Bozcaada/Canakkale",
   gallery: "Gallery",
   galleryModal: {
@@ -93,7 +93,7 @@ export default {
     about: {
       title: "About Us",
       description: "Peace in a restored historic building.",
-      history: "Bozcaada, historically known as Tenedos, is a captivating island in the northern Aegean Sea, rich with cultural and historical significance. Mentioned in Homer’s *Iliad*, the island played a strategic role during the Trojan War, serving as the hiding place for the Greek fleet before their legendary attack on Troy. Throughout its history, Bozcaada was home to various civilizations, including the Phoenicians, Aeolians, and Greeks, thriving as an important maritime hub during the Classical and Hellenistic periods.<br><br>Under Roman and Byzantine rule, it continued to be a vital outpost due to its strategic location near the Dardanelles Strait. In the 15th century, the island became part of the Ottoman Empire, where significant structures such as the iconic Bozcaada Castle were constructed. After the Treaty of Lausanne in 1923, it became part of modern-day Turkey.<br><br>Today, Bozcaada is celebrated for its historic stone houses, picturesque vineyards, windmills, and pristine beaches, offering a harmonious blend of history, nature, and Mediterranean charm.<br><br>Yaz Evi opened its doors in 2024 in the historic Alaybey Quarter of Bozcaada. This carefully restored stone building was designed to blend the traditional spirit of Bozcaada with modern comfort, while staying true to the island’s authentic architectural character. Each of the five unique rooms is named after the island’s mythological heritage — Zeus, Hera, Tenedos, Tenes, and Iliad. Yaz Evi is more than a place to stay — it is a living space where guests can experience the island’s history, culture, and nature in the most heartfelt way.",
+      history: "Bozcaada, historically known as Tenedos, is a captivating island in the northern Aegean Sea, rich with cultural and historical significance. Mentioned in Homer’s <em>Iliad</em>, the island played a strategic role during the Trojan War, serving as the hiding place for the Greek fleet before their legendary attack on Troy. Throughout its history, Bozcaada was home to various civilizations, including the Phoenicians, Aeolians, and Greeks, thriving as an important maritime hub during the Classical and Hellenistic periods.<br><br>Under Roman and Byzantine rule, it continued to be a vital outpost due to its strategic location near the Dardanelles Strait. In the 15th century, the island became part of the Ottoman Empire, where significant structures such as the iconic Bozcaada Castle were constructed. After the Treaty of Lausanne in 1923, it became part of modern-day Turkey.<br><br>Today, Bozcaada is celebrated for its historic stone houses, picturesque vineyards, windmills, and pristine beaches, offering a harmonious blend of history, nature, and Mediterranean charm.<br><br>Yaz Evi opened its doors in 2024 in the historic Alaybey Quarter of Bozcaada. This carefully restored stone building was designed to blend the traditional spirit of Bozcaada with modern comfort, while staying true to the island’s authentic architectural character. Each of the five unique rooms is named after the island’s mythological heritage — Zeus, Hera, Tenedos, Tenes, and Iliad. Yaz Evi is more than a place to stay — it is a living space where guests can experience the island’s history, culture, and nature in the most heartfelt way.",
       getDirections: "Get Directions",
 
     },
@@ -260,7 +260,7 @@ export default {
     refundPartial: '50% refund for cancellations made between 3 and 7 days before the check-in date.',
     refundLate: 'No refund for cancellations made less than 3 days before the check-in date or for no-shows.',
     refundProcessTitle: 'Refund Process',
-    refundProcessContent: 'Refund requests can be made by sending an email to info@yaz-evi.com or calling 0532 431 67 34. Once the refund is approved, it will be processed to the credit card or bank account used for payment within 5-10 business days. Refund transactions are processed through the payment provider iyzico.',
+    refundProcessContent: 'Refund requests can be made by sending an email to info@yaz-evi.com or calling 0532 431 67 34. Once the refund is approved, it will be processed to the credit card or bank account used for payment within 5-10 business days.',
     forceMajeureTitle: 'Force Majeure',
     forceMajeureContent: 'In the event of force majeure circumstances such as natural disasters, pandemics, war, terrorism, or government decisions, the obligations of the parties shall be suspended. In such cases, a full refund will be provided to the guest, or a date change will be arranged by mutual agreement.',
     contactTitle: 'Contact',
@@ -276,11 +276,11 @@ export default {
     purposeTitle: 'Purposes of Data Processing',
     purposeContent: 'Your personal data is processed for the purposes of creating and managing reservations, processing payment transactions, fulfilling legal obligations (accommodation records, etc.), guest communication, and improving service quality.',
     dataSharingTitle: 'Data Sharing',
-    dataSharingContent: 'Your personal data may be shared with the payment provider iyzico for payment transactions and with authorized public institutions as required by law. Beyond this, your data will not be shared with third parties without your explicit consent.',
+    dataSharingContent: 'Your personal data may be shared with authorized public institutions as required by law. Beyond this, your data will not be shared with third parties without your explicit consent.',
     cookiesTitle: 'Cookies',
     cookiesContent: 'Cookies are used on our website to improve user experience. Cookies collect information about your browser preferences and site usage. You can disable cookies through your browser settings; however, some site features may not function properly in that case.',
     dataSecurityTitle: 'Data Security',
-    dataSecurityContent: 'Technical and administrative measures such as SSL encryption, secure payment infrastructure (iyzico is PCI DSS certified), and access control are implemented to ensure the security of your personal data.',
+    dataSecurityContent: 'Technical and administrative measures such as SSL encryption and access control are implemented to ensure the security of your personal data.',
     userRightsTitle: 'Your Rights',
     userRightsContent: 'Under KVKK, you have the right to learn whether your personal data is processed, request information if it has been processed, learn the purpose of processing, know the third parties to whom your data is transferred domestically or internationally, request correction of incomplete or inaccurate data, request deletion or destruction of data, and object to any adverse results arising from the analysis of processed data exclusively through automated systems.',
     contactTitle: 'Contact',
@@ -300,11 +300,11 @@ export default {
     serviceDetailsTitle: 'Essential Characteristics of the Service',
     serviceDetailsContent: 'The type, quantity, price, and payment information of the service are specified on the reservation summary page. The purchased service is accommodation at Yaz Evi Bozcaada boutique hotel between the specified dates. The accommodation service is provided according to the selected room type and specified check-in/check-out dates.',
     priceTitle: 'Service Fee and Payment',
-    priceContent: 'The service fee is the price stated on the website at the time of reservation, inclusive of VAT. Payment is made by credit card or debit card through the iyzico secure payment infrastructure. The total accommodation fee is charged at the time of reservation.',
+    priceContent: 'The service fee is the price stated on the website at the time of reservation, inclusive of VAT. Payment is made by credit card or debit card through a secure payment infrastructure. The total accommodation fee is charged at the time of reservation.',
     withdrawalTitle: 'Right of Withdrawal',
     withdrawalContent: 'Pursuant to Article 15(g) of Law No. 6502, the right of withdrawal cannot be exercised for accommodation services that must be provided on a specific date. However, Yaz Evi Bozcaada prioritizes guest satisfaction and offers refund options within its own cancellation policy.',
     cancellationTitle: 'Cancellation and Refund Conditions',
-    cancellationContent: 'Full refund for cancellations made 7 days or more before the check-in date. 50% of the total amount is charged for cancellations made 3-7 days before check-in, with the remaining 50% refunded. No refund for cancellations made less than 3 days before check-in or for no-shows. Refund transactions are processed through iyzico to the original payment method within 5-10 business days.',
+    cancellationContent: 'Full refund for cancellations made 7 days or more before the check-in date. 50% of the total amount is charged for cancellations made 3-7 days before check-in, with the remaining 50% refunded. No refund for cancellations made less than 3 days before check-in or for no-shows. Refund transactions are processed to the original payment method within 5-10 business days.',
     responsibilitiesTitle: 'Obligations of the Parties',
     responsibilitiesContent: 'The Seller is responsible for providing the service in accordance with the agreement. The Buyer is obligated to provide accurate and complete information during the reservation. The Buyer is obligated to comply with hotel rules during the accommodation period.',
     disputeTitle: 'Dispute Resolution',

@@ -1,14 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useTranslation } from 'i18next-vue'
 import YazIcon from "./atoms/YazIcon.vue";
 import visaLogo from '../assets/media/visa.webp'
 import mastercardLogo from '../assets/media/mastercard.svg'
-import iyzicoLogo from '../assets/media/iyzico.svg'
-import iyzicoEnLogo from '../assets/media/iyzico-en.svg'
-
-const { i18next } = useTranslation()
-const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo : iyzicoEnLogo)
 </script>
 
 <template>
@@ -62,7 +55,7 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
           <YazIcon name="maps" :size="16" color="black" />
           <a
             class="text-link font-raleway w-fit"
-            href="https://goo.gl/maps/7Z3"
+            href="https://maps.app.goo.gl/ggPm96WbCZujmtQq5"
             v-track="'clickOnFooterAddress'"
           >
             {{ $t('hotelAddress') }}
@@ -130,7 +123,6 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
       <div class="flex items-center gap-3">
         <img :src="visaLogo" alt="Visa" class="h-6">
         <img :src="mastercardLogo" alt="Mastercard" class="h-6">
-        <img :src="iyzicoSrc" alt="iyzico" class="h-6">
       </div>
     </div>
   </footer>
