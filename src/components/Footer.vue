@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useTranslation } from 'i18next-vue'
 import YazIcon from "./atoms/YazIcon.vue";
-import visaLogo from '../assets/media/visa.webp'
+import visaLogo from '../assets/media/visa.svg'
 import mastercardLogo from '../assets/media/mastercard.svg'
-import iyzicoLogo from '../assets/media/iyzico.svg'
-import iyzicoEnLogo from '../assets/media/iyzico-en.svg'
 
 const { i18next } = useTranslation()
-const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo : iyzicoEnLogo)
 </script>
 
 <template>
@@ -97,10 +93,9 @@ const iyzicoSrc = computed(() => i18next.language?.startsWith('tr') ? iyzicoLogo
     <div class="flex flex-wrap gap-4 justify-between items-center pt-5 font-jost text-xs text-[rgba(205,216,219,0.6)]">
       <div class="flex items-center gap-4">
         <span>&copy; 2024 Yaz Evi Bozcaada</span>
-        <div class="flex items-center gap-2 opacity-60">
+        <div class="flex items-center gap-2">
           <img :src="visaLogo" alt="Visa" class="h-4">
           <img :src="mastercardLogo" alt="Mastercard" class="h-4">
-          <img :src="iyzicoSrc" alt="iyzico" class="h-4">
         </div>
       </div>
       <div class="flex gap-5 uppercase tracking-[0.18em] text-[11px]">
