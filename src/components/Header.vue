@@ -60,11 +60,11 @@
       <YazIcon
         name="yaz-evi"
         color="white"
-        class="w-[120px] md:w-[150px] h-auto"
+        class="w-[92px] md:w-[150px] h-auto"
       />
     </router-link>
 
-    <div class="justify-self-end flex items-center gap-6">
+    <div class="justify-self-end flex items-center gap-3 md:gap-6">
       <span class="hidden md:block font-jost text-xs tracking-[0.24em] uppercase">
         <button
           type="button"
@@ -82,7 +82,7 @@
       </span>
       <router-link
         to="/booking"
-        class="font-jost text-xs tracking-[0.26em] uppercase border border-white/60 px-4 py-2.5 md:px-6 md:py-3 hover:bg-white hover:text-ink transition-colors duration-300"
+        class="font-jost text-[10px] md:text-xs tracking-[0.14em] md:tracking-[0.26em] uppercase border border-white/60 px-2.5 py-2 md:px-6 md:py-3 whitespace-nowrap hover:bg-white hover:text-ink transition-colors duration-300"
       >
         {{ $t('v2.book') }}
       </router-link>
