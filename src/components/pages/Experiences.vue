@@ -6,11 +6,20 @@ import { getMediaUrl } from '../../utils/media';
   <main class="experiences page-fade bg-cream">
     <!-- Sub hero -->
     <div class="relative h-[420px] md:h-[560px] overflow-hidden">
-      <img
-        :src="getMediaUrl('homepage-5-min.jpg')"
-        alt="Bozcaada sunset"
+      <video
         class="absolute inset-0 w-full h-full object-cover"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        :poster="getMediaUrl('experience-video-media.png')"
       >
+        <source
+          :src="getMediaUrl('experiences.MOV')"
+          type="video/mp4"
+        >
+      </video>
       <div class="absolute inset-0 bg-gradient-to-b from-[rgba(16,32,40,0.42)] via-[rgba(16,32,40,0.15)] to-[rgba(16,32,40,0.5)]"></div>
       <div class="absolute left-0 right-0 top-[56%] -translate-y-1/2 text-center text-white px-6">
         <div class="eyebrow-light mb-5">{{ $t('v2.experiences.eyebrow') }}</div>
