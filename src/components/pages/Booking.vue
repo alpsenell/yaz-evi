@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import i18next from "i18next";
-import { DatePicker as VCalendarDatePicker } from "v-calendar";
 
 import { ROOMS } from "../../enums/global.ts";
 import { useBookings } from "../../composables/useBookings.ts";
@@ -10,11 +9,12 @@ import { useRoomPrices } from "../../composables/useRoomPrices.ts";
 import type { Room } from "../../types/booking.ts";
 
 import Loader from "../atoms/Loader.vue";
+import BookingCalendar from "../organisms/BookingCalendar.vue";
 import { getMediaUrl } from '../../utils/media';
 
 const route = useRoute();
 const router = useRouter();
-const { fetchAllBookings, getDisabledDates, getCalendarAttributes } = useBookings();
+const { fetchAllBookings, getDisabledDates } = useBookings();
 const { fetchPrices, getPrice } = useRoomPrices();
 
 const selectedLanguage = ref(i18next.language as string);
@@ -52,6 +52,12 @@ onMounted(async () => {
   initialLoading.value = false;
 });
 
+const onLanguageChanged = (lang: string) => {
+  selectedLanguage.value = lang;
+};
+i18next.on('languageChanged', onLanguageChanged);
+onBeforeUnmount(() => i18next.off('languageChanged', onLanguageChanged));
+
 const calculateNights = (start: Date | null, end: Date | null): number => {
   if (!start || !end) return 0;
   const diffMs = new Date(end).getTime() - new Date(start).getTime();
@@ -77,33 +83,15 @@ const totalPrice = computed(() => {
   return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(roomPrice.value * nights.value);
 });
 
-const disabledDates = computed(() => {
+const bookedRanges = computed(() => {
   if (!selectedRoom.value) return [];
   return getDisabledDates(selectedRoom.value.id);
 });
-
-const calendarAttributes = computed(() => {
-  if (!selectedRoom.value) return [];
-  return getCalendarAttributes(selectedRoom.value.id);
-});
-
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-
-const calendarColumns = computed(() => (window.innerWidth < 768 ? 1 : 2));
-const calendarKey = ref(0);
 
 const selectRoom = (room: Room) => {
   if (selectedRoom.value?.id === room.id) return;
   selectedRoom.value = room;
   selectedDates.value = { start: null, end: null };
-  calendarKey.value++;
-};
-
-const handleDateChange = (dates: { start: Date | null; end: Date | null }) => {
-  if (dates && dates.start && dates.end) {
-    selectedDates.value = dates;
-  }
 };
 
 const maxGuests = computed(() => selectedRoom.value?.bookingInformation.guestNumber ?? 6);
@@ -247,18 +235,12 @@ const goToCheckout = () => {
             </div>
           </div>
 
-          <div v-if="selectedRoom">
-            <VCalendarDatePicker
-              :key="calendarKey"
-              :columns="calendarColumns"
-              :min-date="today"
-              :disabled-dates="disabledDates"
-              :attributes="calendarAttributes"
-              is-range
-              :first-day-of-week="2"
-              @update:model-value="handleDateChange"
-            />
-          </div>
+          <BookingCalendar
+            v-if="selectedRoom"
+            v-model="selectedDates"
+            :booked-ranges="bookedRanges"
+            :locale="selectedLanguage"
+          />
           <p v-else class="font-jost font-light text-base text-slate border border-sand p-6 max-w-[460px]">
             {{ $t('booking.chooseRoom') }}
           </p>
