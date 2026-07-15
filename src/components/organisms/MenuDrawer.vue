@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { ref, watch, computed, nextTick, onBeforeUnmount } from "vue";
 import { useTranslation } from 'i18next-vue';
-import { HEADER_MENU_ITEMS } from "../../enums/global.ts";
-import LanguageSelector from "./LanguageSelector.vue";
 import YazIcon from "../atoms/YazIcon.vue";
-import ContactInfos from "./ContactInfos.vue";
 
-const { t } = useTranslation();
+const { t, i18next } = useTranslation();
 
 const props = defineProps({
   visibility: Boolean,
@@ -15,6 +12,20 @@ const emits = defineEmits(['toggleMobileMenu']);
 const visibilityClass = ref('invisible -z-10');
 const closeButtonRef = ref<HTMLButtonElement | null>(null);
 const navRef = ref<HTMLElement | null>(null);
+
+const navItems = [
+  { title: 'v2.nav.home', url: '/' },
+  { title: 'v2.nav.rooms', url: '/rooms' },
+  { title: 'v2.nav.experiences', url: '/experiences' },
+  { title: 'v2.nav.gallery', url: '/gallery' },
+  { title: 'v2.nav.about', url: '/about' },
+  { title: 'v2.nav.contact', url: '/contact' },
+];
+
+const currentLanguage = computed(() => i18next.language?.startsWith('tr') ? 'tr' : 'en');
+const setLanguage = (lang: string) => {
+  i18next.changeLanguage(lang);
+};
 
 const handleKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Escape') {
@@ -43,7 +54,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
 watch(() => props.visibility, (value) => {
   if (value) {
-    visibilityClass.value = 'visible z-10';
+    visibilityClass.value = 'visible z-50';
     document.addEventListener('keydown', handleKeydown);
     nextTick(() => {
       closeButtonRef.value?.focus();
@@ -59,17 +70,12 @@ watch(() => props.visibility, (value) => {
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleKeydown);
 });
-
-const openPosition = computed(() => {
-  return window.innerHeight < 500 ? 'up' : 'down';
-});
-
 </script>
 
 <template>
   <div
-    class="fixed top-0 h-full w-screen left-0"
-    :class="visibilityClass"
+    class="fixed inset-0 h-full w-screen transition-opacity duration-300"
+    :class="[visibilityClass, visibility ? 'opacity-100' : 'opacity-0']"
     role="dialog"
     :aria-modal="visibility"
     :aria-hidden="!visibility"
@@ -77,55 +83,66 @@ const openPosition = computed(() => {
   >
     <nav
       ref="navRef"
-      class="h-full w-fit relative z-10 bg-white transition-transform p-10 min-w-[90%] md:min-w-96"
-      :class="{ 'translate-x-0': visibility, '-translate-x-full': !visibility }"
+      class="h-full w-full bg-inkDeep text-parchment flex flex-col"
     >
-      <button
-        ref="closeButtonRef"
-        type="button"
-        class="absolute top-10 right-8 cursor-pointer bg-transparent border-none p-0"
-        :aria-label="t('accessibility.closeMenu')"
-        @click="emits('toggleMobileMenu')"
-      >
-        <YazIcon
-          name="cross"
-          :size="32"
-          color="black"
-        />
-      </button>
+      <div class="flex items-center justify-between px-6 py-6 md:px-10 md:py-8">
+        <router-link to="/" :aria-label="t('accessibility.goHome')" @click="emits('toggleMobileMenu')">
+          <YazIcon
+            name="yaz-evi"
+            color="white"
+            class="w-[120px] md:w-[140px] h-auto"
+          />
+        </router-link>
+        <button
+          ref="closeButtonRef"
+          type="button"
+          class="font-jost text-[13px] tracking-[0.28em] uppercase cursor-pointer bg-transparent border-none p-0 text-parchment"
+          :aria-label="t('accessibility.closeMenu')"
+          @click="emits('toggleMobileMenu')"
+        >
+          {{ $t('v2.close') }} ✕
+        </button>
+      </div>
 
-      <router-link to="/" :aria-label="t('accessibility.goHome')">
-        <YazIcon
-          name="yaz-evi"
-          color="black"
-          class=" max-[400px]:w-[150px] w-[200px] h-auto"
-        />
-      </router-link>
-
-      <ul class="header__list overflow-y-visible h-auto flex flex-col items-baseline gap-4 justify-items-start mt-12">
+      <ul class="flex-1 flex flex-col justify-center gap-1.5 px-6 md:px-10 list-none m-0">
         <li
-          v-for="item in HEADER_MENU_ITEMS"
+          v-for="(item, index) in navItems"
           :key="item.url"
-          class="cursor-pointer"
         >
           <router-link
-            class="header__link sub-link text-base"
+            class="font-serif font-light text-[34px] md:text-[46px] text-parchment py-2 inline-block hover:text-azureSoft transition-colors"
             :to="item.url"
             @click="emits('toggleMobileMenu')"
           >
-            {{ $t(`${item.title}`) }}
+            <span class="font-serif text-[15px] text-azureSoft mr-4 align-middle">0{{ index + 1 }}</span>{{ $t(item.title) }}
           </router-link>
         </li>
-
-        <LanguageSelector :open-position="openPosition" />
-
-        <ContactInfos />
       </ul>
+
+      <div class="px-6 py-6 md:px-10 md:py-8 border-t border-white/10 flex flex-wrap gap-4 justify-between items-center font-jost text-xs tracking-[0.18em]">
+        <a href="tel:+905324316734" class="text-parchment">+90 532 431 67 34</a>
+        <span class="uppercase tracking-[0.24em]">
+          <button
+            type="button"
+            class="cursor-pointer bg-transparent border-none p-0 text-inherit uppercase tracking-[inherit]"
+            :class="{ 'opacity-50': currentLanguage !== 'en' }"
+            @click="setLanguage('en')"
+          >EN</button>
+          <span class="opacity-40"> / </span>
+          <button
+            type="button"
+            class="cursor-pointer bg-transparent border-none p-0 text-inherit uppercase tracking-[inherit]"
+            :class="{ 'opacity-50': currentLanguage !== 'tr' }"
+            @click="setLanguage('tr')"
+          >TR</button>
+        </span>
+        <a
+          href="https://www.instagram.com/yazevibozcaada_/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-parchment"
+        >@yazevibozcaada_</a>
+      </div>
     </nav>
-    <div
-      class="overlay transition-opacity w-full h-full bg-black top-0 left-0 absolute"
-      :class="{ 'opacity-40': visibility, 'opacity-0': !visibility }"
-      @click="emits('toggleMobileMenu')"
-    />
   </div>
 </template>

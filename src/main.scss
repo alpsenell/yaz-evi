@@ -1,9 +1,9 @@
 @use 'styles/reset';
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Jost', system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  background-color: #ffffff;
+  background-color: #FAF8F3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,29 +15,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Gravity";
-  src: url("./assets/fonts/Gravity Handwritten.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Raleway";
-  src: url("./assets/fonts/Raleway-VariableFont_wght.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Montserrat";
-  src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+html {
+  scroll-behavior: smooth;
 }
 
-.font-gravity {
-  font-family: "Gravity", sans-serif;
-}
-
-.font-raleway {
-  font-family: "Raleway", sans-serif;
-}
-
+// Legacy font classes — brand refresh maps everything to the new type system
+.font-gravity,
+.font-raleway,
 .font-montserrat {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Jost', sans-serif;
 }
 
 body {
@@ -46,21 +32,132 @@ body {
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-  background-color: transparent;
+  background-color: #FAF8F3;
+  color: #16323C;
 }
 
-@media screen and (min-width: 768px) {
-  html, body {
-    scroll-snap-type: y mandatory;
+@layer components {
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: #2F6E86;
   }
 
-  .full-height-section, section {
-    scroll-snap-align: start;
+  .eyebrow-light {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    opacity: .9;
+  }
+
+  .eyebrow-ink {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: #8FB4C1;
+  }
+
+  .body-p {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.95;
+    color: #4a5b5e;
+  }
+
+  .link-underline {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #16323C;
+    border-bottom: 1px solid #16323C;
+    padding-bottom: 6px;
+    cursor: pointer;
+    transition: opacity .2s ease;
+
+    &:hover { opacity: .65; }
+  }
+
+  .link-underline-azure {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #2F6E86;
+    border-bottom: 1px solid #2F6E86;
+    padding-bottom: 6px;
+    cursor: pointer;
+    transition: opacity .2s ease;
+
+    &:hover { opacity: .65; }
+  }
+
+  .link-underline-light {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, .6);
+    padding-bottom: 7px;
+    cursor: pointer;
+    transition: opacity .2s ease;
+
+    &:hover { opacity: .75; }
+  }
+
+  .btn-solid-ink {
+    display: block;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    background: #16323C;
+    color: #f3efe6;
+    padding: 17px;
+    cursor: pointer;
+    transition: background .25s ease;
+
+    &:hover { background: #2F6E86; }
+  }
+
+  .btn-outline-light {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    border: 1px solid rgba(243, 239, 230, .5);
+    padding: 16px 40px;
+    color: #f3efe6;
+    cursor: pointer;
+    transition: all .25s ease;
+
+    &:hover {
+      background: #f3efe6;
+      color: #16323C;
+    }
   }
 }
 
+@keyframes yzfade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.page-fade {
+  animation: yzfade .5s ease;
+}
+
+// Legacy link styles used by checkout / confirmation pages
 .sub-link {
-  color: #3E2021;
+  color: #16323C;
   font-weight: 400;
   line-height: 150%;
   letter-spacing: 0.9px;
@@ -68,11 +165,11 @@ body {
   text-transform: uppercase;
   position: relative;
   text-decoration: none;
-  font-family: "Raleway";
+  font-family: 'Jost', sans-serif;
 }
 
 .sub-link:hover {
-  color: #FAAA8D;
+  color: #2F6E86;
 }
 
 .sub-link:hover:after {
@@ -90,13 +187,13 @@ body {
   width: 0;
 }
 
-.text-link{
-  color: #3E2021;
+.text-link {
+  color: #16323C;
   font-size: 14px;
   font-weight: 400;
   line-height: 150%;
   transition: .3s;
-  font-family: "Raleway";
+  font-family: 'Jost', sans-serif;
   text-transform: capitalize;
   position: relative;
 }
@@ -115,4 +212,71 @@ body {
   position: absolute;
   transition: opacity .3s ease;
   width: 100%;
+}
+
+// v-calendar theming to match the brand refresh
+.vc-container.vc-light,
+.vc-container.vc-light.vc-blue,
+.vc-light .vc-popover-content.vc-blue {
+  --vc-color: #16323C;
+  --vc-bg: transparent;
+  --vc-border: transparent;
+  --vc-accent-50: #FAF8F3;
+  --vc-accent-100: #F0E8D9;
+  --vc-accent-200: #E7DCC8;
+  --vc-accent-300: #d8cdb4;
+  --vc-accent-400: #C9B58C;
+  --vc-accent-500: #2F6E86;
+  --vc-accent-600: #16323C;
+  --vc-accent-700: #16323C;
+  --vc-accent-800: #12272E;
+  --vc-accent-900: #12272E;
+  --vc-font-family: 'Jost', sans-serif;
+  --vc-rounded-full: 0;
+  border: none;
+  background: transparent;
+  font-family: 'Jost', sans-serif;
+}
+
+.vc-light {
+  .vc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 22px;
+    color: #16323C;
+    background: transparent;
+  }
+
+  .vc-weekday {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #9a9488;
+  }
+
+  .vc-day-content {
+    font-weight: 300;
+    font-size: 14px;
+    border-radius: 0;
+  }
+
+  .vc-highlight {
+    border-radius: 0;
+  }
+
+  .vc-day-content.vc-disabled {
+    color: #c2b49a;
+    text-decoration: line-through;
+  }
+
+  .vc-arrow,
+  .vc-title {
+    background: transparent;
+  }
+
+  .vc-arrow:hover {
+    background: #F0E8D9;
+  }
 }

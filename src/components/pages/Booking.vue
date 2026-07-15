@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
-import { db } from "../../firebase/config.ts";
-import { collection, query, where, getDocs, doc } from "firebase/firestore";
+import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import i18next from "i18next";
 import { DatePicker as VCalendarDatePicker } from "v-calendar";
@@ -11,8 +9,6 @@ import { useBookings } from "../../composables/useBookings.ts";
 import { useRoomPrices } from "../../composables/useRoomPrices.ts";
 import type { Room } from "../../types/booking.ts";
 
-import YazButton from "../atoms/YazButton.vue";
-import YazIcon from "../atoms/YazIcon.vue";
 import Loader from "../atoms/Loader.vue";
 import { getMediaUrl } from '../../utils/media';
 
@@ -48,6 +44,11 @@ onMounted(async () => {
     }
   }
 
+  const guestsParam = Number(route.query.guests);
+  if (!Number.isNaN(guestsParam) && guestsParam >= 1) {
+    guestNumber.value = Math.min(guestsParam, 6);
+  }
+
   initialLoading.value = false;
 });
 
@@ -59,9 +60,9 @@ const calculateNights = (start: Date | null, end: Date | null): number => {
 };
 
 const formatDate = (date: Date | null) => {
-  if (!date) return '';
+  if (!date) return '—';
   const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
-  return new Intl.DateTimeFormat(selectedLanguage.value === 'en' ? 'en-US' : 'tr-TR', options).format(date);
+  return new Intl.DateTimeFormat(selectedLanguage.value?.startsWith('en') ? 'en-US' : 'tr-TR', options).format(date);
 };
 
 const nights = computed(() => calculateNights(selectedDates.value.start, selectedDates.value.end));
@@ -74,11 +75,6 @@ const roomPrice = computed(() => {
 const totalPrice = computed(() => {
   if (!selectedRoom.value || roomPrice.value === 0 || nights.value === 0) return '';
   return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(roomPrice.value * nights.value);
-});
-
-const formattedPricePerNight = computed(() => {
-  if (roomPrice.value === 0) return '';
-  return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(roomPrice.value);
 });
 
 const disabledDates = computed(() => {
@@ -104,17 +100,13 @@ const selectRoom = (room: Room) => {
   calendarKey.value++;
 };
 
-const changeRoom = () => {
-  selectedRoom.value = null;
-  selectedDates.value = { start: null, end: null };
-  calendarKey.value++;
-};
-
 const handleDateChange = (dates: { start: Date | null; end: Date | null }) => {
   if (dates && dates.start && dates.end) {
     selectedDates.value = dates;
   }
 };
+
+const maxGuests = computed(() => selectedRoom.value?.bookingInformation.guestNumber ?? 6);
 
 const goToCheckout = () => {
   if (!selectedRoom.value || !selectedDates.value.start || !selectedDates.value.end) return;
@@ -137,326 +129,238 @@ const goToCheckout = () => {
 </script>
 
 <template>
-  <section class="booking min-h-screen">
-    <!-- Hero banner -->
-    <div class="relative h-48 md:h-64 overflow-hidden">
+  <main class="booking page-fade bg-cream min-h-screen">
+    <!-- Hero -->
+    <div class="relative h-[360px] md:h-[440px] overflow-hidden">
       <img
-        class="w-full h-full object-cover object-center"
+        class="absolute inset-0 w-full h-full object-cover"
         :src="getMediaUrl('home-gallery/gallery_left_1.jpg')"
         alt="Yaz Evi Bozcaada rezervasyon"
       >
-      <div class="absolute inset-0 bg-secondaryDark/40 flex items-center justify-center">
-        <h1 class="text-3xl md:text-4xl font-raleway font-light text-white tracking-wide">
-          {{ $t('bookNow') }}
-        </h1>
+      <div class="absolute inset-0 bg-gradient-to-b from-[rgba(16,32,40,0.45)] via-[rgba(16,32,40,0.25)] to-[rgba(16,32,40,0.55)]"></div>
+      <div class="absolute left-0 right-0 top-[56%] -translate-y-1/2 text-center text-white px-6">
+        <div class="eyebrow-light mb-5">{{ $t('v2.booking.eyebrow') }}</div>
+        <h1 class="font-serif font-light text-[44px] md:text-[58px] lg:text-[78px] m-0">{{ $t('v2.stay') }}</h1>
       </div>
     </div>
 
-    <!-- Steps indicator -->
-    <div class="max-w-screen-xl mx-auto px-4 py-6">
-      <div class="flex items-center justify-center gap-2 md:gap-4 mb-8">
+    <!-- Steps -->
+    <div class="flex items-start justify-center gap-2 md:gap-5 max-w-[640px] mx-auto pt-14 md:pt-20 px-6 pb-5">
+      <div
+        v-for="step in [
+          { num: 1, label: $t('booking.stepRoom') },
+          { num: 2, label: $t('booking.stepDates') },
+          { num: 3, label: $t('booking.stepSummary') },
+        ]"
+        :key="step.num"
+        class="flex flex-col items-center gap-2.5 w-[130px]"
+      >
         <div
-          v-for="(step, index) in [
-            { num: 1, label: $t('booking.stepRoom') },
-            { num: 2, label: $t('booking.stepDates') },
-            { num: 3, label: $t('booking.stepSummary') },
-          ]"
-          :key="step.num"
-          class="flex items-center gap-2 md:gap-4"
+          class="w-11 h-11 rounded-full flex items-center justify-center font-serif text-[19px] transition-colors"
+          :class="currentStep > step.num
+            ? 'bg-azure text-white'
+            : currentStep === step.num
+              ? 'bg-ink text-white'
+              : 'border border-[#cfc4ac] text-[#b3ab99]'"
         >
-          <div class="flex items-center gap-2">
-            <div
-              class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-montserrat transition-colors"
-              :class="currentStep >= step.num
-                ? 'bg-primary text-white'
-                : 'bg-gray-200 text-gray-500'"
-            >
-              {{ step.num }}
+          0{{ step.num }}
+        </div>
+        <div
+          class="font-jost text-[11px] tracking-[0.2em] uppercase text-center transition-colors"
+          :class="currentStep === step.num ? 'text-ink' : currentStep > step.num ? 'text-azure' : 'text-[#a49c88]'"
+        >
+          {{ step.label }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Instagram contact note -->
+    <p class="text-center font-jost font-light text-sm text-slate px-6 mb-2">
+      {{ $t('instagramContactNote') }}
+      <a
+        href="https://www.instagram.com/yazevibozcaada_/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline text-azure hover:text-ink"
+      >
+        Instagram
+      </a>
+    </p>
+
+    <!-- Loading state -->
+    <div
+      v-if="initialLoading"
+      class="flex items-center justify-center py-24"
+    >
+      <Loader />
+    </div>
+
+    <template v-else>
+      <!-- Room strip -->
+      <div class="px-6 md:px-14 pt-8 pb-2.5">
+        <div class="eyebrow mb-5">{{ $t('v2.booking.yourRoom') }}</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5 md:gap-5">
+          <button
+            v-for="room in ROOMS"
+            :key="room.id"
+            type="button"
+            class="block text-left cursor-pointer bg-transparent border-none p-0"
+            :class="selectedRoom?.id === room.id ? 'outline outline-2 outline-azure outline-offset-[3px]' : ''"
+            @click="selectRoom(room)"
+          >
+            <div class="relative h-[130px] mb-2.5 overflow-hidden">
+              <img
+                class="absolute inset-0 w-full h-full object-cover"
+                :src="getMediaUrl(room.image)"
+                :alt="room.name"
+                loading="lazy"
+              >
+              <div
+                v-if="selectedRoom?.id === room.id"
+                class="absolute top-2 right-2 bg-azure text-white font-jost text-[10px] tracking-[0.18em] uppercase px-2 py-1"
+              >
+                {{ $t('v2.booking.selected') }}
+              </div>
             </div>
-            <span
-              class="hidden md:block font-raleway text-sm transition-colors"
-              :class="currentStep >= step.num ? 'text-primary' : 'text-gray-400'"
-            >
-              {{ step.label }}
-            </span>
-          </div>
-          <div
-            v-if="index < 2"
-            class="w-8 md:w-16 h-[1px] transition-colors"
-            :class="currentStep > step.num ? 'bg-primary' : 'bg-gray-200'"
-          ></div>
+            <div class="flex justify-between items-baseline">
+              <span class="font-serif text-xl text-ink capitalize">{{ room.name }}</span>
+              <span class="font-jost text-[11px] text-stone">{{ room.bookingInformation.size }} m²</span>
+            </div>
+          </button>
         </div>
       </div>
 
-      <!-- Instagram contact note -->
-      <p class="text-center font-raleway text-sm text-primary mb-6">
-        {{ $t('instagramContactNote') }}
-        <a
-          href="https://www.instagram.com/yazevibozcaada_/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline hover:text-secondaryDark"
-        >
-          Instagram
-        </a>
-      </p>
+      <!-- Calendar + summary -->
+      <div class="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-11 md:gap-14 px-6 md:px-14 pt-10 md:pt-14 pb-[70px] md:pb-[100px] items-start">
+        <div>
+          <h2 class="font-serif font-light text-[32px] md:text-[44px] leading-[1.1] text-ink mt-0 mb-1.5">{{ $t('v2.booking.selectDates') }}</h2>
+          <p class="font-jost font-light text-sm text-[#7a8386] mt-1.5 mb-6">{{ $t('v2.booking.bookedNote') }}</p>
 
-      <!-- Loading state -->
-      <div
-        v-if="initialLoading"
-        class="flex items-center justify-center py-24"
-      >
-        <Loader />
-      </div>
+          <div class="flex gap-6 mb-6">
+            <div class="flex items-center gap-2">
+              <span class="w-[15px] h-[15px] bg-sandFill inline-block"></span>
+              <span class="font-jost text-xs text-slate">{{ $t('v2.booking.yourSelection') }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-[15px] h-[15px] border border-[#c2b49a] inline-block"></span>
+              <span class="font-jost text-xs text-slate">{{ $t('v2.booking.booked') }}</span>
+            </div>
+          </div>
 
-      <template v-else>
-        <!-- STEP 1: Room Selection -->
-        <div v-if="currentStep === 1">
-          <p class="font-raleway text-lg text-primary mb-6 text-center">
+          <div v-if="selectedRoom">
+            <VCalendarDatePicker
+              :key="calendarKey"
+              :columns="calendarColumns"
+              :min-date="today"
+              :disabled-dates="disabledDates"
+              :attributes="calendarAttributes"
+              is-range
+              :first-day-of-week="2"
+              @update:model-value="handleDateChange"
+            />
+          </div>
+          <p v-else class="font-jost font-light text-base text-slate border border-sand p-6 max-w-[460px]">
             {{ $t('booking.chooseRoom') }}
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div
-              v-for="room in ROOMS"
-              :key="room.id"
-              tabindex="0"
-              role="button"
-              :aria-label="$t(room.title)"
-              class="group cursor-pointer rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-              :class="selectedRoom?.id === room.id ? 'ring-2 ring-primary' : ''"
-              @click="selectRoom(room)"
-              @keydown.enter="selectRoom(room)"
-              @keydown.space.prevent="selectRoom(room)"
-            >
-              <!-- Room image -->
-              <div class="relative h-56 overflow-hidden">
-                <img
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  :src="getMediaUrl(room.image)"
-                  :alt="$t(room.title)"
-                  loading="lazy"
-                >
-                <div
-                  class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1"
-                >
-                  <p class="font-raleway text-xs font-bold text-secondaryDark">
-                    {{ $t('getInTouch') }}
-                  </p>
-                </div>
-              </div>
-
-              <!-- Room info -->
-              <div class="p-4 bg-white">
-                <h3 class="font-raleway text-lg font-medium text-secondaryDark mb-2">
-                  {{ $t(room.title) }}
-                </h3>
-
-                <div class="flex flex-wrap gap-3 text-sm text-primary mb-3">
-                  <div class="flex items-center gap-1">
-                    <YazIcon name="person" :size="18" />
-                    <span class="font-raleway">{{ room.bookingInformation.guestNumber }}</span>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <YazIcon name="bed" :size="18" />
-                    <span class="font-raleway">
-                      {{ room.bookingInformation.sleeps.map(s => $t(`roomInformation.${s}`)).join(' & ') }}
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <span class="font-raleway">{{ room.bookingInformation.size }}m²</span>
-                  </div>
-                </div>
-
-                <p class="font-raleway text-xs text-primary line-clamp-2">
-                  {{ $t(room.description) }}
-                </p>
-              </div>
+          <!-- Guests -->
+          <div
+            v-if="selectedRoom"
+            class="flex items-center justify-between mt-8 pt-6 border-t border-sand max-w-[320px]"
+          >
+            <span class="font-jost text-[13px] tracking-[0.14em] uppercase text-slate">{{ $t('v2.guests') }}</span>
+            <div class="flex items-center gap-4">
+              <button
+                type="button"
+                class="w-[34px] h-[34px] border border-[#cfc4ac] rounded-full flex items-center justify-center text-ink cursor-pointer bg-transparent"
+                @click="guestNumber = Math.max(1, guestNumber - 1)"
+              >–</button>
+              <span class="font-serif text-[22px] text-ink w-4 text-center">{{ guestNumber }}</span>
+              <button
+                type="button"
+                class="w-[34px] h-[34px] border border-[#cfc4ac] rounded-full flex items-center justify-center text-ink cursor-pointer bg-transparent"
+                @click="guestNumber = Math.min(maxGuests, guestNumber + 1)"
+              >+</button>
             </div>
           </div>
         </div>
 
-        <!-- STEP 2: Date Selection (room is chosen) -->
-        <div v-if="currentStep === 2">
-          <!-- Selected room summary bar -->
-          <div class="flex items-center gap-4 mb-6 p-4 bg-white rounded-xl shadow-sm">
+        <!-- Summary card -->
+        <div class="bg-ink text-parchment">
+          <div class="relative h-[200px]">
             <img
-              class="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover"
-              :src="getMediaUrl(selectedRoom!.image)"
-              :alt="$t(selectedRoom!.title)"
+              v-if="selectedRoom"
+              :src="getMediaUrl(selectedRoom.image)"
+              :alt="selectedRoom.name"
+              class="absolute inset-0 w-full h-full object-cover"
             >
-            <div class="flex-1">
-              <h3 class="font-raleway font-medium text-lg text-secondaryDark">
-                {{ $t(selectedRoom!.title) }}
-              </h3>
-              <p class="font-raleway text-sm text-primary">
-                {{ selectedRoom!.bookingInformation.size }}m² · {{ selectedRoom!.bookingInformation.sleeps.map(s => $t(`roomInformation.${s}`)).join(' & ') }}
-              </p>
+            <div v-else class="absolute inset-0 bg-inkDeep"></div>
+          </div>
+          <div class="p-7 md:p-8">
+            <div class="font-jost text-[11px] tracking-[0.3em] uppercase text-azureSoft mb-2.5">{{ $t('v2.booking.summaryEyebrow') }}</div>
+            <h3 class="font-serif font-light text-[32px] mt-0 mb-1 capitalize">{{ selectedRoom?.name ?? '—' }}</h3>
+            <p class="font-jost font-light text-[13px] text-[#a9bcc2] mt-0 mb-5">
+              <template v-if="selectedRoom">
+                {{ selectedRoom.bookingInformation.size }} m² · {{ selectedRoom.bookingInformation.sleeps.map(s => $t(`roomInformation.${s}`)).join(' & ') }}
+              </template>
+              <template v-else>&nbsp;</template>
+            </p>
+            <div class="grid grid-cols-2 gap-4 pb-5 border-b border-white/15">
+              <div>
+                <div class="font-jost text-[11px] tracking-[0.18em] uppercase text-azureSoft mb-1.5">{{ $t('v2.checkIn') }}</div>
+                <div class="font-serif text-xl">{{ formatDate(selectedDates.start) }}</div>
+              </div>
+              <div>
+                <div class="font-jost text-[11px] tracking-[0.18em] uppercase text-azureSoft mb-1.5">{{ $t('v2.checkOut') }}</div>
+                <div class="font-serif text-xl">{{ formatDate(selectedDates.end) }}</div>
+              </div>
+              <div>
+                <div class="font-jost text-[11px] tracking-[0.18em] uppercase text-azureSoft mb-1.5">{{ $t('v2.nights') }}</div>
+                <div class="font-serif text-xl">{{ nights || '—' }}</div>
+              </div>
+              <div>
+                <div class="font-jost text-[11px] tracking-[0.18em] uppercase text-azureSoft mb-1.5">{{ $t('v2.guests') }}</div>
+                <div class="font-serif text-xl">{{ guestNumber }}</div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between py-5">
+              <span class="font-jost text-xs tracking-[0.2em] uppercase text-azureSoft">{{ $t('v2.booking.total') }}</span>
+              <span v-if="totalPrice" class="font-serif text-[22px]">{{ totalPrice }}</span>
+              <router-link
+                v-else
+                to="/contact"
+                class="font-serif italic text-[22px] underline decoration-1 underline-offset-4 hover:text-azureSoft transition-colors"
+              >{{ $t('v2.booking.onRequest') }}</router-link>
             </div>
             <button
-              @click="changeRoom"
-              class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors"
+              type="button"
+              :disabled="currentStep !== 3"
+              class="block w-full text-center font-jost text-xs tracking-[0.28em] uppercase bg-parchment text-ink p-4 cursor-pointer border-none disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white transition-colors"
+              @click="goToCheckout"
             >
-              {{ $t('booking.changeRoom') }}
+              {{ $t('v2.book') }}
             </button>
           </div>
-
-          <p class="font-raleway text-lg text-primary mb-4 text-center">
-            {{ $t('booking.chooseDates') }}
-          </p>
-
-          <!-- Legend -->
-          <div class="flex items-center justify-center gap-6 mb-4">
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 rounded bg-red-100 border border-red-300"></div>
-              <span class="font-raleway text-xs text-primary">{{ $t('calendar.dateBooked') }}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-4 h-4 rounded bg-blue-100 border border-blue-300"></div>
-              <span class="font-raleway text-xs text-primary">{{ $t('booking.yourSelection') }}</span>
-            </div>
-          </div>
-
-          <!-- Inline calendar -->
-          <div class="flex justify-center">
-            <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 w-fit">
-              <VCalendarDatePicker
-                :key="calendarKey"
-                :columns="calendarColumns"
-                :min-date="today"
-                :disabled-dates="disabledDates"
-                :attributes="calendarAttributes"
-                is-range
-                :first-day-of-week="2"
-                @update:model-value="handleDateChange"
-              />
-
-              <!-- Guest count under calendar -->
-              <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                <span class="font-raleway text-sm text-primary">{{ $t('guests') }}</span>
-                <div class="flex items-center gap-3">
-                  <button
-                    @click="guestNumber = Math.max(1, guestNumber - 1)"
-                    class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                  >
-                    -
-                  </button>
-                  <span class="font-montserrat text-sm w-4 text-center">{{ guestNumber }}</span>
-                  <button
-                    @click="guestNumber = Math.min(selectedRoom!.bookingInformation.guestNumber, guestNumber + 1)"
-                    class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <!-- STEP 3: Summary (room + dates chosen) -->
-        <div v-if="currentStep === 3" class="pb-20 md:pb-0">
-          <div class="max-w-xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <!-- Room image -->
-              <div class="relative h-48 md:h-64">
-                <img
-                  class="w-full h-full object-cover"
-                  :src="getMediaUrl(selectedRoom!.image)"
-                  :alt="$t(selectedRoom!.title)"
-                >
-              </div>
-
-              <div class="p-6 flex flex-col gap-4">
-                <div class="flex items-start justify-between">
-                  <div>
-                    <h3 class="font-raleway font-medium text-xl text-secondaryDark">
-                      {{ $t(selectedRoom!.title) }}
-                    </h3>
-                    <p class="font-raleway text-sm text-primary mt-1">
-                      {{ selectedRoom!.bookingInformation.size }}m² · {{ selectedRoom!.bookingInformation.sleeps.map(s => $t(`roomInformation.${s}`)).join(' & ') }}
-                    </p>
-                  </div>
-                  <button
-                    @click="changeRoom"
-                    class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors shrink-0"
-                  >
-                    {{ $t('booking.changeRoom') }}
-                  </button>
-                </div>
-
-                <span class="h-[0.5px] bg-gray-200"></span>
-
-                <!-- Dates -->
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('checkout.checkIn') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ formatDate(selectedDates.start) }}</p>
-                  </div>
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('checkout.checkOut') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ formatDate(selectedDates.end) }}</p>
-                  </div>
-                </div>
-
-                <div class="flex gap-4">
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('nights') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ nights }}</p>
-                  </div>
-                  <div>
-                    <p class="font-raleway text-xs text-primary">{{ $t('guests') }}</p>
-                    <p class="font-montserrat text-sm text-secondaryDark mt-1">{{ guestNumber }}</p>
-                  </div>
-                </div>
-
-                <button
-                  @click="selectedDates = { start: null, end: null }"
-                  class="font-raleway text-sm text-primary underline hover:text-secondaryDark transition-colors w-fit"
-                >
-                  {{ $t('booking.changeDates') }}
-                </button>
-
-                <span class="h-[0.5px] bg-gray-200"></span>
-
-                <!-- Pricing handled via contact while online payment is unavailable -->
-                <div class="flex items-center justify-between">
-                  <p class="font-raleway font-bold text-base text-secondaryDark">{{ $t('totalPrice') }}</p>
-                  <router-link
-                    to="/contact"
-                    class="font-raleway font-bold text-base text-secondaryDark underline hover:text-primary transition-colors"
-                  >
-                    {{ $t('getInTouch') }}
-                  </router-link>
-                </div>
-
-                <YazButton
-                  :label="$t('bookNow')"
-                  type="primary"
-                  class="w-full mt-2 hidden md:flex"
-                  @click="goToCheckout"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </template>
-    </div>
+      </div>
+    </template>
 
     <!-- Mobile sticky footer for step 3 -->
     <div
       v-if="currentStep === 3 && selectedRoom"
-      class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-10 flex items-center justify-between"
+      class="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-cream border-t border-sand shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-30 flex items-center justify-between"
     >
       <div>
-        <p class="font-raleway text-sm font-bold text-secondaryDark">{{ $t('getInTouch') }}</p>
-        <p class="font-raleway text-xs text-primary">{{ nights }} {{ $t('nights') }}</p>
+        <p class="font-serif text-lg text-ink m-0 capitalize">{{ selectedRoom.name }}</p>
+        <p class="font-jost font-light text-xs text-slate m-0">{{ nights }} {{ $t('v2.nights') }} · {{ guestNumber }} {{ $t('v2.guests') }}</p>
       </div>
-      <YazButton
-        :label="$t('bookNow')"
-        type="primary"
+      <button
+        type="button"
+        class="font-jost text-xs tracking-[0.28em] uppercase bg-ink text-parchment px-6 py-3.5 cursor-pointer border-none"
         @click="goToCheckout"
-      />
+      >
+        {{ $t('v2.book') }}
+      </button>
     </div>
-  </section>
+  </main>
 </template>

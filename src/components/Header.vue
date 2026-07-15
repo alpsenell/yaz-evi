@@ -1,79 +1,91 @@
 <script setup lang="ts">
+  import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import { useTranslation } from 'i18next-vue';
   import YazIcon from "./atoms/YazIcon.vue";
 
-  const { t } = useTranslation();
+  const { t, i18next } = useTranslation();
   const emit = defineEmits(['toggleMobileMenu']);
+
+  const route = useRoute();
+  const scrolled = ref(false);
+
+  const onScroll = () => {
+    scrolled.value = window.scrollY > 90;
+  };
+
+  onMounted(() => {
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  });
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('scroll', onScroll);
+  });
+
+  // Pages without a dark image hero behind the header need the solid style from the top
+  const solidRoutes = ['/contact', '/checkout'];
+  const solid = computed(() =>
+    scrolled.value
+    || solidRoutes.some(p => route.path.startsWith(p))
+    || route.path.startsWith('/booking/confirmation')
+  );
+
+  const currentLanguage = computed(() => i18next.language?.startsWith('tr') ? 'tr' : 'en');
+  const setLanguage = (lang: string) => {
+    i18next.changeLanguage(lang);
+  };
 </script>
 
 <template>
-  <header class="header fixed bg-transparent top-0 items-center flex z-10 transition-transform duration-500 w-full">
-    <div class="header__inner mt-8 flex justify-between md:justify-start gap-10 mx-auto w-[90%]">
+  <header
+    class="fixed top-0 left-0 right-0 z-40 grid grid-cols-[1fr_auto_1fr] items-center text-white px-6 md:px-14 transition-all duration-300"
+    :class="solid ? 'py-4 bg-inkDeep shadow-[0_6px_24px_rgba(0,0,0,0.18)]' : 'py-7 bg-gradient-to-b from-[rgba(16,32,40,0.5)] to-transparent'"
+  >
+    <div class="flex items-center gap-5">
       <button
         type="button"
-        class="block relative w-10 flex-column cursor-pointer top-4 bg-transparent border-none p-0 h-10"
-        :class="{ 'header__mobile-menu-open': false }"
+        class="flex flex-col gap-[5px] w-[26px] cursor-pointer bg-transparent border-none p-0"
         :aria-label="t('accessibility.openMenu')"
         @click="emit('toggleMobileMenu')"
       >
-        <span
-          class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-0 origin-left"></span>
-        <span
-          class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-2 origin-left"></span>
-        <span
-          class="absolute block h-0.5 bg-white w-full rounded l-0 transition-transform top-4 origin-left"></span>
+        <span class="block h-px bg-white w-full"></span>
+        <span class="block h-px bg-white w-full"></span>
+        <span class="block h-px bg-white w-[70%]"></span>
       </button>
+      <span class="hidden md:block font-jost text-xs tracking-[0.3em] uppercase">{{ $t('v2.menu') }}</span>
+    </div>
 
-      <router-link to="/" :aria-label="t('accessibility.goHome')">
-        <YazIcon
-          name="yaz-evi"
-          color="white"
-          class="w-[140px] md:w-[200px] h-auto"
-        />
+    <router-link to="/" :aria-label="t('accessibility.goHome')" class="justify-self-center">
+      <YazIcon
+        name="yaz-evi"
+        color="white"
+        class="w-[120px] md:w-[150px] h-auto"
+      />
+    </router-link>
+
+    <div class="justify-self-end flex items-center gap-6">
+      <span class="hidden md:block font-jost text-xs tracking-[0.24em] uppercase">
+        <button
+          type="button"
+          class="cursor-pointer bg-transparent border-none p-0 text-inherit uppercase tracking-[inherit]"
+          :class="{ 'opacity-50': currentLanguage !== 'en' }"
+          @click="setLanguage('en')"
+        >EN</button>
+        <span class="opacity-40"> / </span>
+        <button
+          type="button"
+          class="cursor-pointer bg-transparent border-none p-0 text-inherit uppercase tracking-[inherit]"
+          :class="{ 'opacity-50': currentLanguage !== 'tr' }"
+          @click="setLanguage('tr')"
+        >TR</button>
+      </span>
+      <router-link
+        to="/booking"
+        class="font-jost text-xs tracking-[0.26em] uppercase border border-white/60 px-4 py-2.5 md:px-6 md:py-3 hover:bg-white hover:text-ink transition-colors duration-300"
+      >
+        {{ $t('v2.book') }}
       </router-link>
     </div>
   </header>
 </template>
-
-<style scoped lang="scss">
-.header {
-  background-image: linear-gradient(180deg, #bfbdba 0%, rgba(255, 255, 255, 0) 100%);
-
-  &__mobile-menu-open {
-    span:nth-child(1) {
-      transform: rotate(45deg);
-      top: 0;
-      left: 0;
-    }
-
-    span:nth-child(2) {
-      opacity: 0;
-      width: 0;
-    }
-
-    span:nth-child(3) {
-      transform: rotate(-45deg);
-      top: 29px;
-      left: 0;
-    }
-  }
-
-  &__phone-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-  }
-
-  &__right {
-    flex-direction: row;
-    gap: 24px;
-  }
-
-  &__contact {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
-}
-</style>
