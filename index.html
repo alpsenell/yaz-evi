@@ -14,10 +14,10 @@
     <meta name="geo.position" content="39.8346;26.0407"/>
     <meta name="ICBM" content="39.8346, 26.0407"/>
     <link rel="icon" type="image/png" href="/favicon.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
     <link rel="preconnect" href="https://media.yaz-evi.com" crossorigin/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link rel="preload" href="/fonts/cormorant-garamond-400-latin.woff2" as="font" type="font/woff2" crossorigin/>
+    <link rel="preload" href="/fonts/jost-400-latin.woff2" as="font" type="font/woff2" crossorigin/>
     <link rel="canonical" href="https://www.yaz-evi.com/"/>
 
     <!-- Open Graph -->
@@ -49,8 +49,11 @@
       "alternateName": "Yaz Evi Butik Otel",
       "description": "Bozcaada'nın en özel butik oteli. Restore edilmiş tarihi taş evde lüks konaklama, eşsiz manzara ve otantik ada deneyimi.",
       "url": "https://www.yaz-evi.com",
-      "telephone": "+905303062021",
+      "telephone": "+905324316734",
       "email": "info@yaz-evi.com",
+      "sameAs": [
+        "https://www.instagram.com/yazevibozcaada_/"
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Alaybey Mah. Muratbey Sk. 12",
@@ -68,10 +71,6 @@
         "https://www.yaz-evi.com/og-image.jpg"
       ],
       "priceRange": "$$",
-      "starRating": {
-        "@type": "Rating",
-        "ratingValue": "4"
-      },
       "checkinTime": "14:00",
       "checkoutTime": "11:00",
       "numberOfRooms": 5,
@@ -84,68 +83,43 @@
         {"@type": "LocationFeatureSpecification", "name": "Minibar", "value": true},
         {"@type": "LocationFeatureSpecification", "name": "Isıtma", "value": true}
       ],
-      "hasMap": "https://maps.google.com/?q=39.8346,26.0407",
+      "hasMap": "https://maps.app.goo.gl/djGuToKY5A9Hmucp9",
       "containsPlace": [
         {
           "@type": "HotelRoom",
           "name": "Oda Zeus",
+          "url": "https://www.yaz-evi.com/room/zeus",
           "description": "Doğal taşlar ve zarif ahşap detaylarla tasarlanmış oda"
         },
         {
           "@type": "HotelRoom",
           "name": "Oda Hera",
+          "url": "https://www.yaz-evi.com/room/hera",
           "description": "Bozcaada'nın dingin atmosferine uyumlu huzurlu oda"
         },
         {
           "@type": "HotelRoom",
           "name": "Oda Tenedos",
+          "url": "https://www.yaz-evi.com/room/tenedos",
           "description": "Tarihi kimliğin izlerini taşıyan taş ve ahşap uyumlu oda"
         },
         {
           "@type": "HotelRoom",
           "name": "Oda Tenes",
+          "url": "https://www.yaz-evi.com/room/tenes",
           "description": "Geleneksel adalı dokunuşlarla dekore edilmiş oda"
         },
         {
           "@type": "HotelRoom",
           "name": "Oda İlyada",
+          "url": "https://www.yaz-evi.com/room/ilyada",
           "description": "Bozcaada'nın tarihi ve mitolojik katmanlarını yansıtan oda"
         }
       ]
     }
     </script>
 
-    <!-- Structured Data - LocalBusiness -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LodgingBusiness",
-      "@id": "https://www.yaz-evi.com/#business",
-      "name": "Yaz Evi Bozcaada Butik Otel",
-      "image": "https://www.yaz-evi.com/og-image.jpg",
-      "url": "https://www.yaz-evi.com",
-      "telephone": "+905303062021",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Alaybey Mah. Muratbey Sk. 12",
-        "addressLocality": "Bozcaada",
-        "addressRegion": "Çanakkale",
-        "postalCode": "17680",
-        "addressCountry": "TR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 39.8346,
-        "longitude": 26.0407
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Bozcaada"
-      }
-    }
-    </script>
-
-    <!-- Structured Data - WebSite for Sitelinks Search -->
+    <!-- Structured Data - WebSite -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -158,73 +132,6 @@
     }
     </script>
 
-    <!-- Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://www.yaz-evi.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Odalar", "item": "https://www.yaz-evi.com/rooms"},
-        {"@type": "ListItem", "position": 3, "name": "Rezervasyon", "item": "https://www.yaz-evi.com/booking"},
-        {"@type": "ListItem", "position": 4, "name": "Galeri", "item": "https://www.yaz-evi.com/gallery"},
-        {"@type": "ListItem", "position": 5, "name": "Deneyimler", "item": "https://www.yaz-evi.com/experiences"},
-        {"@type": "ListItem", "position": 6, "name": "Hakkımızda", "item": "https://www.yaz-evi.com/about"},
-        {"@type": "ListItem", "position": 7, "name": "İletişim", "item": "https://www.yaz-evi.com/contact"}
-      ]
-    }
-    </script>
-
-    <!-- Structured Data - FAQ -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Yaz Evi Bozcaada nerede?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yaz Evi, Bozcaada'nın Alaybey Mahallesi Muratbey Sokak No:12 adresinde, ada merkezinde yer almaktadır."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Yaz Evi Bozcaada'da kaç oda var?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yaz Evi'nde mitolojiden ilham alan 5 butik oda bulunmaktadır: Zeus, Hera, Tenedos, Tenes ve İlyada."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Bozcaada Yaz Evi giriş ve çıkış saatleri nedir?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Giriş (check-in) saati 14:00, çıkış (check-out) saati 11:00'dir."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Yaz Evi Bozcaada'da hangi olanaklar var?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ücretsiz WiFi, klima, ısıtma, minibar, oda servisi, günlük temizlik, saç kurutma makinesi, bornoz, terlik ve kişisel bakım ürünleri sunulmaktadır."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Yaz Evi Bozcaada nasıl rezervasyon yapılır?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Web sitemizden online rezervasyon yapabilir veya +90 530 306 20 21 numaralı telefondan bize ulaşabilirsiniz."
-          }
-        }
-      ]
-    }
-    </script>
-
     <script src="https://panel.testerify.com/testerify.js"
           data-tfy-key="a883371c4daca38f9ab6b63c09c4180b1df36ad8c8d0399db7c3ae34ea2540f9" defer></script>
 </head>
@@ -234,7 +141,7 @@
   <h1>Yaz Evi Bozcaada - Butik Otel</h1>
   <p>Bozcaada'nın en özel butik oteli Yaz Evi'nde konaklayın. Restore edilmiş tarihi taş evde lüks konaklama, eşsiz manzara ve otantik ada deneyimi.</p>
   <p>Adres: Alaybey Mah. Muratbey Sk. 12, Bozcaada/Çanakkale</p>
-  <p>Telefon: +90 530 306 20 21</p>
+  <p>Telefon: +90 532 431 67 34</p>
   <h2>Odalarımız</h2>
   <ul>
     <li>Oda Zeus - Doğal taşlar ve zarif ahşap detaylarla tasarlanmış oda</li>
