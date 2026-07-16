@@ -8,7 +8,14 @@ i18next
   .use(LanguageDetector)
   .init({
     debug: import.meta.env.MODE === 'development',
-    fallbackLng: 'en',
+    fallbackLng: 'tr',
+    supportedLngs: ['tr', 'en'],
+    detection: {
+      // No 'navigator': first-time visitors land on Turkish regardless of
+      // browser language; an explicit choice persists via localStorage.
+      order: ['querystring', 'cookie', 'localStorage', 'sessionStorage'],
+      caches: ['localStorage'],
+    },
     global: true,
     resources: {
       en: {
