@@ -77,8 +77,6 @@ for (const route of ROUTES) {
   html = setValue(html, /(<meta property="og:title" content=")[^"]*/, title)
   html = setValue(html, /(<meta property="og:description" content=")[^"]*/, description)
   html = setValue(html, /(<meta property="og:url" content=")[^"]*/, pageUrl)
-  html = setValue(html, /(<meta name="twitter:title" content=")[^"]*/, title)
-  html = setValue(html, /(<meta name="twitter:description" content=")[^"]*/, description)
 
   const outFile = route.path === '/'
     ? join(DIST, 'index.html')

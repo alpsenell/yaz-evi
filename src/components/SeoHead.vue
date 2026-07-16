@@ -60,10 +60,6 @@ function updateMeta() {
   setMeta('property', 'og:site_name', 'Yaz Evi Bozcaada')
   setMeta('property', 'og:image', 'https://www.yaz-evi.com/og-image.jpg')
   setMeta('property', 'og:image:alt', 'Yaz Evi Bozcaada Butik Otel')
-  setMeta('name', 'twitter:card', 'summary_large_image')
-  setMeta('name', 'twitter:title', title.value)
-  setMeta('name', 'twitter:description', description.value)
-  setMeta('name', 'twitter:image', 'https://www.yaz-evi.com/og-image.jpg')
 
   // Canonical URL
   setCanonical(pageUrl)
