@@ -55,6 +55,32 @@ export default {
     distanceSales: {
       title: "Mesafeli Satış Sözleşmesi | Yaz Evi Bozcaada",
       description: "Yaz Evi Bozcaada butik otelin mesafeli satış sözleşmesi hükümlerini okuyun."
+    },
+    notFound: {
+      title: "Sayfa Bulunamadı | Yaz Evi Bozcaada",
+      description: "Aradığınız sayfa bulunamadı. Yaz Evi Bozcaada ana sayfasından devam edin."
+    },
+    roomDetail: {
+      zeus: {
+        title: "Oda Zeus | Yaz Evi Bozcaada Butik Otel",
+        description: "Gücün tanrısına adanmış 40 m² Zeus odası: king yatak, doğal taş duvarlar ve sıcak ahşap detaylar. Yaz Evi Bozcaada'da otantik konaklama için rezervasyon yapın."
+      },
+      hera: {
+        title: "Oda Hera | Yaz Evi Bozcaada Butik Otel",
+        description: "Huzur ve dengenin tanrıçasına adanmış 25 m² Hera odası: king yatak ve adanın dingin ruhuyla uyumlu sakin bir atmosfer. Yaz Evi Bozcaada butik oda."
+      },
+      tenedos: {
+        title: "Oda Tenedos | Yaz Evi Bozcaada Butik Otel",
+        description: "Adanın antik adını taşıyan 30 m² Tenedos odası: king yatak, geçmişle bugünü buluşturan taş ve ahşap uyumu. Bozcaada'da butik konaklama."
+      },
+      tenes: {
+        title: "Oda Tenes | Yaz Evi Bozcaada Butik Otel",
+        description: "Adanın ilk yerleşimcisinin adını taşıyan 30 m² Tenes odası: king yatak, taş duvarlar ve geleneksel ada dokunuşları. Yaz Evi Bozcaada'da rezervasyon yapın."
+      },
+      ilyada: {
+        title: "Oda İlyada | Yaz Evi Bozcaada Butik Otel",
+        description: "İlyada destanından ilhamla tasarlanan 30 m² oda: king yatak, tarihsel derinlik taşıyan taş ve ahşap detaylar. Bozcaada'nın destan ruhunu yaşayın."
+      }
     }
   },
   phoneNumber: "+90 532 431 67 34",
@@ -418,6 +444,12 @@ export default {
       tenedos: 'Adanın antik adlarından biri. Taş ve ahşap, geçmişle bugün arasındaki çizgiyi çiziyor.',
       tenes: 'Adanın ilk yerleşimcisine — taş duvarlar, ahşap detaylar ve geleneksel ada dokunuşları.',
       ilyada: 'Bozcaada\'nın izlerinin bulunduğu ilk destana — her ahşap ve taş detayda tarihsel derinlik.',
+    },
+    notFound: {
+      eyebrow: '404',
+      title: 'Aradığınız sayfa bulunamadı',
+      body: 'Sayfa taşınmış ya da hiç var olmamış olabilir. Ana sayfadan devam edebilirsiniz.',
+      back: 'Ana Sayfaya Dön',
     },
     experiences: {
       eyebrow: 'Deneyimler · Experiences',

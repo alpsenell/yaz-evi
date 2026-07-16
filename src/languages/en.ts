@@ -55,6 +55,32 @@ export default {
     distanceSales: {
       title: "Distance Sales Agreement | Yaz Evi Bozcaada",
       description: "Read the distance sales agreement terms for Yaz Evi Bozcaada boutique hotel."
+    },
+    notFound: {
+      title: "Page Not Found | Yaz Evi Bozcaada",
+      description: "The page you are looking for could not be found. Continue from the Yaz Evi Bozcaada homepage."
+    },
+    roomDetail: {
+      zeus: {
+        title: "Zeus Room | Yaz Evi Bozcaada Boutique Hotel",
+        description: "The 40 m² Zeus room, named for the god of power: king bed, natural stone walls and warm wooden details. Book your authentic stay at Yaz Evi Bozcaada."
+      },
+      hera: {
+        title: "Hera Room | Yaz Evi Bozcaada Boutique Hotel",
+        description: "The 25 m² Hera room, named for the goddess of peace and balance: king bed and a serene atmosphere in harmony with the island's calm spirit."
+      },
+      tenedos: {
+        title: "Tenedos Room | Yaz Evi Bozcaada Boutique Hotel",
+        description: "The 30 m² Tenedos room carries the island's ancient name: king bed, with stone and wood tracing the line between past and present in Bozcaada."
+      },
+      tenes: {
+        title: "Tenes Room | Yaz Evi Bozcaada Boutique Hotel",
+        description: "The 30 m² Tenes room, named for the island's first settler: king bed, stone walls and traditional island touches at Yaz Evi Bozcaada."
+      },
+      ilyada: {
+        title: "Ilyada Room | Yaz Evi Bozcaada Boutique Hotel",
+        description: "The 30 m² Ilyada room, inspired by the Iliad: king bed and stone-and-wood details with historical depth. Experience Bozcaada's epic spirit."
+      }
     }
   },
   phoneNumber: "+90 532 431 67 34",
@@ -418,6 +444,12 @@ export default {
       tenedos: "One of the island's ancient names. Stone and wood trace the line between past and present.",
       tenes: "For the island's first settler — stone walls, wooden details and traditional island touches.",
       ilyada: 'For the first epic where Bozcaada appears — historical depth in every wooden and stone detail.',
+    },
+    notFound: {
+      eyebrow: '404',
+      title: "The page you're looking for doesn't exist",
+      body: 'It may have been moved, or it never existed. You can continue from the homepage.',
+      back: 'Back to Home',
     },
     experiences: {
       eyebrow: 'Experiences · Deneyimler',

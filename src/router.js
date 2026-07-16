@@ -14,6 +14,7 @@ import BookingTerms from './components/pages/BookingTerms.vue';
 import DeliveryAndReturn from './components/pages/DeliveryAndReturn.vue';
 import PrivacyPolicy from './components/pages/PrivacyPolicy.vue';
 import DistanceSalesAgreement from './components/pages/DistanceSalesAgreement.vue';
+import NotFound from './components/pages/NotFound.vue';
 
 const routes = [
   { path: '/', component: Home, meta: { seoKey: 'home' } },
@@ -22,14 +23,15 @@ const routes = [
   { path: '/rooms', component: Rooms, meta: { seoKey: 'rooms' } },
   { path: '/room/:slug', component: Room, meta: { seoKey: 'room' } },
   { path: '/booking', component: Booking, meta: { seoKey: 'booking' } },
-  { path: '/checkout', component: Checkout, meta: { seoKey: 'checkout' } },
-  { path: '/booking/confirmation/:bookingId', component: BookingConfirmation, meta: { seoKey: 'confirmation' } },
+  { path: '/checkout', component: Checkout, meta: { seoKey: 'checkout', noindex: true } },
+  { path: '/booking/confirmation/:bookingId', component: BookingConfirmation, meta: { seoKey: 'confirmation', noindex: true } },
   { path: '/booking-terms', component: BookingTerms, meta: { seoKey: 'bookingTerms' } },
   { path: '/delivery-and-return', component: DeliveryAndReturn, meta: { seoKey: 'deliveryAndReturn' } },
   { path: '/privacy-policy', component: PrivacyPolicy, meta: { seoKey: 'privacyPolicy' } },
   { path: '/distance-sales-agreement', component: DistanceSalesAgreement, meta: { seoKey: 'distanceSales' } },
   { path: '/experiences', component: Experiences, meta: { seoKey: 'experiences' } },
   { path: '/contact', component: Contact, meta: { seoKey: 'contact' } },
+  { path: '/:pathMatch(.*)*', component: NotFound, meta: { seoKey: 'notFound', noindex: true } },
 ]
 
 const router = createRouter({

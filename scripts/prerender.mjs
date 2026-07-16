@@ -21,14 +21,15 @@ const ROUTES = [
   { path: '/', seoKey: 'home' },
   { path: '/about', seoKey: 'about' },
   { path: '/rooms', seoKey: 'rooms' },
-  { path: '/room/zeus', seoKey: 'room' },
-  { path: '/room/hera', seoKey: 'room' },
-  { path: '/room/tenedos', seoKey: 'room' },
-  { path: '/room/tenes', seoKey: 'room' },
-  { path: '/room/ilyada', seoKey: 'room' },
+  // Room pages use the per-room entries nested under seo.roomDetail
+  { path: '/room/zeus', seoKey: 'zeus' },
+  { path: '/room/hera', seoKey: 'hera' },
+  { path: '/room/tenedos', seoKey: 'tenedos' },
+  { path: '/room/tenes', seoKey: 'tenes' },
+  { path: '/room/ilyada', seoKey: 'ilyada' },
   { path: '/gallery', seoKey: 'gallery' },
   { path: '/booking', seoKey: 'booking' },
-  { path: '/checkout', seoKey: 'checkout' },
+  { path: '/checkout', seoKey: 'checkout', noindex: true },
   { path: '/experiences', seoKey: 'experiences' },
   { path: '/contact', seoKey: 'contact' },
   { path: '/booking-terms', seoKey: 'bookingTerms' },
@@ -70,9 +71,9 @@ for (const route of ROUTES) {
   html = html.replace(/<title>[^<]*<\/title>/, () => `<title>${title}</title>`)
   html = setValue(html, /(<meta name="description" content=")[^"]*/, description)
   html = setValue(html, /(<link rel="canonical" href=")[^"]*/, pageUrl)
-  html = setValue(html, /(<link rel="alternate" hreflang="tr" href=")[^"]*/, pageUrl)
-  html = setValue(html, /(<link rel="alternate" hreflang="en" href=")[^"]*/, pageUrl)
-  html = setValue(html, /(<link rel="alternate" hreflang="x-default" href=")[^"]*/, pageUrl)
+  if (route.noindex) {
+    html = setValue(html, /(<meta name="robots" content=")[^"]*/, 'noindex, nofollow')
+  }
   html = setValue(html, /(<meta property="og:title" content=")[^"]*/, title)
   html = setValue(html, /(<meta property="og:description" content=")[^"]*/, description)
   html = setValue(html, /(<meta property="og:url" content=")[^"]*/, pageUrl)

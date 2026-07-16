@@ -8,18 +8,24 @@ const route = useRoute()
 
 const seoKey = computed(() => (route.meta.seoKey as string) || 'home')
 const currentLang = computed(() => i18next.language?.startsWith('tr') ? 'tr' : 'en')
-const title = computed(() => t(`seo.${seoKey.value}.title`))
-const description = computed(() => t(`seo.${seoKey.value}.description`))
 
-function setOrCreateLink(rel: string, hreflang: string, href: string) {
-  const selector = hreflang
-    ? `link[rel="${rel}"][hreflang="${hreflang}"]`
-    : `link[rel="${rel}"]:not([hreflang])`
-  let el = document.querySelector(selector) as HTMLLinkElement | null
+// Room detail pages get per-room titles/descriptions when a translation exists
+const seoBase = computed(() => {
+  const slug = route.params.slug as string | undefined
+  if (seoKey.value === 'room' && slug && i18next.exists(`seo.roomDetail.${slug}.title`)) {
+    return `seo.roomDetail.${slug}`
+  }
+  return `seo.${seoKey.value}`
+})
+
+const title = computed(() => t(`${seoBase.value}.title`))
+const description = computed(() => t(`${seoBase.value}.description`))
+
+function setCanonical(href: string) {
+  let el = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
   if (!el) {
     el = document.createElement('link')
-    el.setAttribute('rel', rel)
-    if (hreflang) el.setAttribute('hreflang', hreflang)
+    el.setAttribute('rel', 'canonical')
     document.head.appendChild(el)
   }
   el.setAttribute('href', href)
@@ -42,7 +48,9 @@ function updateMeta() {
   const pageUrl = `https://www.yaz-evi.com${route.path}`
 
   setMeta('name', 'description', description.value)
-  setMeta('name', 'robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')
+  setMeta('name', 'robots', route.meta.noindex
+    ? 'noindex, nofollow'
+    : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1')
   setMeta('name', 'author', 'Yaz Evi Bozcaada')
   setMeta('property', 'og:title', title.value)
   setMeta('property', 'og:description', description.value)
@@ -58,12 +66,7 @@ function updateMeta() {
   setMeta('name', 'twitter:image', 'https://www.yaz-evi.com/og-image.jpg')
 
   // Canonical URL
-  setOrCreateLink('canonical', '', pageUrl)
-
-  // Hreflang tags
-  setOrCreateLink('alternate', 'tr', pageUrl)
-  setOrCreateLink('alternate', 'en', pageUrl)
-  setOrCreateLink('alternate', 'x-default', pageUrl)
+  setCanonical(pageUrl)
 }
 
 onMounted(updateMeta)
