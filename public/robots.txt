@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /assets/
 
 Sitemap: https://www.yaz-evi.com/sitemap.xml
