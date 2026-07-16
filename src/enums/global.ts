@@ -89,7 +89,7 @@ export const ROOMS: Room[] = [
     title: 'room2',
     name: 'Hera',
     image: 'oda_2/oda2-1-min.jpg',
-    description: 'room1Description',
+    description: 'room2Description',
     bookingInformation: {
       price: 0,
       guestNumber: 2,

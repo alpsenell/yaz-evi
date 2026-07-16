@@ -10,20 +10,14 @@ import type { CheckoutState, GuestInfo } from '../../types/booking'
 import YazIcon from '../atoms/YazIcon.vue'
 import Loader from '../atoms/Loader.vue'
 import { getMediaUrl } from '../../utils/media'
+import { trackEvent } from '../../utils/analytics'
+import { emailRegex, turkishPhoneRegex, formatTurkishPhone } from '../../utils/validation'
 
 const router = useRouter()
 const { t } = useTranslation()
 const { getState } = useBookingState()
 
-// Online payment is temporarily disabled until the payment provider is configured.
-// While false, guests are directed to /contact instead of the iyzipay checkout.
-const paymentEnabled: boolean = false
-
 const bookingState = ref<CheckoutState | null>(null)
-const isSubmitting = ref(false)
-const submitError = ref('')
-const showPaymentForm = ref(false)
-const paymentFormContent = ref('')
 
 const guestInfo = ref<GuestInfo>({
   name: '',
@@ -40,8 +34,6 @@ const touched = ref({
   phone: false,
   terms: false,
 })
-
-const submitAttempted = ref(false)
 
 onMounted(() => {
   const state = getState()
@@ -68,9 +60,6 @@ const formattedTotal = computed(() => {
 })
 
 // Validation
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const turkishPhoneRegex = /^\+90 \(5\d{2}\) \d{3} \d{2} \d{2}$/
-
 const errors = computed(() => ({
   name: guestInfo.value.name.trim() === '' ? t('validation.nameRequired') : '',
   email: guestInfo.value.email.trim() === ''
@@ -86,44 +75,14 @@ const errors = computed(() => ({
   terms: !termsAccepted.value ? t('validation.termsRequired') : '',
 }))
 
-const isFormValid = computed(() => {
-  return Object.values(errors.value).every(e => e === '')
-})
-
 const shouldShowError = (field: keyof typeof touched.value) => {
-  return (touched.value[field] || submitAttempted.value) && errors.value[field]
+  return touched.value[field] && errors.value[field]
 }
 
 // Phone masking
 const handlePhoneInput = (event: Event) => {
   const input = event.target as HTMLInputElement
-  let digits = input.value.replace(/\D/g, '')
-
-  // Remove leading 90 country code if present
-  if (digits.startsWith('90')) {
-    digits = digits.slice(2)
-  }
-
-  // Cap at 10 digits
-  digits = digits.slice(0, 10)
-
-  // Format: +90 (5XX) XXX XX XX
-  let formatted = '+90 '
-  if (digits.length > 0) {
-    formatted += '(' + digits.slice(0, 3)
-    if (digits.length >= 3) {
-      formatted += ') '
-    }
-    if (digits.length > 3) {
-      formatted += digits.slice(3, 6)
-    }
-    if (digits.length > 6) {
-      formatted += ' ' + digits.slice(6, 8)
-    }
-    if (digits.length > 8) {
-      formatted += ' ' + digits.slice(8, 10)
-    }
-  }
+  const formatted = formatTurkishPhone(input.value)
 
   guestInfo.value.phone = formatted
   nextTick(() => {
@@ -131,47 +90,10 @@ const handlePhoneInput = (event: Event) => {
   })
 }
 
-const handleSubmit = async () => {
-  if (!paymentEnabled) {
-    router.push('/contact')
-    return
-  }
-
-  submitAttempted.value = true
-
-  if (!isFormValid.value || !bookingState.value) return
-
-  isSubmitting.value = true
-  submitError.value = ''
-
-  try {
-    const response = await fetch('/api/payment/initialize', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        roomId: bookingState.value.room.id,
-        checkIn: bookingState.value.checkIn.toISOString(),
-        checkOut: bookingState.value.checkOut.toISOString(),
-        nights: bookingState.value.nights,
-        pricePerNight: bookingState.value.pricePerNight,
-        guest: guestInfo.value,
-        locale: selectedLanguage.value,
-      }),
-    })
-
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.message || 'Payment initialization failed')
-    }
-
-    const data = await response.json()
-    paymentFormContent.value = data.checkoutFormContent
-    showPaymentForm.value = true
-  } catch (error) {
-    submitError.value = error instanceof Error ? error.message : 'An error occurred'
-  } finally {
-    isSubmitting.value = false
-  }
+// Online payment is not available; guests complete their reservation via /contact.
+const handleSubmit = () => {
+  trackEvent('submitCheckoutForm')
+  router.push('/contact')
 }
 </script>
 
@@ -185,20 +107,8 @@ const handleSubmit = async () => {
     </div>
 
     <template v-else>
-      <!-- Payment form overlay -->
-      <div
-        v-if="showPaymentForm"
-        class="max-w-screen-md mx-auto px-6 pt-[120px] md:pt-[150px] pb-[70px]"
-      >
-        <h2 class="font-serif font-light text-[32px] md:text-[44px] text-ink mt-0 mb-6">
-          {{ $t('checkout.payment') }}
-        </h2>
-        <div v-html="paymentFormContent"></div>
-      </div>
-
       <!-- Checkout form -->
       <div
-        v-else
         class="px-6 md:px-14 pt-[120px] md:pt-[150px] pb-[70px] md:pb-[100px]"
       >
         <div class="eyebrow mb-5">{{ $t('v2.booking.eyebrow') }}</div>
@@ -223,6 +133,7 @@ const handleSubmit = async () => {
                 <a
                   href="tel:+905324316734"
                   class="flex items-center gap-2 text-azure hover:text-ink transition-colors"
+                  v-track="'clickOnCheckoutPhone'"
                 >
                   <YazIcon name="phone" :size="16" color="currentColor" />
                   <span>0532 431 67 34</span>
@@ -232,6 +143,7 @@ const handleSubmit = async () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex items-center gap-2 text-azure hover:text-ink transition-colors"
+                  v-track="'clickOnCheckoutInstagram'"
                 >
                   <YazIcon name="instagram" :size="16" color="currentColor" />
                   <span>yazevibozcaada_</span>
@@ -347,6 +259,7 @@ const handleSubmit = async () => {
                     href="/booking-terms"
                     target="_blank"
                     class="underline text-azure hover:text-ink transition-colors"
+                    v-track="'clickOnCheckoutTermsLink'"
                   >{{ $t('checkout.termsAcceptLink') }}</a>{{ $t('checkout.termsAcceptSuffix') }}
                 </label>
               </div>
@@ -358,19 +271,11 @@ const handleSubmit = async () => {
               </p>
             </div>
 
-            <div
-              v-if="submitError"
-              class="font-jost text-sm text-red-600 border border-red-400 px-5 py-4"
-            >
-              {{ submitError }}
-            </div>
-
             <button
               type="submit"
-              :disabled="isSubmitting"
-              class="btn-solid-ink border-none w-full disabled:opacity-60"
+              class="btn-solid-ink border-none w-full"
             >
-              {{ isSubmitting ? $t('checkout.processing') : paymentEnabled ? $t('checkout.payNow') : $t('v2.getInTouch') }}
+              {{ $t('v2.getInTouch') }}
             </button>
           </form>
 
@@ -414,6 +319,7 @@ const handleSubmit = async () => {
                   v-else
                   to="/contact"
                   class="font-serif italic text-[22px] underline decoration-1 underline-offset-4 hover:text-azureSoft transition-colors"
+                  v-track="'clickOnCheckoutSummaryGetInTouch'"
                 >{{ $t('v2.booking.onRequest') }}</router-link>
               </div>
             </div>

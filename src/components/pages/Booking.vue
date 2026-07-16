@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import i18next from "i18next";
 
@@ -11,6 +11,7 @@ import type { Room } from "../../types/booking.ts";
 import Loader from "../atoms/Loader.vue";
 import BookingCalendar from "../organisms/BookingCalendar.vue";
 import { getMediaUrl } from '../../utils/media';
+import { trackEvent, capitalize } from "../../utils/analytics";
 
 const route = useRoute();
 const router = useRouter();
@@ -90,14 +91,23 @@ const bookedRanges = computed(() => {
 
 const selectRoom = (room: Room) => {
   if (selectedRoom.value?.id === room.id) return;
+  trackEvent(`selectBookingRoom${capitalize(room.slug)}`);
   selectedRoom.value = room;
   selectedDates.value = { start: null, end: null };
 };
+
+watch(selectedDates, (dates) => {
+  if (dates.start && dates.end && calculateNights(dates.start, dates.end) > 0) {
+    trackEvent('selectBookingDates');
+  }
+});
 
 const maxGuests = computed(() => selectedRoom.value?.bookingInformation.guestNumber ?? 6);
 
 const goToCheckout = () => {
   if (!selectedRoom.value || !selectedDates.value.start || !selectedDates.value.end) return;
+
+  trackEvent('clickOnBookingBookNow');
 
   const state = {
     roomId: selectedRoom.value.id,
@@ -170,6 +180,7 @@ const goToCheckout = () => {
         target="_blank"
         rel="noopener noreferrer"
         class="underline text-azure hover:text-ink"
+        v-track="'clickOnBookingInstagram'"
       >
         Instagram
       </a>
@@ -255,12 +266,14 @@ const goToCheckout = () => {
               <button
                 type="button"
                 class="w-[34px] h-[34px] border border-[#cfc4ac] rounded-full flex items-center justify-center text-ink cursor-pointer bg-transparent"
+                v-track="'clickOnBookingGuestMinus'"
                 @click="guestNumber = Math.max(1, guestNumber - 1)"
               >–</button>
               <span class="font-serif text-[22px] text-ink w-4 text-center">{{ guestNumber }}</span>
               <button
                 type="button"
                 class="w-[34px] h-[34px] border border-[#cfc4ac] rounded-full flex items-center justify-center text-ink cursor-pointer bg-transparent"
+                v-track="'clickOnBookingGuestPlus'"
                 @click="guestNumber = Math.min(maxGuests, guestNumber + 1)"
               >+</button>
             </div>

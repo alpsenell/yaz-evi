@@ -47,6 +47,7 @@
         type="button"
         class="flex flex-col gap-[5px] w-[26px] cursor-pointer bg-transparent border-none p-0"
         :aria-label="t('accessibility.openMenu')"
+        v-track="'clickOnHeaderMenuToggle'"
         @click="emit('toggleMobileMenu')"
       >
         <span class="block h-px bg-white w-full"></span>
@@ -56,7 +57,7 @@
       <span class="hidden md:block font-jost text-xs tracking-[0.3em] uppercase">{{ $t('v2.menu') }}</span>
     </div>
 
-    <router-link to="/" :aria-label="t('accessibility.goHome')" class="justify-self-center">
+    <router-link to="/" :aria-label="t('accessibility.goHome')" class="justify-self-center" v-track="'clickOnHeaderLogo'">
       <YazIcon
         name="yaz-evi"
         color="white"

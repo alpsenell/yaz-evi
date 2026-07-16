@@ -146,6 +146,7 @@ const moments = [
       <button
         type="button"
         class="bg-ink text-parchment flex items-center justify-center p-5 md:p-6 cursor-pointer border-none hover:bg-azure transition-colors"
+        v-track="'clickOnHomeBookNow'"
         @click="goBooking"
       >
         <span class="font-jost text-xs tracking-[0.3em] uppercase">{{ $t('v2.book') }}</span>

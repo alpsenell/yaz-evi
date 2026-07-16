@@ -28,6 +28,7 @@ const { i18next } = useTranslation()
           target="_blank"
           rel="noopener noreferrer"
           class="font-jost font-light text-sm leading-[1.9]"
+          v-track="'clickOnFooterAddress'"
         >
           Alaybey Mah. Muratbey Sk. 12<br>Bozcaada / Çanakkale
         </a>
@@ -36,8 +37,8 @@ const { i18next } = useTranslation()
       <div>
         <div class="font-jost text-[11px] tracking-[0.3em] uppercase text-azureSoft mb-5">{{ $t('v2.footer.contact') }}</div>
         <p class="font-jost font-light text-sm leading-[1.9] m-0">
-          <a href="tel:+905324316734">+90 532 431 67 34</a><br>
-          <a href="mailto:info@yaz-evi.com">info@yaz-evi.com</a>
+          <a href="tel:+905324316734" v-track="'clickOnFooterPhone'">+90 532 431 67 34</a><br>
+          <a href="mailto:info@yaz-evi.com" v-track="'clickOnFooterEmail'">info@yaz-evi.com</a>
         </p>
       </div>
 
@@ -48,6 +49,7 @@ const { i18next } = useTranslation()
             href="https://www.instagram.com/yazevibozcaada_/"
             target="_blank"
             rel="noopener noreferrer"
+            v-track="'clickOnFooterInstagram'"
           >
             Instagram<br>@yazevibozcaada_
           </a>
@@ -60,6 +62,7 @@ const { i18next } = useTranslation()
         <router-link
           class="font-jost text-xs text-[rgba(205,216,219,0.75)] hover:text-white transition-colors"
           to="/booking-terms"
+          v-track="'clickOnFooterBookingTerms'"
         >
           {{ $t('footer.termsAndPolicy') }}
         </router-link>
@@ -68,6 +71,7 @@ const { i18next } = useTranslation()
         <router-link
           class="font-jost text-xs text-[rgba(205,216,219,0.75)] hover:text-white transition-colors"
           to="/privacy-policy"
+          v-track="'clickOnFooterPrivacyPolicy'"
         >
           {{ $t('footer.privacyPolicy') }}
         </router-link>
@@ -76,6 +80,7 @@ const { i18next } = useTranslation()
         <router-link
           class="font-jost text-xs text-[rgba(205,216,219,0.75)] hover:text-white transition-colors"
           to="/delivery-and-return"
+          v-track="'clickOnFooterDeliveryAndReturn'"
         >
           {{ $t('footer.deliveryAndReturn') }}
         </router-link>
@@ -84,6 +89,7 @@ const { i18next } = useTranslation()
         <router-link
           class="font-jost text-xs text-[rgba(205,216,219,0.75)] hover:text-white transition-colors"
           to="/distance-sales-agreement"
+          v-track="'clickOnFooterDistanceSales'"
         >
           {{ $t('footer.distanceSales') }}
         </router-link>

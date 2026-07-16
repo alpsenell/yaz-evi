@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 
 import { ROOMS } from '../../enums/global'
 import { getMediaUrl } from '../../utils/media'
+import { capitalize } from '../../utils/analytics'
 import Lightbox from '../organisms/Lightbox.vue'
 
 const route = useRoute()
@@ -11,6 +12,8 @@ const route = useRoute()
 const room = computed(() => {
   return ROOMS.find(r => r.slug === route.params.slug) ?? null
 })
+
+const roomTrackName = computed(() => capitalize(room.value?.slug ?? ''))
 
 const galleryUrls = computed(() => room.value ? room.value.images.map(image => getMediaUrl(image)) : [])
 
@@ -65,7 +68,7 @@ const openLightbox = (index: number) => {
           <span class="font-jost text-xs tracking-[0.14em] uppercase text-[#8a8474]">{{ $t('v2.roomPage.bathroom') }}</span>
           <span class="font-jost text-[15px] text-ink">{{ room.bookingInformation.bathroom }}</span>
         </div>
-        <router-link :to="`/booking?room=${room.slug}`" class="btn-solid-ink mt-6">{{ $t('v2.book') }}</router-link>
+        <router-link :to="`/booking?room=${room.slug}`" class="btn-solid-ink mt-6" v-track="`clickOnRoomCtaBook${roomTrackName}`">{{ $t('v2.book') }}</router-link>
         <router-link
           to="/contact"
           class="block text-center font-jost text-xs tracking-[0.24em] uppercase text-azure mt-4 cursor-pointer"
@@ -81,6 +84,7 @@ const openLightbox = (index: number) => {
         type="button"
         class="relative h-[260px] lg:h-[380px] overflow-hidden cursor-pointer group bg-transparent border-none p-0"
         :aria-label="`${room.name} ${index + 1}`"
+        v-track="`clickOnRoomGalleryImage${roomTrackName}`"
         @click="openLightbox(index)"
       >
         <img

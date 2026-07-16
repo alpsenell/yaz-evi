@@ -2,8 +2,11 @@
 import { ref, watch, computed, nextTick, onBeforeUnmount } from "vue";
 import { useTranslation } from 'i18next-vue';
 import YazIcon from "../atoms/YazIcon.vue";
+import { capitalize } from "../../utils/analytics";
 
 const { t, i18next } = useTranslation();
+
+const menuTrackName = (url: string) => `clickOnMenu${capitalize(url.replace('/', '')) || 'Home'}`;
 
 const props = defineProps({
   visibility: Boolean,
@@ -86,7 +89,7 @@ onBeforeUnmount(() => {
       class="h-full w-full bg-inkDeep text-parchment flex flex-col"
     >
       <div class="flex items-center justify-between px-6 py-6 md:px-10 md:py-8">
-        <router-link to="/" :aria-label="t('accessibility.goHome')" @click="emits('toggleMobileMenu')">
+        <router-link to="/" :aria-label="t('accessibility.goHome')" v-track="'clickOnMenuLogo'" @click="emits('toggleMobileMenu')">
           <YazIcon
             name="yaz-evi"
             color="white"
@@ -112,6 +115,7 @@ onBeforeUnmount(() => {
           <router-link
             class="font-serif font-light text-[34px] md:text-[46px] text-parchment py-2 inline-block hover:text-azureSoft transition-colors"
             :to="item.url"
+            v-track="menuTrackName(item.url)"
             @click="emits('toggleMobileMenu')"
           >
             <span class="font-serif text-[15px] text-azureSoft mr-4 align-middle">0{{ index + 1 }}</span>{{ $t(item.title) }}

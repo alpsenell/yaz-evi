@@ -99,6 +99,7 @@ const setFilter = (key: string) => {
         class="relative overflow-hidden cursor-pointer group bg-transparent border-none p-0"
         :class="item.featured ? 'md:col-span-2 md:row-span-2' : ''"
         :aria-label="`${$t('galleryModal.imageAlt')} ${index + 1}`"
+        v-track="`clickOnGalleryImage${index + 1}`"
         @click="openLightbox(index)"
       >
         <img

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /assets/
 
-Sitemap: https://www.yazevi.com/sitemap.xml
+Sitemap: https://www.yaz-evi.com/sitemap.xml
