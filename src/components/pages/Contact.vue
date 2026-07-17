@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import i18next from 'i18next';
 import { useTranslation } from 'i18next-vue';
 import { getMediaUrl } from '../../utils/media';
@@ -7,6 +8,7 @@ import { trackEvent } from '../../utils/analytics';
 import { emailRegex, turkishPhoneRegex, formatTurkishPhone } from '../../utils/validation';
 
 const { t } = useTranslation();
+const route = useRoute();
 
 const formData = ref({
   name: '',
@@ -14,6 +16,13 @@ const formData = ref({
   phone: '',
   message: '',
   website: '', // honeypot — real users never see or fill this
+});
+
+onMounted(() => {
+  const prefill = route.query.message;
+  if (typeof prefill === 'string' && prefill.trim() !== '') {
+    formData.value.message = prefill;
+  }
 });
 
 const touched = ref({

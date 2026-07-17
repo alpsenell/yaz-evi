@@ -487,6 +487,7 @@ export default {
       total: 'Toplam',
       onRequest: 'Fiyat için ulaşın',
       selected: 'Seçildi',
+      availabilityMessage: 'Merhabalar! {{room}} için {{checkIn}} - {{checkOut}} arası müsaitlik durumunu öğrenebilir miyim?',
     },
     contact: {
       eyebrow: 'İletişim · Contact',

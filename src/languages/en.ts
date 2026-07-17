@@ -487,6 +487,7 @@ export default {
       total: 'Total',
       onRequest: 'On request',
       selected: 'Selected',
+      availabilityMessage: 'Hello! Could I ask about the availability of {{room}} between {{checkIn}} - {{checkOut}}?',
     },
     contact: {
       eyebrow: 'Contact · İletişim',

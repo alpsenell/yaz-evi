@@ -5,7 +5,6 @@ import i18next from "i18next";
 
 import { ROOMS } from "../../enums/global.ts";
 import { useBookings } from "../../composables/useBookings.ts";
-import { useRoomPrices } from "../../composables/useRoomPrices.ts";
 import type { Room } from "../../types/booking.ts";
 
 import Loader from "../atoms/Loader.vue";
@@ -16,7 +15,6 @@ import { trackEvent, capitalize } from "../../utils/analytics";
 const route = useRoute();
 const router = useRouter();
 const { fetchAllBookings, getDisabledDates } = useBookings();
-const { fetchPrices, getPrice } = useRoomPrices();
 
 const selectedLanguage = ref(i18next.language as string);
 const guestNumber = ref(2);
@@ -35,7 +33,7 @@ const currentStep = computed(() => {
 });
 
 onMounted(async () => {
-  await Promise.all([fetchAllBookings(), fetchPrices()]);
+  await fetchAllBookings();
 
   const roomSlug = route.query.room as string | undefined;
   if (roomSlug) {
@@ -74,14 +72,14 @@ const formatDate = (date: Date | null) => {
 
 const nights = computed(() => calculateNights(selectedDates.value.start, selectedDates.value.end));
 
-const roomPrice = computed(() => {
-  if (!selectedRoom.value) return 0;
-  return getPrice(selectedRoom.value.id) ?? 0;
-});
-
-const totalPrice = computed(() => {
-  if (!selectedRoom.value || roomPrice.value === 0 || nights.value === 0) return '';
-  return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(roomPrice.value * nights.value);
+const contactMessage = computed(() => {
+  if (!selectedRoom.value || !selectedDates.value.start || !selectedDates.value.end) return '';
+  return i18next.t('v2.booking.availabilityMessage', {
+    room: capitalize(selectedRoom.value.name),
+    checkIn: formatDate(selectedDates.value.start),
+    checkOut: formatDate(selectedDates.value.end),
+    interpolation: { escapeValue: false },
+  });
 });
 
 const bookedRanges = computed(() => {
@@ -104,25 +102,11 @@ watch(selectedDates, (dates) => {
 
 const maxGuests = computed(() => selectedRoom.value?.bookingInformation.guestNumber ?? 6);
 
-const goToCheckout = () => {
-  if (!selectedRoom.value || !selectedDates.value.start || !selectedDates.value.end) return;
+const goToContact = () => {
+  if (!contactMessage.value) return;
 
-  trackEvent('clickOnBookingBookNow');
-
-  const state = {
-    roomId: selectedRoom.value.id,
-    checkIn: selectedDates.value.start.toISOString(),
-    checkOut: selectedDates.value.end.toISOString(),
-    nights: nights.value,
-    guests: guestNumber.value,
-    rooms: 1,
-    pricePerNight: roomPrice.value,
-    totalPrice: roomPrice.value * nights.value,
-    locale: selectedLanguage.value,
-  };
-
-  sessionStorage.setItem('bookingState', JSON.stringify(state));
-  router.push('/checkout');
+  trackEvent('clickOnBookingGetInTouch');
+  router.push({ path: '/contact', query: { message: contactMessage.value } });
 };
 </script>
 
@@ -320,10 +304,8 @@ const goToCheckout = () => {
             </div>
             <div class="flex items-center justify-between py-5">
               <span class="font-jost text-xs tracking-[0.2em] uppercase text-azureSoft">{{ $t('v2.booking.total') }}</span>
-              <span v-if="totalPrice" class="font-serif text-[22px]">{{ totalPrice }}</span>
               <router-link
-                v-else
-                to="/contact"
+                :to="contactMessage ? { path: '/contact', query: { message: contactMessage } } : '/contact'"
                 class="font-serif italic text-[22px] underline decoration-1 underline-offset-4 hover:text-azureSoft transition-colors"
               >{{ $t('v2.booking.onRequest') }}</router-link>
             </div>
@@ -331,9 +313,9 @@ const goToCheckout = () => {
               type="button"
               :disabled="currentStep !== 3"
               class="block w-full text-center font-jost text-xs tracking-[0.28em] uppercase bg-parchment text-ink p-4 cursor-pointer border-none disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white transition-colors"
-              @click="goToCheckout"
+              @click="goToContact"
             >
-              {{ $t('v2.book') }}
+              {{ $t('v2.getInTouch') }}
             </button>
           </div>
         </div>
@@ -352,9 +334,9 @@ const goToCheckout = () => {
       <button
         type="button"
         class="font-jost text-xs tracking-[0.28em] uppercase bg-ink text-parchment px-6 py-3.5 cursor-pointer border-none"
-        @click="goToCheckout"
+        @click="goToContact"
       >
-        {{ $t('v2.book') }}
+        {{ $t('v2.getInTouch') }}
       </button>
     </div>
   </main>
