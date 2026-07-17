@@ -24,7 +24,7 @@
   });
 
   // Pages without a dark image hero behind the header need the solid style from the top
-  const solidRoutes = ['/contact', '/checkout'];
+  const solidRoutes = ['/contact', '/checkout', '/gallery'];
   const solid = computed(() =>
     scrolled.value
     || solidRoutes.some(p => route.path.startsWith(p))

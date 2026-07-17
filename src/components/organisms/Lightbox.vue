@@ -5,6 +5,7 @@ const props = defineProps<{
   open: boolean
   images: string[]
   index: number
+  captions?: string[]
 }>()
 
 const emit = defineEmits(['close', 'update:index'])
@@ -66,7 +67,13 @@ watch(() => props.open, (value) => {
         aria-label="Next"
         @click="next"
       >›</button>
-      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 font-jost text-[13px] tracking-[0.2em]">
+      <div
+        v-if="captions?.length"
+        class="absolute bottom-6 left-5 right-5 text-center text-white/75 font-serif italic font-light text-[17px]"
+      >
+        {{ captions[index] }}
+      </div>
+      <div v-else class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 font-jost text-[13px] tracking-[0.2em]">
         {{ index + 1 }} / {{ images.length }}
       </div>
     </div>
